@@ -33,4 +33,4 @@
 11. Go into GitHub -> Pull-Request -> Create a Pull-Request **OR** Do it from the branch menu **OR** in the code section at the top
 
 
-###IMPORTANT: Try to make sure that 2 people are not working on the same thing at the same time
+### IMPORTANT: Try to make sure that 2 people are not working on the same thing at the same time
