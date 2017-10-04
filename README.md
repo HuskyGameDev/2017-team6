@@ -2,14 +2,14 @@
 
 
 ## Steps to get the project on your machine
-
+-1. Download Unity 2017.5.1f
 0. Get GitBash if you do not have it on **Windows**
 1. Navigate/Create the folder that you want to hold your Unity Projects
 2. Fork the GitHub Repository so you have a personal copy
-3. Clone your forked repo: git clone **ht<span>tps://github.com/(your username)/team10_hgd.git**
-4. Once you have it cloned, Navigate into folder that was created (should be team10_hgd): 
-* git remote add (your username) **ht<span>tps://github.com/(your username)/team10_hgd.git**
-* git remote set-url origin **ht<span>tps://github.com/ronaldliu/team10_hgd.git**
+3. Clone your forked repo: git clone **ht<span>tps://github.com/(your username)/2017-team6.git**
+4. Once you have it cloned, Navigate into folder that was created (should be 2017-team6): 
+* git remote add (your username) **ht<span>tps://github.com/(your username)/2017-team6.git**
+* git remote set-url origin **ht<span>tps://github.com/HuskyGameDev/2017-team6.git**
 5. Open Unity
 6. Open the folder that you cloned
 - There you go you should have everything setup
@@ -33,4 +33,4 @@
 11. Go into GitHub -> Pull-Request -> Create a Pull-Request **OR** Do it from the branch menu **OR** in the code section at the top
 
 
-### IMPORTANT: Try to make sure that 2 people are not working on the same thing at the same time
+###IMPORTANT: Try to make sure that 2 people are not working on the same thing at the same time
