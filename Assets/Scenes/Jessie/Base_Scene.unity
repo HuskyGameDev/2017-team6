@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 454848622}
   - component: {fileID: 454848621}
   - component: {fileID: 454848620}
+  - component: {fileID: 454848624}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -197,6 +198,21 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+--- !u!114 &454848624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 454848618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b4a38015e733a40869d7edac1d72ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1186471181}
+  horizontalRotation: 0
+  distanceFromPlayer: 20
+  angleFromTop: 45
 --- !u!1 &1186471177
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +246,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 060f0ef0ef26a084aa8e47949a591573, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
