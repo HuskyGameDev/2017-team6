@@ -11,7 +11,7 @@
 
 [Fixing Merge Conflicts][mergoconflicto]
 
-## [TASK LIST][tasks]
+#### [TASK LIST][tasks]
 
 [initial]: https://github.com/HuskyGameDev/2017-team6/wiki
 [workflow]: https://github.com/HuskyGameDev/2017-team6/wiki/Development-Workflow
