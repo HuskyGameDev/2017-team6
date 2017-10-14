@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
 
   AudioSource playerAudio;
   PlayerMovement playerMovement;
-  PlayerShoot playerShoot;
+  PlayerUse playerUse;
   Renderer playerRenderer;
 
   bool isDead;
@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
 
     playerAudio = GetComponent<AudioSource>();
     playerMovement = GetComponent<PlayerMovement>();
-    playerShoot = GetComponent<PlayerShoot>();
+    playerUse = GetComponent<PlayerUse>();
     playerRenderer = GetComponent<Renderer>();
 	}
 
@@ -63,13 +63,13 @@ public class PlayerManager : MonoBehaviour
   void Death() {
     isDead = true;
 
-    // playerShoot.DisableEffects();
+    // playerUse.DisableEffects();
     // anim.SetTrigger("Die");
 
     // playerAudio.clip = deathClip;
     // playerAudio.Play();
 
     playerMovement.enabled = false;
-    playerShoot.enabled = false;
+    playerUse.enabled = false;
   }
 }

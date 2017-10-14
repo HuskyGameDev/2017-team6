@@ -10,7 +10,7 @@ public class BaseWeapon : MonoBehaviour {
     public int clipSize = 30;
     public Light gunLight;                          // Reference to the light component.
 
-    float timer;                                    // A timer to determine when to fire.
+    float nextTimeToFire;                                    // A timer to determine when to fire.
     Ray shootRay;                                   // A ray from the gun end forwards.
     RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
     int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
@@ -39,36 +39,22 @@ public class BaseWeapon : MonoBehaviour {
         ammo = clipSize;
     }
 
+    public void Fire() {
+        nextTimeToFire += Time.deltaTime;
 
-    void Update()
-    {
-        // Add the time since Update was last called to the timer.
-        timer += Time.deltaTime;
+        Debug.Log(nextTimeToFire + " " + timeBetweenBullets);
 
-
-        // If the Fire1 button is being press and it's time to fire...
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && reloading == false && ammo > 0)
-        {
-            // ... shoot the gun.
+        if (nextTimeToFire >= timeBetweenBullets &&
+            reloading == false &&
+            ammo > 0) {
             Shoot();
-            ammo--;
-        }
-
-        if(Input.GetKeyDown("r") && reloading == false)
-        {
-            Reloading();
-        }
-
-        // If the timer has exceeded the proportion of timeBetweenBullets that the effects should be displayed for...
-        if (timer >= timeBetweenBullets * effectsDisplayTime)
-        {
-            // ... disable the effects.
+        } else {
             DisableEffects();
         }
     }
 
 
-    void Reloading()
+    public void Reloading()
     {
         if (reloading)
         {
@@ -114,7 +100,8 @@ public class BaseWeapon : MonoBehaviour {
     void Shoot()
     {
         // Reset the timer.
-        timer = 0f;
+        nextTimeToFire = 0f;
+        ammo--;
 
         // Play the gun shot audioclip.
         //gunAudio.Play();
@@ -151,4 +138,4 @@ public class BaseWeapon : MonoBehaviour {
         }
     }
 
- }
+}
