@@ -1,6 +1,7 @@
 # Bot.net: The Game
 ## This is the repository for Team 6's Game
 
+
 ## For Reference
 
 [Initial Setup][initial]
