@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 54226530791354678}
   - component: {fileID: 136757714334094050}
   - component: {fileID: 114140224493392192}
+  - component: {fileID: 114146808538302132}
+  - component: {fileID: 114607258066302512}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -194,6 +196,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+--- !u!114 &114146808538302132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499055664444606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215a8f7f746b7064d991441a0ad0d7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 100
+  currentHealth: 0
+  flashSpeed: 5
+  flashColor: {r: 1, g: 0, b: 0, a: 0.1}
+--- !u!114 &114607258066302512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499055664444606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff440aa133440164a995a4c94b09b92b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135363733314758370
 SphereCollider:
   m_ObjectHideFlags: 1

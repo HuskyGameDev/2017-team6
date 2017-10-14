@@ -87,11 +87,8 @@ public class BaseWeapon : MonoBehaviour {
         ammo = clipSize;
         reloading = false;
 
-
-
         //play reloading sound
         //reloadAudio.Play();
-
     }
 
 
