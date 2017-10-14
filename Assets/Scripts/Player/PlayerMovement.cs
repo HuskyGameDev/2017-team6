@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 
   int floorMask;
   float camRayLength = 100f;
+  float camHorizontalAngle = 0f;
 
 	// Initializes player variables on startup
 	void Awake () {
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // Get the Main Character from the scene
     playerCam = GameObject.Find("Main Camera").GetComponent<Camera>();
+    camHorizontalAngle = playerCam.GetComponent<PlayerCamera>().horizontalRotation;
 	}
 
   // Runs all necessary updates for the player
@@ -55,19 +57,30 @@ public class PlayerMovement : MonoBehaviour {
   // Rotates the player base on the Camera position and Mouse position
   void Turning ()
   {
-    Ray camRay = playerCam.ScreenPointToRay (Input.mousePosition);
 
-    RaycastHit floorHit;
+    float h = Input.GetAxis("AimX");
+    float v = Input.GetAxis("AimY");
 
-    // Get the position of the hit on the floor.
-    if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask)) {
-      Vector3 playerToMouse = floorHit.point - transform.position;
+    Quaternion newRotation;
 
-      playerToMouse.y = 0f;
+    if (h != 0 || v != 0) {
+      float angle = Mathf.Atan2(h, v * -1) * Mathf.Rad2Deg;
+      angle += camHorizontalAngle;
 
-      Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+      transform.rotation = Quaternion.Euler(0, angle, 0);
+    } else {
+      Ray camRay = playerCam.ScreenPointToRay (Input.mousePosition);
 
-      playerRBody.MoveRotation(newRotation);
+      RaycastHit floorHit;
+
+      // Get the position of the hit on the floor.
+      if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask)) {
+        Vector3 playerToMouse = floorHit.point - transform.position;
+        playerToMouse.y = 0f;
+
+        newRotation = Quaternion.LookRotation(playerToMouse);
+        playerRBody.MoveRotation(newRotation);
+      }
     }
   }
 }
