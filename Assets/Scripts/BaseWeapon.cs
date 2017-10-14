@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour {
+public class BaseWeapon : MonoBehaviour {
 
     public int damagePerShot = 20;                  // The damage inflicted by each bullet.
     public float timeBetweenBullets = 0.15f;        // The time between each shot.
@@ -44,7 +44,7 @@ public class Gun : MonoBehaviour {
     {
         // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
-        
+
 
         // If the Fire1 button is being press and it's time to fire...
         if (Input.GetButton("Fire1") && timer >= timeBetweenBullets && reloading == false && ammo > 0)
@@ -121,7 +121,7 @@ public class Gun : MonoBehaviour {
 
         // Play the gun shot audioclip.
         //gunAudio.Play();
-        
+
         // Enable the light.
         gunLight.enabled = true;
 
