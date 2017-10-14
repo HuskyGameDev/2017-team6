@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour {
     movement.Set(h, 0f, v);
 
     movement = movement.normalized * speed * Time.deltaTime;
+    movement = Quaternion.Euler(0, camHorizontalAngle, 0) * movement;
 
     playerRBody.MovePosition(transform.position + movement);
   }
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour {
   // Rotates the player base on the Camera position and Mouse position
   void Turning ()
   {
-
+    // Get horizontal and vertical directions for aim input
     float h = Input.GetAxis("AimX");
     float v = Input.GetAxis("AimY");
 
