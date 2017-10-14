@@ -140,15 +140,8 @@ public class Gun : MonoBehaviour {
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
         if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
         {
-            // Try and find an EnemyHealth script on the gameobject hit.
-            //EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
 
-            // If the EnemyHealth component exist...
-            //if (enemyHealth != null)
-            //{
-                // ... the enemy should take damage.
-              //  enemyHealth.TakeDamage(damagePerShot, shootHit.point);
-            //}
+            print("shot object\n");
 
             // Set the second position of the line renderer to the point the raycast hit.
             gunLine.SetPosition(1, shootHit.point);
