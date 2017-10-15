@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff440aa133440164a995a4c94b09b92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 114427389016979790, guid: 957463bda7641bb4b99a9d64e1555dfe,
-    type: 2}
+  weaponList:
+  - {fileID: 114427389016979790, guid: 957463bda7641bb4b99a9d64e1555dfe, type: 2}
 --- !u!136 &136757714334094050
 CapsuleCollider:
   m_ObjectHideFlags: 1
