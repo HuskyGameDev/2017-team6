@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     playerAudio = GetComponent<AudioSource>();
     playerMovement = GetComponent<PlayerMovement>();
     playerUse = GetComponent<PlayerUse>();
-    playerRenderer = GetComponent<Renderer>();
+		playerRenderer = GetComponentInChildren<Renderer>();
 	}
 
 	// Update is called once per frame
