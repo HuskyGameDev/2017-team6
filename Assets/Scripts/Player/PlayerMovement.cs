@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Awake () {
     floorMask = LayerMask.GetMask("Floor");
 
-    anim = GetComponent<Animator>();
+		anim = GetComponentInChildren<Animator>();
     playerRBody = GetComponent<Rigidbody>();
 
     // Get the Main Character from the scene
@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour {
     Turning();
 
     // Animate the player base on direction of movement
-    // Animating(h,v);
+    Animating(h,v);
   }
 
   // Moves the player the specified direction
@@ -84,4 +84,13 @@ public class PlayerMovement : MonoBehaviour {
       }
     }
   }
+
+	void Animating(float h, float v)
+	{
+		Vector3 relativeMoveDir = new Vector3 (h, 0, v);
+		relativeMoveDir = (Quaternion.Inverse(playerRBody.rotation) * relativeMoveDir);
+
+		anim.SetFloat ("ForwardMovement", relativeMoveDir.z);
+		anim.SetFloat ("RightMovement", relativeMoveDir.x);
+	}
 }
