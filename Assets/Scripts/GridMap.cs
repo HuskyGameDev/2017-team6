@@ -44,4 +44,10 @@ public class GridMap : MonoBehaviour {
       }
     }
 	}
+
+  public Vector3 getTilePosition(int x, int y)
+  {
+    TileInfo tile = tiles[x,y];
+    return new Vector3(tile.xPos, 0f, tile.yPos);
+  }
 }
