@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemy : MonoBehaviour {
+public class EnemyManager : MonoBehaviour {
 
     public int startingHealth = 100;
     public int currentHealth;
