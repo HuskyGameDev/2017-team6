@@ -234,7 +234,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3487afb653ea74243bcfe09dceaef6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHit: {fileID: 0}
+  playerHit:
+  - {fileID: 8300000, guid: 8d2391e0b58218243b221e4035ff301c, type: 3}
+  - {fileID: 8300000, guid: 92d4114068cf9bd44820d3f9becdd3ad, type: 3}
+  - {fileID: 8300000, guid: 036b4d613b75102438ecb39bebdab67c, type: 3}
+  - {fileID: 8300000, guid: 27f18714b39332b4b8757a2a2ad1ac51, type: 3}
 --- !u!82 &862838017
 AudioSource:
   m_ObjectHideFlags: 0
@@ -480,6 +484,11 @@ Prefab:
     - target: {fileID: 4017552572653728, guid: 67928e02515329340a884048e0d78699, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114590981131544938, guid: 67928e02515329340a884048e0d78699,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67928e02515329340a884048e0d78699, type: 2}

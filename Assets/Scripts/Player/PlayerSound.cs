@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSound : MonoBehaviour {
 
-    public AudioClip playerHit;
+    public AudioClip[] playerHit;
 
     private AudioSource source;
 
@@ -15,6 +15,7 @@ public class PlayerSound : MonoBehaviour {
     // Play sound when player gets hit
 	public void playHitSound()
     {
-        source.PlayOneShot(playerHit, 0.5f);
+        int hitSoundID = Mathf.CeilToInt(Random.Range(0, 4));
+        source.PlayOneShot(playerHit[hitSoundID], 0.2f);
     }
 }
