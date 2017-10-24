@@ -1,54 +1,16 @@
 fileFormatVersion: 2
-guid: 73c7aa6002eeb0c49aab730d41a4fe6e
-timeCreated: 1507931457
+guid: 6141b429adf902d4d8e7188840a2dce1
+timeCreated: 1508689765
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Empty
-    100002: Hand_L
-    100004: Head
-    100006: LowerArm_L
-    100008: //RootNode
-    100010: Stand
-    100012: TorsoA
-    100014: TorsoB
-    100016: UpperArm_L
-    100018: Wheel
-    400000: Empty
-    400002: Hand_L
-    400004: Head
-    400006: LowerArm_L
-    400008: //RootNode
-    400010: Stand
-    400012: TorsoA
-    400014: TorsoB
-    400016: UpperArm_L
-    400018: Wheel
-    2300000: Hand_L
-    2300002: Head
-    2300004: LowerArm_L
-    2300006: Stand
-    2300008: TorsoA
-    2300010: TorsoB
-    2300012: UpperArm_L
-    2300014: Wheel
-    3300000: Hand_L
-    3300002: Head
-    3300004: LowerArm_L
-    3300006: Stand
-    3300008: TorsoA
-    3300010: TorsoB
-    3300012: UpperArm_L
-    3300014: Wheel
-    4300000: Hand_L
-    4300002: Stand
-    4300004: LowerArm_L
-    4300006: UpperArm_L
-    4300008: TorsoB
-    4300010: TorsoA
-    4300012: Head
-    4300014: Wheel
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube
+    4300002: Gun_Laser
     7400000: Default Take
     9500000: //RootNode
   materials:
