@@ -51,7 +51,7 @@ public class BaseWeapon : MonoBehaviour {
             ammo > 0) {
 
             // Play weapon fire audio
-            int hitSoundID = Mathf.CeilToInt(Random.Range(0, 4));
+            int hitSoundID = Mathf.CeilToInt(Random.Range(0, gunShotSFX.Length));
             gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
 
             Shoot();
