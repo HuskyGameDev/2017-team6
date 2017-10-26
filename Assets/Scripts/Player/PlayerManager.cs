@@ -5,71 +5,83 @@ using UnityEngine;
 // Class used to manage the player
 public class PlayerManager : MonoBehaviour
 {
-  public int startHealth = 100;
-  public int currentHealth;
+    public int startHealth = 100;
+    public int currentHealth;
 
-  // public Slider healthSlider;
+    // public Slider healthSlider;
 
-  public float flashSpeed;
-  public Color flashColor = new Color(1f, 0f, 0f, 0.1f);
+    public float flashSpeed;
+    public Color flashColor = new Color(1f, 0f, 0f, 0.1f);
 
-  AudioSource playerAudio;
-  PlayerMovement playerMovement;
-  PlayerUse playerUse;
-  Renderer playerRenderer;
+    AudioSource playerAudio;
+    PlayerMovement playerMovement;
+    PlayerUse playerUse;
+    PlayerSound playerSound;
+    Renderer playerRenderer;
 
-  bool isDead;
-  bool damaged;
+    bool isDead;
+    bool damaged;
 
-	// Use this for initialization
-	void Awake ()
-  {
-    currentHealth = startHealth;
+    // Use this for initialization
+    void Awake()
+    {
+        currentHealth = startHealth;
 
-    playerAudio = GetComponent<AudioSource>();
-    playerMovement = GetComponent<PlayerMovement>();
-    playerUse = GetComponent<PlayerUse>();
-		playerRenderer = GetComponentInChildren<Renderer>();
-	}
-
-	// Update is called once per frame
-	void Update ()
-  {
-    if (damaged) {
-      playerRenderer.material.color = flashColor;
-    } else {
-      // Transition the color back to normal
-      playerRenderer.material.color = Color.Lerp(playerRenderer.material.color, Color.clear, flashSpeed * Time.deltaTime);
+        playerAudio = GetComponent<AudioSource>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerUse = GetComponent<PlayerUse>();
+        playerSound = GetComponent<PlayerSound>();
+        playerRenderer = GetComponentInChildren<Renderer>();
     }
 
-    // Reset the damage
-    damaged = false;
-	}
+    // Update is called once per frame
+    void Update()
+    {
 
-  public void applyDamage(int damage)
-  {
-    // Set damage to be true so we can show it
-    damaged = true;
+        if (damaged)
+        {
+            playerRenderer.material.color = flashColor;
+        }
+        else
+        {
+            // Transition the color back to normal
+            playerRenderer.material.color = Color.Lerp(playerRenderer.material.color, Color.clear, flashSpeed * Time.deltaTime);
+        }
 
-    // Apply the damage
-    currentHealth = currentHealth - damage;
-
-    // Check if the player is dead
-    if (currentHealth <= 0 && !isDead) {
-      Death();
+        // Reset the damage
+        damaged = false;
     }
-  }
 
-  void Death() {
-    isDead = true;
+    public void applyDamage(int damage)
+    {
+        // Set damage to be true so we can show it
+        damaged = true;
 
-    // playerUse.DisableEffects();
-    // anim.SetTrigger("Die");
+        // Apply the damage
+        currentHealth = currentHealth - damage;
 
-    // playerAudio.clip = deathClip;
-    // playerAudio.Play();
+        // Play player hit sound
+        playerSound.playHitSound();
 
-    playerMovement.enabled = false;
-    playerUse.enabled = false;
-  }
+        // Check if the player is dead
+        if (currentHealth <= 0 && !isDead)
+        {
+            Death();
+        }
+    }
+
+
+    void Death()
+    {
+        isDead = true;
+
+        // playerUse.DisableEffects();
+        // anim.SetTrigger("Die");
+
+        // playerAudio.clip = deathClip;
+        // playerAudio.Play();
+
+        playerMovement.enabled = false;
+        playerUse.enabled = false;
+    }
 }

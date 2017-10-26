@@ -2,39 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerUse : MonoBehaviour {
+public class PlayerUse : MonoBehaviour
+{
 
-  public BaseWeapon[] weaponList;
+    public BaseWeapon[] weaponList;
 
-  BaseWeapon currentWeapon;
-  GameObject weaponHolder;
+    BaseWeapon currentWeapon;
+    Transform weaponHolder;
 
-	// Use this for initialization
-	void Awake () {
-    weaponHolder = GameObject.Find("WeaponHolder");
+    // Use this for initialization
+    void Awake()
+    {
+        Transform[] transforms = this.transform.GetComponentsInChildren<Transform>();
+        foreach (Transform t in transforms)
+        {
+            if (t.name == "WeaponHolder")
+            {
+                weaponHolder = t;
+            }
+        }
 
-    // NOTE: Weapon to be spawned will be base on the inventory manager in the future
-    attachWeapon(weaponList[0]);
-	}
-
-  void Update()
-  {
-    if (Input.GetButton("Fire1")) {
-      currentWeapon.Fire();
+        // NOTE: Weapon to be spawned will be base on the inventory manager in the future
+        attachWeapon(weaponList[0]);
     }
 
-    if (Input.GetKeyDown("r")) {
-      currentWeapon.Reloading();
-    }
-  }
+    void Update()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            currentWeapon.Fire();
+        }
 
-  public void attachWeapon(BaseWeapon weapon)
-  {
-    currentWeapon = Instantiate(
-      weapon,
-      weaponHolder.transform.position,
-      weaponHolder.transform.rotation
-    );
-    currentWeapon.transform.parent = weaponHolder.transform;
-  }
+        if (Input.GetKeyDown("r"))
+        {
+            currentWeapon.Reloading();
+        }
+    }
+
+    public void attachWeapon(BaseWeapon weapon)
+    {
+        currentWeapon = Instantiate(
+          weapon,
+          weaponHolder.transform.position,
+          weaponHolder.transform.rotation
+        );
+        currentWeapon.transform.parent = transform;
+    }
 }

@@ -24,6 +24,8 @@ public class BaseWeapon : MonoBehaviour {
     bool timerRunning = false;                      //timer begins at this value
     float reloadSpeed = 5.0f;                       //time reached to do something
 
+    public AudioClip[] gunShotSFX;
+    public AudioClip reloadSFX;
     private int ammo;
 
     void Awake()
@@ -47,6 +49,11 @@ public class BaseWeapon : MonoBehaviour {
         if (nextTimeToFire >= timeBetweenBullets &&
             reloading == false &&
             ammo > 0) {
+
+            // Play weapon fire audio
+            int hitSoundID = Mathf.CeilToInt(Random.Range(0, gunShotSFX.Length));
+            gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
+
             Shoot();
         } else {
             DisableEffects();
@@ -61,6 +68,7 @@ public class BaseWeapon : MonoBehaviour {
             return;
         }
         //do the reloading process
+        gunAudio.PlayOneShot(reloadSFX, 0.4f);
         reloading = true;
 
         timerRunning = true;
