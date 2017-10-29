@@ -213,6 +213,39 @@ MonoBehaviour:
   horizontalRotation: 45
   distanceFromPlayer: 10
   angleFromTop: 45
+--- !u!1 &456163954 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1540490609704840, guid: 64b7b668ce0b6ae4db634af7e215741f,
+    type: 2}
+  m_PrefabInternal: {fileID: 709652917}
+--- !u!114 &456163955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 456163954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca569c3949d3134ca9c2f5c2374cd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invRow: 0
+  invCol: 0
+  itemCount: 0
+  resources:
+    scrap: 0
+    energy: 0
+    wire: 0
+  hotbar:
+    weapons: []
+    consumables: []
+    crafter:
+      max: 0
+      current: 0
+      item: {fileID: 0}
+      name: 
+      itemImg: {fileID: 0}
+  items: []
 --- !u!4 &581801393 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4280247728661520, guid: 64b7b668ce0b6ae4db634af7e215741f,

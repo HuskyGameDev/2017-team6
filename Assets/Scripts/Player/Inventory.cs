@@ -25,8 +25,8 @@ public class Inventory : MonoBehaviour
     [System.Serializable]
     public class Hotbar
     {
-        public Item[] weapons;
-        public Item[] consumables;
+        public Item[] weapons = new Item[3];
+        public Item[] consumables = new Item[2];
         public Item crafter;
     }
 
