@@ -6,18 +6,39 @@ using UnityEngine;
 // Basic Inventory class
 // Basic implementation modified from http://answers.unity3d.com/questions/972660/using-enums-to-design-an-inventory-system.html
 public class Inventory : MonoBehaviour
-{
-    public int maxItems = 40;
+{   
+    // Basic Inventory information
+    [Header("Inventory Info")]
+    public int invRow;
+    public int invCol;
     public int itemCount;
 
-    public Resources[] resources;
+    // Resources class for keeping track of available resources
+    [System.Serializable]
+    public class Resources
+    {
+        public int scrap;
+        public int energy;
+        public int wire;
+    }
+
+    [System.Serializable]
+    public class Hotbar
+    {
+        public Item[] weapons;
+        public Item[] consumables;
+        public Item crafter;
+    }
+
+    public Resources resources;
+    public Hotbar hotbar;
+    // Array of items that can be used by the player
     public Item[] items;
 
     private void Start()
     {
-        items = new Item[maxItems];
+        items = new Item[invRow * invCol];
         itemCount = 0;
-        Debug.Log(items.Length);
     }
 
     public void AddItem(Item item, int numItem = 1)
@@ -25,15 +46,16 @@ public class Inventory : MonoBehaviour
         bool containsItem = false;
         for (int i = 0; i < items.Length; i++)
         {
+            // If item already exists: increment the item count without exceeding limits
             if (items[i].name == item.name)
             {
-                // Increment the item count without exceeding limits
                 items[i].current = Mathf.Clamp(numItem + items[i].current, 0, items[i].max);
                 containsItem = true;
             }
         }
 
-        if (!containsItem && )
+        // If the item does not already exist add it
+        if (!containsItem && itemCount < (invRow * invCol))
         {
             // Add the item to the first open spot in the inventory
             for (int i = 0; i < items.Length; i++)
@@ -48,7 +70,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void EquipItem(int itemIdx)
+    public void AddItemToHotbar(int itemIdx)
     {
         // Equip the item onto the player
     }
