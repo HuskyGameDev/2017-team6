@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class used by the "player" to interact with inventory items
 public class PlayerUse : MonoBehaviour
 {
 
     public BaseWeapon[] weaponList;
 
-    BaseWeapon currentWeapon;
-    Transform weaponHolder;
+    private BaseWeapon currentWeapon;
+    private Transform weaponHolder;
+    private Inventory inventoryMngr;
 
     // Use this for initialization
     void Awake()
@@ -21,6 +23,9 @@ public class PlayerUse : MonoBehaviour
                 weaponHolder = t;
             }
         }
+
+        // Get the inventory component
+        inventoryMngr = GetComponent<Inventory>();
 
         // NOTE: Weapon to be spawned will be base on the inventory manager in the future
         attachWeapon(weaponList[0]);
@@ -37,6 +42,11 @@ public class PlayerUse : MonoBehaviour
         {
             currentWeapon.Reloading();
         }
+    }
+
+    public void updateWeaponList()
+    {
+        // inventoryMngr
     }
 
     public void attachWeapon(BaseWeapon weapon)
