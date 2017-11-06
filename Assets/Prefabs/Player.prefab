@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 114834951365230592}
   - component: {fileID: 114183310018039750}
   - component: {fileID: 114795773638992278}
+  - component: {fileID: 114713649551450000}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -673,6 +674,29 @@ MonoBehaviour:
   currentHealth: 0
   flashSpeed: 5
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
+--- !u!114 &114713649551450000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1540490609704840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca569c3949d3134ca9c2f5c2374cd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invRow: 4
+  invCol: 5
+  itemCount: 0
+  resources:
+    scrap: 0
+    energy: 0
+    wire: 0
+  hotbar:
+    weapons: []
+    consumables: []
+    crafter: {fileID: 0}
+  items: []
 --- !u!114 &114795773638992278
 MonoBehaviour:
   m_ObjectHideFlags: 1
