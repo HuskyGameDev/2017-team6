@@ -17,6 +17,14 @@ public class BaseWeapon : Item {
         public AudioClip reloadSFX;
     }
 
+    public bool ProjectileShoot;
+    public bool RayShoot;
+    public float projectileSpeed = 40;
+
+    GameObject player;
+    GameObject projectile;
+    GameObject gun;
+
     float nextTimeToFire;                           // A timer to determine when to fire.
     Ray shootRay;                                   // A ray from the gun end forwards.
     RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
@@ -45,6 +53,7 @@ public class BaseWeapon : Item {
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
 
+        projectile = Resources.Load("projectileBullet") as GameObject;
         ammo = weaponInfo.clipSize;
     }
 
@@ -54,14 +63,17 @@ public class BaseWeapon : Item {
 
         if (nextTimeToFire >= weaponInfo.timeBetweenBullets &&
             reloading == false &&
-            ammo > 0) {
+            ammo > 0)
+        {
 
             // Play weapon fire audio
             int hitSoundID = Mathf.CeilToInt(Random.Range(0, weaponInfo.gunShotSFX.Length));
             gunAudio.PlayOneShot(weaponInfo.gunShotSFX[hitSoundID], 0.4f);
 
             Shoot();
-        } else {
+        }
+        else
+        {
             DisableEffects();
         }
     }
@@ -95,7 +107,7 @@ public class BaseWeapon : Item {
     void ReloadTimer()
     {
         reloadTimer += Time.deltaTime;
-        if(reloadTimer > reloadSpeed)
+        if (reloadTimer > reloadSpeed)
         {
             reloadTimer = 0f;
             timerRunning = false;
@@ -113,12 +125,60 @@ public class BaseWeapon : Item {
 
     void Shoot()
     {
-        // Reset the timer.
-        nextTimeToFire = 0f;
-        ammo--;
 
-        // Play the gun shot audioclip.
-        //gunAudio.Play();
+        //if we want a raycast type of gun
+        if (RayShoot)
+        {
+            // Reset the timer.
+            nextTimeToFire = 0f;
+            ammo--;
+
+            // Play the gun shot audioclip.
+            //gunAudio.Play();
+
+            // Enable the light.
+            weaponInfo.gunLight.enabled = true;
+
+            // Stop the particles from playing if they were, then start the particles.
+            gunParticles.Stop();
+            gunParticles.Play();
+
+            // Enable the line renderer and set it's first position to be the end of the gun.
+            gunLine.enabled = true;
+            gunLine.SetPosition(0, transform.position);
+
+            // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
+            shootRay.origin = transform.position;
+            shootRay.direction = transform.forward;
+
+            // Perform the raycast against gameobjects on the shootable layer and if it hits something...
+            if (Physics.Raycast(shootRay, out shootHit, weaponInfo.range, shootableMask))
+            {
+
+                print("shot object\n");
+
+                // Set the second position of the line renderer to the point the raycast hit.
+                gunLine.SetPosition(1, shootHit.point);
+            }
+            // If the raycast didn't hit anything on the shootable layer...
+            else
+            {
+                // ... set the second position of the line renderer to the fullest extent of the gun's range.
+                gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponInfo.range);
+            }
+        }
+
+        //if we want a projectile weapon
+        if (ProjectileShoot)
+        {
+            nextTimeToFire = 0f;
+            ammo--;
+            gun = GameObject.FindWithTag("Muzzle");
+            player = GameObject.FindWithTag("Player");
+            GameObject bullet = Instantiate(projectile) as GameObject;
+            bullet.transform.position = gun.transform.position;
+            bullet.transform.rotation = gun.transform.rotation;
+        }
 
         // Enable the light.
         weaponInfo.gunLight.enabled = true;
@@ -126,30 +186,6 @@ public class BaseWeapon : Item {
         // Stop the particles from playing if they were, then start the particles.
         gunParticles.Stop();
         gunParticles.Play();
-
-        // Enable the line renderer and set it's first position to be the end of the gun.
-        gunLine.enabled = true;
-        gunLine.SetPosition(0, transform.position);
-
-        // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
-        shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
-
-        // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-        if (Physics.Raycast(shootRay, out shootHit, weaponInfo.range, shootableMask))
-        {
-
-            print("shot object\n");
-
-            // Set the second position of the line renderer to the point the raycast hit.
-            gunLine.SetPosition(1, shootHit.point);
-        }
-        // If the raycast didn't hit anything on the shootable layer...
-        else
-        {
-            // ... set the second position of the line renderer to the fullest extent of the gun's range.
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponInfo.range);
-        }
     }
 
 }
