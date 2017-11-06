@@ -4,6 +4,10 @@ using UnityEngine;
 
 [System.Serializable]
 // Basic Inventory class
+// Class used by the Player Use class to determine what items are:
+//  collected
+//  able to be used
+//  currently equipped
 // Basic implementation modified from http://answers.unity3d.com/questions/972660/using-enums-to-design-an-inventory-system.html
 public class Inventory : MonoBehaviour
 {   
@@ -22,34 +26,29 @@ public class Inventory : MonoBehaviour
         public int wire;
     }
 
-    [System.Serializable]
-    public class Hotbar
-    {
-        public Item[] weapons = new Item[3];
-        public Item[] consumables = new Item[2];
-        public Item crafter;
-    }
-
+    // Class containing all the resources
     public Resources resources;
-    public Hotbar hotbar;
     // Array of items that can be used by the player
-    public Item[] items;
+    public Item[] inventoryItems;
+
+    // Reference to the hotbar object
+    public Hotbar hotbar;
 
     private void Start()
     {
-        items = new Item[invRow * invCol];
+        inventoryItems = new Item[invRow * invCol];
         itemCount = 0;
     }
 
     public void AddItem(Item item, int numItem = 1)
     {
         bool containsItem = false;
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < inventoryItems.Length; i++)
         {
             // If item already exists: increment the item count without exceeding limits
-            if (items[i].name == item.name)
+            if (inventoryItems[i].name == item.name)
             {
-                items[i].current = Mathf.Clamp(numItem + items[i].current, 0, items[i].max);
+                inventoryItems[i].current = Mathf.Clamp(numItem + inventoryItems[i].current, 0, inventoryItems[i].max);
                 containsItem = true;
             }
         }
@@ -58,13 +57,13 @@ public class Inventory : MonoBehaviour
         if (!containsItem && itemCount < (invRow * invCol))
         {
             // Add the item to the first open spot in the inventory
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < inventoryItems.Length; i++)
             {
-                if (items[i] == null)
+                if (inventoryItems[i] == null)
                 {
-                    items[i] = item;
+                    inventoryItems[i] = item;
 
-                    // TODO: Update the inventory menu to contain this item
+                    // TODO: Update the GUI
                 }
             }
         }
@@ -75,9 +74,24 @@ public class Inventory : MonoBehaviour
         // Equip the item onto the player
     }
 
+    // Removes an item from the inventory and updates the Inventory GUI
+    //  also removes the item from the hotbar if needed
     public void RemoveItem(int itemIdx)
     {
-        // Drop onto the ground
+        Item tmp = inventoryItems[itemIdx];
+        // TODO: Drop onto the ground
+
+        // If item in Hotbar remove it
+        hotbar.RemoveItem(tmp.name);
+
         // Destroy from inventory menu
+        inventoryItems[itemIdx] = null;
+
+        // TODO: Update the GUI
+    }
+
+    public void RefreshInventoryGUI()
+    {
+        Debug.Log("No function created to update GUI");
     }
 }

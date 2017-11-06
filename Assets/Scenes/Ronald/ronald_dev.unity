@@ -107,7 +107,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 05b1c57d300be8a4d987b1e757d9657b, type: 2}
 --- !u!1 &454848618
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,39 +213,6 @@ MonoBehaviour:
   horizontalRotation: 45
   distanceFromPlayer: 10
   angleFromTop: 45
---- !u!1 &456163954 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1540490609704840, guid: 64b7b668ce0b6ae4db634af7e215741f,
-    type: 2}
-  m_PrefabInternal: {fileID: 709652917}
---- !u!114 &456163955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 456163954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca569c3949d3134ca9c2f5c2374cd25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  invRow: 0
-  invCol: 0
-  itemCount: 0
-  resources:
-    scrap: 0
-    energy: 0
-    wire: 0
-  hotbar:
-    weapons: []
-    consumables: []
-    crafter:
-      max: 0
-      current: 0
-      item: {fileID: 0}
-      name: 
-      itemImg: {fileID: 0}
-  items: []
 --- !u!4 &581801393 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4280247728661520, guid: 64b7b668ce0b6ae4db634af7e215741f,
@@ -331,6 +298,11 @@ Prefab:
     - target: {fileID: 4017552572653728, guid: 67928e02515329340a884048e0d78699, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114590981131544938, guid: 67928e02515329340a884048e0d78699,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67928e02515329340a884048e0d78699, type: 2}
@@ -438,6 +410,10 @@ Prefab:
     - target: {fileID: 4778858089396392, guid: 05c94f8788018b94790700a3e621130a, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925215942793400, guid: 05c94f8788018b94790700a3e621130a, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05c94f8788018b94790700a3e621130a, type: 2}

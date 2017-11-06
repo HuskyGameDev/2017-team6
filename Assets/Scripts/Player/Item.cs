@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 // Simple class used to keep track of items
-public class Item {
+[System.Serializable]
+public abstract class Item : MonoBehaviour {
 
+    [Header("Base Item Info")]
     public int max;
     public int current;
-    public GameObject item;
-    public string name;
-    public Sprite itemImg;
 
+    public string itemName;
+    public Sprite itemImg;
+    public enum Types {
+        Weapon, Ammo, Consumable
+    };
+
+    public abstract void Using();
+
+    public abstract void Reloading();
 }

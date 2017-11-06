@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseWeapon : MonoBehaviour {
+// Base weapon class containing all the information for a gun
+public class BaseWeapon : Item {
 
-    public int damagePerShot = 20;                  // The damage inflicted by each bullet.
-    public float timeBetweenBullets = 0.15f;        // The time between each shot.
-    public float range = 20f;                       // The distance the gun can fire.
-    public int clipSize = 30;
-    public Light gunLight;                          // Reference to the light component.
+    [System.Serializable]
+    public class WeaponInfo
+    {
+        public int damagePerShot = 20;                  // The damage inflicted by each bullet.
+        public float timeBetweenBullets = 0.15f;        // The time between each shot.
+        public float range = 20f;                       // The distance the gun can fire.
+        public int clipSize = 30;
+        public Light gunLight;                          // Reference to the light component.
+        public AudioClip[] gunShotSFX;
+        public AudioClip reloadSFX;
+    }
 
-    float nextTimeToFire;                                    // A timer to determine when to fire.
+    float nextTimeToFire;                           // A timer to determine when to fire.
     Ray shootRay;                                   // A ray from the gun end forwards.
     RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
     int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
@@ -24,8 +31,8 @@ public class BaseWeapon : MonoBehaviour {
     bool timerRunning = false;                      //timer begins at this value
     float reloadSpeed = 5.0f;                       //time reached to do something
 
-    public AudioClip[] gunShotSFX;
-    public AudioClip reloadSFX;
+    public WeaponInfo weaponInfo;
+
     private int ammo;
 
     void Awake()
@@ -38,21 +45,20 @@ public class BaseWeapon : MonoBehaviour {
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
 
-        ammo = clipSize;
+        ammo = weaponInfo.clipSize;
     }
 
-    public void Fire() {
+    // Script for firing a weapon
+    public override void Using() {
         nextTimeToFire += Time.deltaTime;
 
-        Debug.Log(nextTimeToFire + " " + timeBetweenBullets);
-
-        if (nextTimeToFire >= timeBetweenBullets &&
+        if (nextTimeToFire >= weaponInfo.timeBetweenBullets &&
             reloading == false &&
             ammo > 0) {
 
             // Play weapon fire audio
-            int hitSoundID = Mathf.CeilToInt(Random.Range(0, gunShotSFX.Length));
-            gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
+            int hitSoundID = Mathf.CeilToInt(Random.Range(0, weaponInfo.gunShotSFX.Length));
+            gunAudio.PlayOneShot(weaponInfo.gunShotSFX[hitSoundID], 0.4f);
 
             Shoot();
         } else {
@@ -61,14 +67,14 @@ public class BaseWeapon : MonoBehaviour {
     }
 
 
-    public void Reloading()
+    public override void Reloading()
     {
         if (reloading)
         {
             return;
         }
         //do the reloading process
-        gunAudio.PlayOneShot(reloadSFX, 0.4f);
+        gunAudio.PlayOneShot(weaponInfo.reloadSFX, 0.4f);
         reloading = true;
 
         timerRunning = true;
@@ -78,7 +84,7 @@ public class BaseWeapon : MonoBehaviour {
             ReloadTimer();
         }
 
-        ammo = clipSize;
+        ammo = weaponInfo.clipSize;
         reloading = false;
 
         //play reloading sound
@@ -101,7 +107,7 @@ public class BaseWeapon : MonoBehaviour {
     {
         // Disable the line renderer and the light.
         gunLine.enabled = false;
-        gunLight.enabled = false;
+        weaponInfo.gunLight.enabled = false;
     }
 
 
@@ -115,7 +121,7 @@ public class BaseWeapon : MonoBehaviour {
         //gunAudio.Play();
 
         // Enable the light.
-        gunLight.enabled = true;
+        weaponInfo.gunLight.enabled = true;
 
         // Stop the particles from playing if they were, then start the particles.
         gunParticles.Stop();
@@ -130,7 +136,7 @@ public class BaseWeapon : MonoBehaviour {
         shootRay.direction = transform.forward;
 
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+        if (Physics.Raycast(shootRay, out shootHit, weaponInfo.range, shootableMask))
         {
 
             print("shot object\n");
@@ -142,7 +148,7 @@ public class BaseWeapon : MonoBehaviour {
         else
         {
             // ... set the second position of the line renderer to the fullest extent of the gun's range.
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponInfo.range);
         }
     }
 
