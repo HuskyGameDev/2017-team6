@@ -10,11 +10,10 @@ using UnityEngine;
 //  currently equipped
 // Basic implementation modified from http://answers.unity3d.com/questions/972660/using-enums-to-design-an-inventory-system.html
 public class Inventory : MonoBehaviour
-{   
+{
     // Basic Inventory information
     [Header("Inventory Info")]
-    public int invRow;
-    public int invCol;
+    public int maxItems;
     public int itemCount;
 
     // Resources class for keeping track of available resources
@@ -26,46 +25,42 @@ public class Inventory : MonoBehaviour
         public int wire;
     }
 
+    [Header("The Inventory")]
     // Class containing all the resources
     public Resources resources;
     // Array of items that can be used by the player
-    public Item[] inventoryItems;
+    public List<Item> inventoryItems;
 
+    [Header("Hotbar Attributes")]
     // Reference to the hotbar object
     public Hotbar hotbar;
 
     private void Start()
     {
-        inventoryItems = new Item[invRow * invCol];
+        inventoryItems = new List<Item>();
+        inventoryItems.Capacity = maxItems;
         itemCount = 0;
     }
 
     public void AddItem(Item item, int numItem = 1)
     {
         bool containsItem = false;
-        for (int i = 0; i < inventoryItems.Length; i++)
+        foreach (Item _item in inventoryItems)
         {
             // If item already exists: increment the item count without exceeding limits
-            if (inventoryItems[i].name == item.name)
+            if (_item.name == item.name)
             {
-                inventoryItems[i].current = Mathf.Clamp(numItem + inventoryItems[i].current, 0, inventoryItems[i].max);
+                _item.current = Mathf.Clamp(numItem + _item.current, 0, _item.max);
                 containsItem = true;
             }
         }
 
         // If the item does not already exist add it
-        if (!containsItem && itemCount < (invRow * invCol))
+        if (!containsItem && itemCount < maxItems)
         {
-            // Add the item to the first open spot in the inventory
-            for (int i = 0; i < inventoryItems.Length; i++)
-            {
-                if (inventoryItems[i] == null)
-                {
-                    inventoryItems[i] = item;
+            inventoryItems.Add(item);
 
-                    // TODO: Update the GUI
-                }
-            }
+            // TODO: Update the GUI
         }
     }
 

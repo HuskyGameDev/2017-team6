@@ -276,6 +276,9 @@ MonoBehaviour:
   current: 0
   itemName: Laser Gun
   itemImg: {fileID: 0}
+  ProjectileShoot: 0
+  RayShoot: 1
+  projectileSpeed: 40
   weaponInfo:
     damagePerShot: 20
     timeBetweenBullets: 0.15
