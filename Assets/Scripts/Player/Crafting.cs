@@ -9,7 +9,7 @@ public class Crafting : MonoBehaviour
     // Array of items that can be crafted
     public Item[] craftableItems;
     // Used to reference the craftable items
-    public Sprite[] GUIitems;
+    public Sprite[] guiItems;
 
     private Inventory inventoryMngr;
 
@@ -17,7 +17,10 @@ public class Crafting : MonoBehaviour
     void Start()
     {
         inventoryMngr = GetComponent<Inventory>();
-        GUIitems = new Sprite[craftableItems.Length];
+        if (craftableItems.Length != guiItems.Length)
+        {
+            Debug.LogError("GUI Items and Craftable Items sizes do not match.");
+        }
     }
 
     // Calls Inventory class AddItem() to craft the item
