@@ -26,7 +26,7 @@ public abstract class Item : MonoBehaviour {
     };
 
     [Header("Item Cost")]
-    public Resources itemCost;
+    public ItemCost itemCost;
 
     public abstract void Using();
 
