@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Base weapon class containing all the information for a gun
-public class BaseWeapon : Item {
+public class BaseWeapon : Item
+{
 
     [System.Serializable]
     public class WeaponInfo
@@ -58,7 +59,8 @@ public class BaseWeapon : Item {
     }
 
     // Script for firing a weapon
-    public override void Using() {
+    public override void Using()
+    {
         nextTimeToFire += Time.deltaTime;
 
         if (nextTimeToFire >= weaponInfo.timeBetweenBullets &&
@@ -120,6 +122,40 @@ public class BaseWeapon : Item {
         // Disable the line renderer and the light.
         gunLine.enabled = false;
         weaponInfo.gunLight.enabled = false;
+    }
+
+    public void FireRay(Vector3 direction)
+    {
+        // Enable the light.
+        weaponInfo.gunLight.enabled = true;
+
+        // Stop the particles from playing if they were, then start the particles.
+        gunParticles.Stop();
+        gunParticles.Play();
+
+        // Enable the line renderer and set it's first position to be the end of the gun.
+        gunLine.enabled = true;
+        gunLine.SetPosition(0, transform.position);
+
+        // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
+        shootRay.origin = transform.position;
+        shootRay.direction = transform.forward;
+
+        // Perform the raycast against gameobjects on the shootable layer and if it hits something...
+        if (Physics.Raycast(shootRay, out shootHit, weaponInfo.range, shootableMask))
+        {
+
+            print("shot object\n");
+
+            // Set the second position of the line renderer to the point the raycast hit.
+            gunLine.SetPosition(1, shootHit.point);
+        }
+        // If the raycast didn't hit anything on the shootable layer...
+        else
+        {
+            // ... set the second position of the line renderer to the fullest extent of the gun's range.
+            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponInfo.range);
+        }
     }
 
 
