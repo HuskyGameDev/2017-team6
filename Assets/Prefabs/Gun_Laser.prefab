@@ -231,7 +231,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1807003147466206}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -272,17 +272,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea8ed743cd2d984bbd345dd778fb961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 20
-  timeBetweenBullets: 0.15
-  range: 20
-  clipSize: 30
-  gunLight: {fileID: 108847214283644570}
-  gunShotSFX:
-  - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
-  - {fileID: 8300000, guid: bcec26fea408df8458b574ac28ae6a16, type: 3}
-  - {fileID: 8300000, guid: bf32a4f67da228f42a4a5f6a143d616a, type: 3}
-  - {fileID: 8300000, guid: a599a1f1ca210d946ad161d7e21e457a, type: 3}
-  reloadSFX: {fileID: 8300000, guid: e3979ddcf4a07d047ba9d557dddf2dc8, type: 3}
+  max: 1
+  current: 0
+  itemName: Laser Gun
+  itemImg: {fileID: 0}
+  ProjectileShoot: 0
+  RayShoot: 1
+  projectileSpeed: 40
+  weaponInfo:
+    damagePerShot: 20
+    timeBetweenBullets: 0.15
+    range: 20
+    clipSize: 30
+    gunLight: {fileID: 108847214283644570}
+    gunShotSFX:
+    - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
+    - {fileID: 8300000, guid: bcec26fea408df8458b574ac28ae6a16, type: 3}
+    - {fileID: 8300000, guid: bf32a4f67da228f42a4a5f6a143d616a, type: 3}
+    - {fileID: 8300000, guid: a599a1f1ca210d946ad161d7e21e457a, type: 3}
+    reloadSFX: {fileID: 8300000, guid: e3979ddcf4a07d047ba9d557dddf2dc8, type: 3}
 --- !u!120 &120657845415950512
 LineRenderer:
   m_ObjectHideFlags: 1
