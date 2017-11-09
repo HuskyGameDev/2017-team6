@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseRayGun : Item
+public class Shotgun : Item
 {
 
     [System.Serializable]
@@ -14,9 +14,11 @@ public class BaseRayGun : Item
         public float range = 20f;                       // The distance the gun can fire.
         public int clipSize = 30;
         public float reloadSpeed = 5.0f;                // time reached to do something
+        public int roundsPerShot = 10;
     }
 
     // Weapon Info Class
+    [Header("Weapon Attributes")]
     public WeaponInfo weaponInfo;
 
     [Header("GameObjects/Resources")]
@@ -75,8 +77,16 @@ public class BaseRayGun : Item
             int hitSoundID = Mathf.CeilToInt(UnityEngine.Random.Range(0, gunShotSFX.Length));
             gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
 
-            ShootRay();
-        } else if (ammo <= 0)
+            for (int i = 0; i < weaponInfo.roundsPerShot; ++i)
+            {
+                ShootRay();
+            }
+
+            // Reset variables for next fire
+            nextTimeToFire = 0f;
+            ammo--;
+        }
+        else if (ammo <= 0)
         {
             // Play empty sound
         }
@@ -103,29 +113,20 @@ public class BaseRayGun : Item
         gunParticles.Stop();
         gunParticles.Play();
 
-        // Enable the line renderer and set it's first position to be the end of the gun.
-        gunLine.enabled = true;
-        gunLine.SetPosition(0, transform.position);
-
         // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
         shootRay.origin = transform.position;
         shootRay.direction = randomDirection;
 
-        Debug.DrawRay(transform.position, randomDirection);
+        Debug.DrawRay(transform.position, randomDirection * 10);
 
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
         if (Physics.Raycast(shootRay, out shootHit, weaponInfo.range, shootableMask))
         {
             print("shot object\n");
-
-            // Set the second position of the line renderer to the point the raycast hit.
-            gunLine.SetPosition(1, shootHit.point);
         }
-        // If the raycast didn't hit anything on the shootable layer...
         else
         {
-            // ... set the second position of the line renderer to the fullest extent of the gun's range.
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponInfo.range);
+
         }
 
         // Enable the light.
@@ -134,9 +135,5 @@ public class BaseRayGun : Item
         // Stop the particles from playing if they were, then start the particles.
         gunParticles.Stop();
         gunParticles.Play();
-
-        // Reset variables for next fire
-        nextTimeToFire = 0f;
-        ammo--;
     }
 }
