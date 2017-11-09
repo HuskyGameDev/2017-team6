@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerUse : MonoBehaviour
 {
 
-    public BaseWeapon[] weaponList;
+    public Item[] weaponList;
 
     private Item currentEquipped;
     private Transform weaponHolder;

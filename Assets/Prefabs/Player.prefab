@@ -749,7 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponList:
-  - {fileID: 114661683761521362, guid: 66fb54eb34079254e84ba0d163598dbd, type: 2}
+  - {fileID: 114046770664666564, guid: 66fb54eb34079254e84ba0d163598dbd, type: 2}
 --- !u!114 &114834951365230592
 MonoBehaviour:
   m_ObjectHideFlags: 1
