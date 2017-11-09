@@ -200,7 +200,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -224,7 +224,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!108 &108847214283644570
 Light:
   m_ObjectHideFlags: 1
@@ -276,6 +276,10 @@ MonoBehaviour:
   current: 0
   itemName: Laser Gun
   itemImg: {fileID: 0}
+  itemCost:
+    scrap: 0
+    energy: 0
+    wire: 0
   ProjectileShoot: 0
   RayShoot: 1
   projectileSpeed: 40
