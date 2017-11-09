@@ -144,7 +144,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1833657061178530}
-  m_Mesh: {fileID: 4300002, guid: 6141b429adf902d4d8e7188840a2dce1, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e5ccfb9fa4227304e8861a9e2ab3af44, type: 3}
 --- !u!82 &82460424637547064
 AudioSource:
   m_ObjectHideFlags: 1
@@ -272,9 +272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a494be6b7879e874f8fea76da8265ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 0
+  max: 1
   current: 0
-  itemName: 
+  itemName: Shotgun
   itemImg: {fileID: 0}
   itemCost:
     scrap: 0
@@ -286,12 +286,14 @@ MonoBehaviour:
     range: 20
     clipSize: 30
     reloadSpeed: 5
-  gunLight: {fileID: 0}
-  gunShotSFX: []
-  reloadSFX: {fileID: 0}
+    roundsPerShot: 10
+  gunLight: {fileID: 108500214165278208}
+  gunShotSFX:
+  - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
+  - {fileID: 8300000, guid: bcec26fea408df8458b574ac28ae6a16, type: 3}
+  reloadSFX: {fileID: 8300000, guid: e3979ddcf4a07d047ba9d557dddf2dc8, type: 3}
   radius: 2
   z: 10
-  numberOfBullets: 10
 --- !u!120 &120277788252505318
 LineRenderer:
   m_ObjectHideFlags: 1
