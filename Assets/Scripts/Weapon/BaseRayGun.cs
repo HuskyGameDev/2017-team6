@@ -63,6 +63,7 @@ public class BaseRayGun : Item
         ammo = weaponInfo.clipSize;
     }
 
+    // Inherited method for Using the weapon
     public override void Using()
     {
         nextTimeToFire += Time.deltaTime;
@@ -79,12 +80,37 @@ public class BaseRayGun : Item
         } else if (ammo <= 0)
         {
             // Play empty sound
+        } else
+        {
+            DisableEffects();
         }
     }
 
+    // Inherited method for reloading
     public override void Reloading()
     {
-        throw new NotImplementedException();
+        if (!reloading)
+        {
+            StartCoroutine(Reload());
+        }
+
+        // TODO: Update the GUI
+    }
+
+    // IEnumerator for handling reloads
+    IEnumerator Reload()
+    {
+        reloading = true;
+
+        // Play reload sound
+        gunAudio.PlayOneShot(reloadSFX, 0.3f);
+
+        // TODO: Play reload animation
+
+        yield return new WaitForSeconds(weaponInfo.reloadSpeed);
+
+        ammo = weaponInfo.clipSize;
+        reloading = false;
     }
 
     // Fire the Ray
@@ -94,7 +120,7 @@ public class BaseRayGun : Item
         Vector3 randomDirection = UnityEngine.Random.insideUnitCircle * radius;
         randomDirection.z = z;
 
-        randomDirection = transform.TransformDirection(randomDirection.normalized);
+        randomDirection = gunLight.transform.TransformDirection(randomDirection.normalized);
 
         // Enable the light.
         gunLight.enabled = true;
@@ -108,7 +134,7 @@ public class BaseRayGun : Item
         gunLine.SetPosition(0, transform.position);
 
         // Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
-        shootRay.origin = transform.position;
+        shootRay.origin = gunLight.transform.position;
         shootRay.direction = randomDirection;
 
         Debug.DrawRay(transform.position, randomDirection);
@@ -138,5 +164,12 @@ public class BaseRayGun : Item
         // Reset variables for next fire
         nextTimeToFire = 0f;
         ammo--;
+    }
+
+    public void DisableEffects()
+    {
+        // Disable the line renderer and the light.
+        gunLine.enabled = false;
+        gunLight.enabled = false;
     }
 }

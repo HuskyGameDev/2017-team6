@@ -210,9 +210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 581801393}
-  horizontalRotation: 45
-  distanceFromPlayer: 10
-  angleFromTop: 45
+  horizontalRotation: 80
+  distanceFromPlayer: 3
+  angleFromTop: 60
 --- !u!1001 &487417478
 Prefab:
   m_ObjectHideFlags: 0
@@ -357,6 +357,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114795773638992278, guid: 64b7b668ce0b6ae4db634af7e215741f,
+        type: 2}
+      propertyPath: weaponList.Array.data[0]
+      value: 
+      objectReference: {fileID: 114046770664666564, guid: 66fb54eb34079254e84ba0d163598dbd,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64b7b668ce0b6ae4db634af7e215741f, type: 2}
   m_IsPrefabParent: 0
@@ -398,6 +404,11 @@ Prefab:
     - target: {fileID: 4017552572653728, guid: 67928e02515329340a884048e0d78699, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114590981131544938, guid: 67928e02515329340a884048e0d78699,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67928e02515329340a884048e0d78699, type: 2}
