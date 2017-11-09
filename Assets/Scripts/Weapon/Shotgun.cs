@@ -40,9 +40,7 @@ public class Shotgun : Item
     int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
 
     ParticleSystem gunParticles;                    // Reference to the particle system.
-    LineRenderer gunLine;                           // Reference to the line renderer.
     AudioSource gunAudio;                           // Reference to the audio source.
-    AudioSource reloadAudio;                        // Reference to the reload audio source.
 
     float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
     bool timerRunning = false;                      // timer begins at this value
@@ -59,7 +57,6 @@ public class Shotgun : Item
 
         // Set up the references.
         gunParticles = GetComponent<ParticleSystem>();
-        gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
 
         ammo = weaponInfo.clipSize;
