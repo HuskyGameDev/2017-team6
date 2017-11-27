@@ -183,7 +183,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -207,7 +207,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!108 &108365426071211690
 Light:
   m_ObjectHideFlags: 1
@@ -253,22 +253,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ea8ed743cd2d984bbd345dd778fb961, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  damagePerShot: 20
-  timeBetweenBullets: 0.15
-  range: 20
-  clipSize: 30
-  gunLight: {fileID: 108365426071211690}
-  gunShotSFX:
-  - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
-  - {fileID: 8300000, guid: bcec26fea408df8458b574ac28ae6a16, type: 3}
-  - {fileID: 8300000, guid: bf32a4f67da228f42a4a5f6a143d616a, type: 3}
-  - {fileID: 8300000, guid: a599a1f1ca210d946ad161d7e21e457a, type: 3}
-  reloadSFX: {fileID: 8300000, guid: e3979ddcf4a07d047ba9d557dddf2dc8, type: 3}
-  RayShoot: 0
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max: 0
+  current: 0
+  itemName: 
+  itemImg: {fileID: 0}
+  itemCost:
+    scrap: 0
+    energy: 0
+    wire: 0
   ProjectileShoot: 1
+  RayShoot: 0
   projectileSpeed: 40
+  weaponInfo:
+    damagePerShot: 20
+    timeBetweenBullets: 0.15
+    range: 20
+    clipSize: 30
+    gunLight: {fileID: 0}
+    gunShotSFX: []
+    reloadSFX: {fileID: 0}
 --- !u!120 &120852362260689482
 LineRenderer:
   m_ObjectHideFlags: 1
