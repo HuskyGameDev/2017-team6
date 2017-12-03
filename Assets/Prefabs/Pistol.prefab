@@ -282,17 +282,14 @@ MonoBehaviour:
     wire: 0
   weaponInfo:
     damagePerShot: 10
-    timeBetweenBullets: 0.3
+    timeBetweenBullets: 0.2
     range: 10
     clipSize: 14
     reloadSpeed: 1
   gunLight: {fileID: 108574773265884894}
   gunShotSFX:
-  - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
-  - {fileID: 8300000, guid: bcec26fea408df8458b574ac28ae6a16, type: 3}
-  - {fileID: 8300000, guid: bf32a4f67da228f42a4a5f6a143d616a, type: 3}
-  - {fileID: 8300000, guid: a599a1f1ca210d946ad161d7e21e457a, type: 3}
-  reloadSFX: {fileID: 8300000, guid: e3979ddcf4a07d047ba9d557dddf2dc8, type: 3}
+  - {fileID: 8300000, guid: c1c374b71d35ca34da01765b8dfa8e37, type: 3}
+  reloadSFX: {fileID: 8300000, guid: 0ac1f81f8511c6e4094fabe0d72beaa4, type: 3}
   radius: 1
   z: 10
 --- !u!120 &120146581595635598

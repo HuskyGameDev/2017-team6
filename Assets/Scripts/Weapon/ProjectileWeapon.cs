@@ -27,6 +27,7 @@ public class ProjectileWeapon : Item
     public Light gunLight;                          // Reference to the light component.
     public AudioClip[] gunShotSFX;
     public AudioClip reloadSFX;
+	public AudioClip gunEmpty;
 
     [Header("Fire Variance Attributes")]
     // Scale of the circle
@@ -34,19 +35,19 @@ public class ProjectileWeapon : Item
     // Used to set the distance of the circle
     public float z = 10f;
 
-    Transform firepoint;                            // Point where bullets come out of in our gun
+    protected Transform firepoint;                            // Point where bullets come out of in our gun
 
-    int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
+    protected int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
 
-    ParticleSystem gunParticles;                    // Reference to the particle system.
-    AudioSource gunAudio;                           // Reference to the audio source.
+    protected ParticleSystem gunParticles;                    // Reference to the particle system.
+    protected AudioSource gunAudio;                           // Reference to the audio source.
 
     float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
     bool timerRunning = false;                      // timer begins at this value
 
-    private int ammo;
-    private bool reloading = false;
-    private float nextTimeToFire;                   // Timer to keep track of fire rate
+	protected int ammo;
+    protected bool reloading = false;
+    protected float nextTimeToFire;                   // Timer to keep track of fire rate
 
     // Use this for initialization
     void Awake()
@@ -87,8 +88,12 @@ public class ProjectileWeapon : Item
 
             ShootProjectile();
         }
-        else if (ammo <= 0)
+		else if (nextTimeToFire >= weaponInfo.timeBetweenBullets && 
+				 reloading == false && 
+				 ammo <= 0)
         {
+			gunAudio.PlayOneShot(gunEmpty, 0.4f);
+			nextTimeToFire = 0f;
             // Play empty sound
         }
         else
@@ -125,7 +130,7 @@ public class ProjectileWeapon : Item
     }
 
     // Fire the Ray
-    void ShootProjectile()
+    public virtual void ShootProjectile()
     {
         Vector3 spread = new Vector3(
             UnityEngine.Random.Range(-1, 1) * radius, 
@@ -140,7 +145,8 @@ public class ProjectileWeapon : Item
         gunParticles.Stop();
         gunParticles.Play();
 
-        // TODO: Fire the projectile
+        // Fire the Projectile
+		Debug.Log("WHTKSFJ");
         GameObject tmpProj = Instantiate(projectile);
         tmpProj.transform.position = firepoint.position;
         tmpProj.transform.rotation = Quaternion.Euler(spread) * firepoint.rotation;
