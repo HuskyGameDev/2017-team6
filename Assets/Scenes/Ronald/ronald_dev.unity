@@ -261,7 +261,7 @@ Prefab:
         type: 2}
       propertyPath: weaponList.Array.data[0]
       value: 
-      objectReference: {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af,
+      objectReference: {fileID: 114680158850876472, guid: 5aa1baa12530199438ca7c74c0760ec6,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64b7b668ce0b6ae4db634af7e215741f, type: 2}
@@ -305,9 +305,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114590981131544938, guid: 67928e02515329340a884048e0d78699,
-        type: 2}
-      propertyPath: m_Enabled
+    - target: {fileID: 1167521439279458, guid: 67928e02515329340a884048e0d78699, type: 2}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -416,10 +415,6 @@ Prefab:
     - target: {fileID: 4778858089396392, guid: 05c94f8788018b94790700a3e621130a, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1925215942793400, guid: 05c94f8788018b94790700a3e621130a, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05c94f8788018b94790700a3e621130a, type: 2}

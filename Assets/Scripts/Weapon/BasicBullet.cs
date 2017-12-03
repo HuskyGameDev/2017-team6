@@ -3,19 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicBullet : MonoBehaviour {
+    
+    [System.Serializable]
+    public class ImpactSounds
+    {
+        public AudioClip metal;
+        public AudioClip wood;
+        public AudioClip concrete;
+    }
 
     public int damage;
     public LayerMask canDamageLMask;
     public float projectileSpeed;
     public float projectileRange;
 
+    public ImpactSounds impactSoundClips;
+
     private Vector3 startPos;
+    private AudioSource playAudio;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         startPos = transform.position;
-        Debug.Log(transform.forward);
-
+        playAudio = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -30,16 +40,22 @@ public class BasicBullet : MonoBehaviour {
         }
 	}
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
+        Debug.Log("AKSDJKASd");
+
         int colLayer = col.gameObject.layer;
-        if (canDamageLMask == (canDamageLMask | (1 << colLayer)))
+        if (colLayer == LayerMask.NameToLayer("Shootable"))
         {
             Debug.Log("Damage Hit: " + col.gameObject.name);
-        } else {
-            Debug.Log("No Damage Hit: " + col.gameObject.name);
+
+            col.GetComponentInParent<EnemyManager>().applyDamage(damage);
+            Destroy(gameObject);
+        } else if (colLayer == LayerMask.NameToLayer("Obstacle"))
+        {
+            playAudio.PlayOneShot(impactSoundClips.concrete, 0.1f);
+            Destroy(gameObject);
         }
         // TODO: play hit sound
-        Destroy(gameObject);
     }
 }
