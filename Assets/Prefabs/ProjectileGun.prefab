@@ -317,13 +317,12 @@ MonoBehaviour:
   projectile: {fileID: 1830864759168760, guid: 7c13b5c4c5e6f6a40a747906f07fcd36, type: 2}
   gunLight: {fileID: 108659948899771720}
   gunShotSFX:
-  - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
-  - {fileID: 8300000, guid: bcec26fea408df8458b574ac28ae6a16, type: 3}
-  - {fileID: 8300000, guid: bf32a4f67da228f42a4a5f6a143d616a, type: 3}
-  - {fileID: 8300000, guid: a599a1f1ca210d946ad161d7e21e457a, type: 3}
-  reloadSFX: {fileID: 8300000, guid: e3979ddcf4a07d047ba9d557dddf2dc8, type: 3}
-  radius: 0.5
-  z: 10
+  - {fileID: 8300000, guid: d0ecd2d4816957f4e889d147aeaf6526, type: 3}
+  - {fileID: 8300000, guid: d0ecd2d4816957f4e889d147aeaf6526, type: 3}
+  reloadSFX: {fileID: 8300000, guid: 5d884f5cd82260b4fb8518ff33f1f800, type: 3}
+  gunEmpty: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
+  radius: 15
+  z: 2
 --- !u!198 &198814211207382592
 ParticleSystem:
   m_ObjectHideFlags: 1
