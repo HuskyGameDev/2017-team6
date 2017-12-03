@@ -71,8 +71,6 @@ public class EnemyAttack : MonoBehaviour {
 
     void Update()
     {
-        // Add the time since Update was last called to the timer.
-
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
         if (playerInRange && 
             enemyHealth.currentHealth > 0 && 

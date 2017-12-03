@@ -47,7 +47,7 @@ public class ProjectileWeapon : Item
 
 	protected int ammo;
     protected bool reloading = false;
-    protected float nextTimeToFire;                   // Timer to keep track of fire rate
+    protected float nextTimeToFire = 0.0f;                   // Timer to keep track of fire rate
 
     // Use this for initialization
     void Awake()
@@ -76,9 +76,7 @@ public class ProjectileWeapon : Item
     // Inherited method for Using the weapon
     public override void Using()
     {
-        nextTimeToFire += Time.deltaTime;
-
-        if (nextTimeToFire >= weaponInfo.timeBetweenBullets &&
+        if (Time.time > nextTimeToFire &&
             reloading == false &&
             ammo > 0)
         {
@@ -87,6 +85,8 @@ public class ProjectileWeapon : Item
             gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
 
             ShootProjectile();
+
+            nextTimeToFire = Time.time + weaponInfo.timeBetweenBullets;
         }
 		else if (nextTimeToFire >= weaponInfo.timeBetweenBullets && 
 				 reloading == false && 
@@ -94,6 +94,7 @@ public class ProjectileWeapon : Item
         {
 			gunAudio.PlayOneShot(gunEmpty, 0.4f);
 			nextTimeToFire = 0f;
+            DisableEffects();
             // Play empty sound
         }
         else
@@ -130,13 +131,13 @@ public class ProjectileWeapon : Item
     }
 
     // Fire the Ray
-    public virtual void ShootProjectile()
+    protected virtual void ShootProjectile()
     {
         Vector3 spread = new Vector3(
-            UnityEngine.Random.Range(-1, 1) * radius, 
-            UnityEngine.Random.Range(-1, 1) * radius, 
-            UnityEngine.Random.Range(-1, 1) * radius
-        ).normalized;
+            UnityEngine.Random.Range(-1, 1), 
+            UnityEngine.Random.Range(-1, 1), 
+            UnityEngine.Random.Range(-1, 1)
+        ).normalized * radius;
 
         // Enable the light.
         gunLight.enabled = true;

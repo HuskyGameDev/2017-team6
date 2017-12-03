@@ -58,6 +58,7 @@ public class EnemyManager : MonoBehaviour {
         }
     }
 
+    // Kill the Enemy
     void Death()
     {
         isDead = true;
@@ -67,6 +68,8 @@ public class EnemyManager : MonoBehaviour {
 
         // playerAudio.clip = deathClip;
         // playerAudio.Play();
+
+        Destroy(gameObject);
 
         enemyMovement.enabled = false;
     }
