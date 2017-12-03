@@ -7,11 +7,12 @@ public class PlayerManager : MonoBehaviour
 {
     public int startHealth = 100;
     public int currentHealth;
-
-    // public Slider healthSlider;
-
-    public float flashSpeed;
+    //public Slider healthSlider;
+    //public Image damageImage;
+    public AudioClip deathClip;
+    public float flashSpeed = 5f;
     public Color flashColor = new Color(1f, 0f, 0f, 0.1f);
+  
 
     AudioSource playerAudio;
     PlayerMovement playerMovement;
@@ -52,6 +53,7 @@ public class PlayerManager : MonoBehaviour
         damaged = false;
     }
 
+
     public void applyDamage(int damage)
     {
         // Set damage to be true so we can show it
@@ -75,11 +77,11 @@ public class PlayerManager : MonoBehaviour
     {
         isDead = true;
 
-        // playerUse.DisableEffects();
-        // anim.SetTrigger("Die");
+        //playerUse.DisableEffects();
+        //anim.SetTrigger("Die");
 
-        // playerAudio.clip = deathClip;
-        // playerAudio.Play();
+        playerAudio.clip = deathClip;
+        playerAudio.Play();
 
         playerMovement.enabled = false;
         playerUse.enabled = false;
