@@ -40,7 +40,7 @@ public class SentryScript : MonoBehaviour {
     {
         if(Vector3.Distance(transform.position,target.transform.position) > attackRange)
         {
-            Debug.Log("false");
+            //Debug.Log("false");
             return false;
         }
         
@@ -51,6 +51,5 @@ public class SentryScript : MonoBehaviour {
         Debug.Log("false");
         return false;
     }
-
 
 }
