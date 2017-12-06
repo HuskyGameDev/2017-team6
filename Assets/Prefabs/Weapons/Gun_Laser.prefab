@@ -275,7 +275,7 @@ MonoBehaviour:
   max: 0
   current: 0
   itemName: 
-  itemImg: {fileID: 0}
+  itemImg: {fileID: 21300000, guid: 53b1b9b936d9b004a9b6d42f43804caf, type: 3}
   itemCost:
     scrap: 0
     energy: 0

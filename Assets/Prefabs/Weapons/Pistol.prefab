@@ -275,7 +275,7 @@ MonoBehaviour:
   max: 1
   current: 0
   itemName: Basic Pistol
-  itemImg: {fileID: 0}
+  itemImg: {fileID: 21300000, guid: 3114190a71de62f49af5d8bd1023e73d, type: 3}
   itemCost:
     scrap: 0
     energy: 0
