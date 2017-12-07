@@ -16,6 +16,7 @@ public class EnemyManager : MonoBehaviour {
 
     bool isDead;
     bool damaged;
+    Color originalColor;
 
     // Use this for initialization
     void Awake()
@@ -24,7 +25,9 @@ public class EnemyManager : MonoBehaviour {
 
         enemyAudio = GetComponent<AudioSource>();
         enemyMovement = GetComponent<EnemyMovement>();
-        enemyRenderer = GetComponent<Renderer>();
+        enemyRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        originalColor = enemyRenderer.material.color;
     }
 
     // Update is called once per frame
@@ -36,7 +39,7 @@ public class EnemyManager : MonoBehaviour {
         else
         {
             // Transition the color back to normal
-            enemyRenderer.material.color = Color.Lerp(enemyRenderer.material.color, Color.clear, flashSpeed * Time.deltaTime);
+            enemyRenderer.material.color = Color.Lerp(enemyRenderer.material.color, originalColor, flashSpeed * Time.deltaTime);
         }
 
         // Reset the damage

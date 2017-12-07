@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
 
     bool isDead;
     bool damaged;
+    Color originalColor;
 
     // Use this for initialization
     void Awake()
@@ -32,13 +33,14 @@ public class PlayerManager : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerUse = GetComponent<PlayerUse>();
         // playerSound = GetComponent<PlayerSound>();
-        playerRenderer = GetComponentInChildren<Renderer>();
+        playerRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        originalColor = playerRenderer.material.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (damaged)
         {
             playerRenderer.material.color = flashColor;
@@ -46,7 +48,7 @@ public class PlayerManager : MonoBehaviour
         else
         {
             // Transition the color back to normal
-            playerRenderer.material.color = Color.Lerp(playerRenderer.material.color, Color.clear, flashSpeed * Time.deltaTime);
+            playerRenderer.material.color = Color.Lerp(playerRenderer.material.color, originalColor, flashSpeed * Time.deltaTime);
         }
 
         // Reset the damage
