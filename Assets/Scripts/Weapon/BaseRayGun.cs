@@ -66,9 +66,8 @@ public class BaseRayGun : Item
     // Inherited method for Using the weapon
     public override void Using()
     {
-        nextTimeToFire += Time.deltaTime;
 
-        if (nextTimeToFire >= weaponInfo.timeBetweenBullets &&
+        if (Time.time > nextTimeToFire &&
             reloading == false &&
             ammo > 0)
         {
@@ -77,8 +76,12 @@ public class BaseRayGun : Item
             gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
 
             ShootRay();
+
+            nextTimeToFire = Time.time + weaponInfo.timeBetweenBullets;
         } else if (ammo <= 0)
         {
+            nextTimeToFire = 0f;
+            DisableEffects();
             // Play empty sound
         } else
         {
@@ -142,7 +145,9 @@ public class BaseRayGun : Item
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
         if (Physics.Raycast(shootRay, out shootHit, weaponInfo.range, shootableMask))
         {
-            print("shot object\n");
+            print("Hit: " + shootHit.collider.name);
+
+            shootHit.collider.gameObject.GetComponentInParent<EnemyManager>().applyDamage(weaponInfo.damagePerShot);
 
             // Set the second position of the line renderer to the point the raycast hit.
             gunLine.SetPosition(1, shootHit.point);
