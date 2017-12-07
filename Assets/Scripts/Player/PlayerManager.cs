@@ -26,11 +26,12 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         currentHealth = startHealth;
+        isDead = false;
 
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
         playerUse = GetComponent<PlayerUse>();
-        playerSound = GetComponent<PlayerSound>();
+        // playerSound = GetComponent<PlayerSound>();
         playerRenderer = GetComponentInChildren<Renderer>();
     }
 
@@ -61,7 +62,7 @@ public class PlayerManager : MonoBehaviour
         currentHealth = currentHealth - damage;
 
         // Play player hit sound
-        playerSound.playHitSound();
+        // playerSound.playHitSound();
 
         // Check if the player is dead
         if (currentHealth <= 0 && !isDead)

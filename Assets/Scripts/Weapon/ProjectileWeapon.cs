@@ -147,7 +147,6 @@ public class ProjectileWeapon : Item
         gunParticles.Play();
 
         // Fire the Projectile
-		Debug.Log("WHTKSFJ");
         GameObject tmpProj = Instantiate(projectile);
         tmpProj.transform.position = firepoint.position;
         tmpProj.transform.rotation = Quaternion.Euler(spread) * firepoint.rotation;

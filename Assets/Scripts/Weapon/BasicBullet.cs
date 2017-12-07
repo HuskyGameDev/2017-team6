@@ -42,14 +42,21 @@ public class BasicBullet : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log("AKSDJKASd");
 
         int colLayer = col.gameObject.layer;
         if (colLayer == LayerMask.NameToLayer("Shootable"))
         {
             Debug.Log("Damage Hit: " + col.gameObject.name);
 
-            col.GetComponentInParent<EnemyManager>().applyDamage(damage);
+            switch (col.gameObject.tag)
+            {
+                case "Player":
+                    col.GetComponent<PlayerManager>().applyDamage(damage);
+                    break;
+                case "Enemy":
+                    col.GetComponentInParent<EnemyManager>().applyDamage(damage);
+                    break;
+            }
             Destroy(gameObject);
         } else if (colLayer == LayerMask.NameToLayer("Obstacle"))
         {

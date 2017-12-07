@@ -30,8 +30,6 @@ public class EnemyMovement : MonoBehaviour
         {
             direction = (player.position - transform.position).normalized;
 
-            direction.y = 0.0f;
-
             //create the rotation we need to be in to look at the target
             lookRotation = Quaternion.LookRotation(direction);
 

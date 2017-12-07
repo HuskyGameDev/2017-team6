@@ -163,7 +163,8 @@ GameObject:
   - component: {fileID: 114795773638992278}
   - component: {fileID: 114713649551450000}
   - component: {fileID: 114256014026592456}
-  m_Layer: 0
+  - component: {fileID: 114855292295216034}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -717,7 +718,37 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  guiItems: []
+  guiItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114713649551450000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -749,7 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponList:
-  - {fileID: 114271046245406050, guid: f244babd8fbc1434fa2246c1198ef315, type: 2}
+  - {fileID: 114680158850876472, guid: 5aa1baa12530199438ca7c74c0760ec6, type: 2}
 --- !u!114 &114834951365230592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -762,6 +793,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+--- !u!114 &114855292295216034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1540490609704840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8866afa7978a0b14b9f8ccdd3e512419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
+  - {fileID: 114223502909024330, guid: a19304707921ac542a95dc2c3990536f, type: 2}
+  - {fileID: 114680158850876472, guid: 5aa1baa12530199438ca7c74c0760ec6, type: 2}
+  - {fileID: 114271046245406050, guid: f244babd8fbc1434fa2246c1198ef315, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentItem: 0
 --- !u!136 &136274022644988852
 CapsuleCollider:
   m_ObjectHideFlags: 1
