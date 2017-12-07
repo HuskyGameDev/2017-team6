@@ -48,11 +48,6 @@ public class BasicBullet : MonoBehaviour {
         {
             Debug.Log("Damage Hit: " + col.gameObject.name);
 
-            if (col.gameObject.tag == "Player")
-            {
-
-            }
-
             switch (col.gameObject.tag)
             {
                 case "Player":
