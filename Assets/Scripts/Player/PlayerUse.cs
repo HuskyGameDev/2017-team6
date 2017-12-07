@@ -27,9 +27,12 @@ public class PlayerUse : MonoBehaviour
 
         // Get the inventory component
         inventoryMngr = GetComponent<Inventory>();
+		// Get hotbar component
+		hotbar = GetComponent<Hotbar>();
 
         // NOTE: Weapon to be spawned will be base on the inventory manager in the future
-        attachItem(weaponList[0]);
+        //attachItem(weaponList[0]);
+		attachItem(hotbar.items[0]);
     }
 
     void Update()
@@ -44,12 +47,12 @@ public class PlayerUse : MonoBehaviour
             currentEquipped.Reloading();
         }
 
-        if (Input.GetButton("NextItem"))
+		if (Input.GetButtonDown("NextItem"))
         {
             attachItem(hotbar.NextItem());
         }
 
-        if (Input.GetButton("PrevItem"))
+        if (Input.GetButtonDown("PrevItem"))
         {
             attachItem(hotbar.PreviousItem());
         }
@@ -59,6 +62,10 @@ public class PlayerUse : MonoBehaviour
     public void attachItem(Item weapon)
     {
         // TODO: Play Equip Animation
+
+		if(currentEquipped != null)
+			GameObject.Destroy(currentEquipped.gameObject);
+
         currentEquipped = Instantiate(
           weapon,
           weaponHolder.transform.position,

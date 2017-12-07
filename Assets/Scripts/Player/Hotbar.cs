@@ -11,7 +11,7 @@ public class Hotbar : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        items = new Item[6];
+        //items = new Item[6];
         currentItem = 0;
 
         // TODO: Set item 5 to be the crafting item
@@ -33,7 +33,7 @@ public class Hotbar : MonoBehaviour
     // Get the item before the current item on the hotbar
     public Item PreviousItem()
     {
-        if (currentItem - 1 > 0)
+        if (currentItem - 1 >= 0)
         {
             currentItem -= 1;
         }

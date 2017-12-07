@@ -270,11 +270,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4380d2fc240a1284b9a9bd946f2ab727, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   max: 0
   current: 0
-  itemName: 
+  itemName: Laser Gun
   itemImg: {fileID: 21300000, guid: 53b1b9b936d9b004a9b6d42f43804caf, type: 3}
   itemCost:
     scrap: 0
