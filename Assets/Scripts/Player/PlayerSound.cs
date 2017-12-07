@@ -16,6 +16,6 @@ public class PlayerSound : MonoBehaviour {
 	public void playHitSound()
     {
         int hitSoundID = Mathf.CeilToInt(Random.Range(0, 4));
-        source.PlayOneShot(playerHit[hitSoundID], 0.2f);
+        source.PlayOneShot(playerHit[hitSoundID], 0.1f);
     }
 }

@@ -64,6 +64,6 @@ public class PlayerUse : MonoBehaviour
           weaponHolder.transform.position,
           weaponHolder.transform.rotation
         );
-        currentEquipped.transform.parent = transform;
+        currentEquipped.transform.parent = weaponHolder;
     }
 }

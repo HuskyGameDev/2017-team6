@@ -27,7 +27,7 @@ public class EnemyAttack : MonoBehaviour {
         Transform[] transforms = this.transform.GetComponentsInChildren<Transform>();
         foreach (Transform t in transforms)
         {
-            if (t.name == "Hand_L")
+            if (t.name == "WeaponHolder")
             {
                 weaponHolder = t;
             }
@@ -83,7 +83,7 @@ public class EnemyAttack : MonoBehaviour {
         }
 
         // If the player has zero or less health...
-        if (playerHealth.currentHealth <= 0)
+        if (enemyHealth.currentHealth <= 0)
         {
             // ... tell the animator the player is dead.
             anim.SetTrigger("PlayerDead");
