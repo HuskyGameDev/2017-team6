@@ -35,10 +35,6 @@ public class Inventory : MonoBehaviour
     // Reference to the hotbar object
     public Hotbar hotbar;
 
-	[Header("UI Information")]
-	// Reference to the game UI
-	public GameUI ui;
-
     private void Start()
     {
         inventoryItems = new List<Item>();
@@ -64,8 +60,7 @@ public class Inventory : MonoBehaviour
         {
             inventoryItems.Add(item);
 
-			// Update the GUI
-			ui.UpdateInventory();
+            // TODO: Update the GUI
         }
     }
 
@@ -87,7 +82,11 @@ public class Inventory : MonoBehaviour
         // Destroy from inventory menu
         inventoryItems[itemIdx] = null;
 
-        // Update the GUI
-		ui.UpdateInventory();
+        // TODO: Update the GUI
+    }
+
+    public void RefreshInventoryGUI()
+    {
+        Debug.Log("No function created to update GUI");
     }
 }
