@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 114713649551450000}
   - component: {fileID: 114256014026592456}
   - component: {fileID: 114855292295216034}
+  - component: {fileID: 114225112485089476}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -658,7 +659,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114183310018039750
@@ -670,25 +671,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 215a8f7f746b7064d991441a0ad0d7ec, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   startHealth: 100
   currentHealth: 0
   flashSpeed: 5
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
 --- !u!114 &114225112485089476
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1540490609704840}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8866afa7978a0b14b9f8ccdd3e512419, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   items:
-  - {fileID: 114661683761521362, guid: 66fb54eb34079254e84ba0d163598dbd, type: 2}
+  - {fileID: 0}
   - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
   currentItem: 0
 --- !u!114 &114256014026592456
@@ -700,8 +701,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 745b3bf7ea0f3614387df875e2c5c072, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   craftableItems:
   - {fileID: 0}
   - {fileID: 0}
@@ -773,8 +774,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca569c3949d3134ca9c2f5c2374cd25, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxItems: 0
   itemCount: 0
   resources:
@@ -793,8 +794,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff440aa133440164a995a4c94b09b92b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   weaponList:
   - {fileID: 114680158850876472, guid: 5aa1baa12530199438ca7c74c0760ec6, type: 2}
 --- !u!114 &114834951365230592
@@ -806,8 +807,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3837f4404d83544286600d2f6f0a5b8, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   speed: 6
 --- !u!114 &114855292295216034
 MonoBehaviour:
@@ -818,8 +819,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8866afa7978a0b14b9f8ccdd3e512419, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   items:
   - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
   - {fileID: 114223502909024330, guid: a19304707921ac542a95dc2c3990536f, type: 2}

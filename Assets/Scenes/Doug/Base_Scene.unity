@@ -108,6 +108,52 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 23800000, guid: 841f0103428abfc409cb865eede1dc1c, type: 2}
+--- !u!1001 &11774823
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.0184057
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.19909255
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4546183115592222, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590057804165472, guid: c7037098471bfde4199a148351734739, type: 2}
+      propertyPath: m_Name
+      value: Enemy Melee
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c7037098471bfde4199a148351734739, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &21763340
 GameObject:
   m_ObjectHideFlags: 0
