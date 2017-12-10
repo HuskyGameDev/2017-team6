@@ -51,16 +51,18 @@ public class BasicBullet : MonoBehaviour {
             switch (col.gameObject.tag)
             {
                 case "Player":
+                    AudioSource.PlayClipAtPoint(impactSoundClips.wood, transform.position);
                     col.GetComponent<PlayerManager>().applyDamage(damage);
                     break;
                 case "Enemy":
+                    AudioSource.PlayClipAtPoint(impactSoundClips.metal, transform.position);
                     col.GetComponentInParent<EnemyManager>().applyDamage(damage);
                     break;
             }
             Destroy(gameObject);
         } else if (colLayer == LayerMask.NameToLayer("Obstacle"))
         {
-            playAudio.PlayOneShot(impactSoundClips.concrete, 0.1f);
+            AudioSource.PlayClipAtPoint(impactSoundClips.concrete, transform.position);
             Destroy(gameObject);
         }
         // TODO: play hit sound

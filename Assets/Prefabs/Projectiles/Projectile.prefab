@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 136945072070680764}
   - component: {fileID: 23636703361026440}
   - component: {fileID: 114185578967688704}
-  - component: {fileID: 54319777695543876}
   - component: {fileID: 82387371199921750}
   - component: {fileID: 96328318817791092}
+  - component: {fileID: 54057367192436400}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1830864759168760}
   m_Mesh: {fileID: 4300014, guid: 89d2e1a9cf806614b937531704a5d1a5, type: 3}
---- !u!54 &54319777695543876
+--- !u!54 &54057367192436400
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -94,7 +94,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: Infinity
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -117,7 +117,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 140
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

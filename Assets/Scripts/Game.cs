@@ -33,6 +33,7 @@ public class Game : MonoBehaviour {
     private float timer;
     private float spawnTimer;
     private int enemiesRemaining;
+    private float waveTimer;
 
     // Use this for initialization
     void Start () {
@@ -60,6 +61,8 @@ public class Game : MonoBehaviour {
                     // Enable the player
                     playerObj.GetComponent<PlayerMovement>().enabled = true;
 
+                    waveTimer = (defendDuration / waveInfo.numberOfWaves);
+
                     Debug.Log("Game State: " + currentState.ToString());
                 }
                 break;
@@ -79,7 +82,7 @@ public class Game : MonoBehaviour {
                 }
 
                 // Split wave spawn rate to = duration of wave / number of waves
-                if (spawnTimer > (defendDuration / waveInfo.numberOfWaves) && timer <= defendDuration)
+                if (spawnTimer > waveTimer && timer <= defendDuration)
                 {
                     SpawnNextWave();
                     spawnTimer = 0.0f;
@@ -110,6 +113,8 @@ public class Game : MonoBehaviour {
                 {
                     timer = 0.0f;
                     currentState = GameState.DEFEND;
+
+                    waveTimer = (defendDuration / waveInfo.numberOfWaves);
 
                     Debug.Log("Game State: " + currentState.ToString());
                 }
