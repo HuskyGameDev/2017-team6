@@ -313,7 +313,7 @@ MonoBehaviour:
     timeBetweenBullets: 0.15
     range: 20
     clipSize: 30
-    reloadSpeed: 2
+    reloadSpeed: 1.5
   projectile: {fileID: 1830864759168760, guid: 7c13b5c4c5e6f6a40a747906f07fcd36, type: 2}
   gunLight: {fileID: 108659948899771720}
   gunShotSFX:
@@ -321,7 +321,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d0ecd2d4816957f4e889d147aeaf6526, type: 3}
   reloadSFX: {fileID: 8300000, guid: 5d884f5cd82260b4fb8518ff33f1f800, type: 3}
   gunEmpty: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
-  radius: 15
+  radius: 5
   z: 2
 --- !u!198 &198814211207382592
 ParticleSystem:

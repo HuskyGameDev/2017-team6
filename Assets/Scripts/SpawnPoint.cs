@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour {
 
-    public GameObject[] toSpawn;
-    int current;
-
-    // Use this for initialization
-    void Start() {
-        current = 0;
-    }
-
-    void SpawnNextObject()
+    // Spawn the "wave" stored in toSpawn
+    public void SpawnWave(GameObject[] toSpawn)
     {
-        GameObject spawnedObj = Instantiate(toSpawn[current]);
-        spawnedObj.transform.position = transform.position;
+        int i;
+        for (i = 0; i < toSpawn.Length; i++)
+        {
+            GameObject spawnedObj = Instantiate(toSpawn[i]);
+            spawnedObj.transform.position = transform.position;
+        }
     }
 }

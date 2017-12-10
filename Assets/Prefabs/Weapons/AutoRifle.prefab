@@ -285,7 +285,7 @@ MonoBehaviour:
     timeBetweenBullets: 0.05
     range: 40
     clipSize: 50
-    reloadSpeed: 2
+    reloadSpeed: 1
   gunLight: {fileID: 108142910245065116}
   gunShotSFX:
   - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
