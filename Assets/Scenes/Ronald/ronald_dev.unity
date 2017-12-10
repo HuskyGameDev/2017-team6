@@ -147,6 +147,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114855292295216034, guid: 64b7b668ce0b6ae4db634af7e215741f,
+        type: 2}
+      propertyPath: items.Array.data[1]
+      value: 
+      objectReference: {fileID: 114899506463473908, guid: a683243c46ce2e241a29ce4999c54f36,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114224025724950902, guid: 64b7b668ce0b6ae4db634af7e215741f, type: 2}
     - {fileID: 82283685941252780, guid: 64b7b668ce0b6ae4db634af7e215741f, type: 2}
