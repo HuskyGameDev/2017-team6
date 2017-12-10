@@ -285,7 +285,7 @@ MonoBehaviour:
     timeBetweenBullets: 0.05
     range: 40
     clipSize: 50
-    reloadSpeed: 1
+    reloadSpeed: 2
   gunLight: {fileID: 108142910245065116}
   gunShotSFX:
   - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
@@ -302,13 +302,13 @@ LineRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1167290564049076}
   m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 04c2cf29e63d11146a4831c32dd64159, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
