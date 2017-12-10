@@ -41,6 +41,9 @@ public class Game : MonoBehaviour {
 
         playerMngr = playerObj.GetComponent<PlayerManager>();
 
+        // Disable the player initially
+        playerObj.GetComponent<PlayerMovement>().enabled = false;
+
         currentState = GameState.START;
 	}
 	
@@ -54,6 +57,8 @@ public class Game : MonoBehaviour {
                     timer = 0.0f;
                     spawnTimer = 0.0f;
                     currentState = GameState.DEFEND;
+                    // Enable the player
+                    playerObj.GetComponent<PlayerMovement>().enabled = true;
 
                     Debug.Log("Game State: " + currentState.ToString());
                 }
