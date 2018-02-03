@@ -14,6 +14,9 @@ public class EnemyManager : MonoBehaviour {
     EnemyMovement enemyMovement;
     Renderer enemyRenderer;
 
+	public GameObject[] itemdrops = new GameObject[3];
+	public GameObject[] resourcedrops = new GameObject[3];
+
     bool isDead;
     bool damaged;
     Color originalColor;
@@ -66,6 +69,28 @@ public class EnemyManager : MonoBehaviour {
     {
         isDead = true;
 
+
+		//create a randomly assigned number
+		var droproll = Random.Range(2,3);
+		//if the roll on death of the enemy matches the droproll value, drop scrap, energy, wires, and the gun of the enemy
+		if (droproll == 2) {
+			Vector3 position = transform.position;
+			foreach (GameObject item in itemdrops ){
+				if (item != null) {
+					Vector3 spawnPos = new Vector3 (position.x, 0, position.z);
+					Instantiate(item, spawnPos , Quaternion.identity);
+				}
+			}
+		}
+		if (droproll == 3) {
+			Vector3 position = transform.position;
+			foreach (GameObject item in resourcedrops ){
+				if (item != null) {
+					Vector3 spawnPos = new Vector3 (position.x, 0, position.z);
+					Instantiate(item, spawnPos , Quaternion.identity);
+				}
+			}
+		}
         // playerUse.DisableEffects();
         // anim.SetTrigger("Die");
 
