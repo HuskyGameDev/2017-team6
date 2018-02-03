@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     // Basic Inventory information
     [Header("Inventory Info")]
     public int maxItems;
-    public int itemCount;
+    public int itemCount;// TODO: Remove?
 
     // Resources class for keeping track of available resources
     [System.Serializable]

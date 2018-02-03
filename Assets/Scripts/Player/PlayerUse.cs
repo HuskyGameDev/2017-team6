@@ -5,13 +5,11 @@ using UnityEngine;
 // Class used by the "player" to interact with inventory items
 public class PlayerUse : MonoBehaviour
 {
-
-    public Item[] weaponList;
-
     private Item currentEquipped;
     private Transform weaponHolder;
     private Inventory inventoryMngr;
     private Hotbar hotbar;
+
 
     // Use this for initialization
     void Awake()
@@ -31,7 +29,6 @@ public class PlayerUse : MonoBehaviour
 		hotbar = GetComponent<Hotbar>();
 
         // NOTE: Weapon to be spawned will be base on the inventory manager in the future
-        //attachItem(weaponList[0]);
 		attachItem(hotbar.items[0]);
     }
 

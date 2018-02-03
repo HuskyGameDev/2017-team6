@@ -220,4 +220,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shouldSpin: 1
-  spinSpeed: 0.5
+  spinSpeed: 1

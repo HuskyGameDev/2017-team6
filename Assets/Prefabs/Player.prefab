@@ -164,7 +164,6 @@ GameObject:
   - component: {fileID: 114713649551450000}
   - component: {fileID: 114256014026592456}
   - component: {fileID: 114855292295216034}
-  - component: {fileID: 114225112485089476}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -678,21 +677,6 @@ MonoBehaviour:
   score: 0
   flashSpeed: 5
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
---- !u!114 &114225112485089476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540490609704840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8866afa7978a0b14b9f8ccdd3e512419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
-  - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
-  currentItem: 0
 --- !u!114 &114256014026592456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -777,8 +761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca569c3949d3134ca9c2f5c2374cd25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxItems: 0
-  itemCount: 0
+  maxItems: 24
+  itemCount: 4
   resources:
     scrap: 0
     energy: 0
