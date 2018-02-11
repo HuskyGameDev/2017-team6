@@ -293,20 +293,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114855292295216034, guid: 64b7b668ce0b6ae4db634af7e215741f,
-        type: 2}
-      propertyPath: items.Array.data[1]
-      value: 
-      objectReference: {fileID: 114899506463473908, guid: a683243c46ce2e241a29ce4999c54f36,
-        type: 2}
-    - target: {fileID: 114713649551450000, guid: 64b7b668ce0b6ae4db634af7e215741f,
-        type: 2}
-      propertyPath: maxItems
-      value: 24
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114224025724950902, guid: 64b7b668ce0b6ae4db634af7e215741f, type: 2}
-    - {fileID: 82283685941252780, guid: 64b7b668ce0b6ae4db634af7e215741f, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64b7b668ce0b6ae4db634af7e215741f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &248977545
@@ -1480,43 +1467,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db5cd3c257585ce418cb1f29008c0723, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1377175971 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1540490609704840, guid: 64b7b668ce0b6ae4db634af7e215741f,
-    type: 2}
-  m_PrefabInternal: {fileID: 181630855}
---- !u!23 &1377175980
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1377175971}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &1532821422
 GameObject:
   m_ObjectHideFlags: 0

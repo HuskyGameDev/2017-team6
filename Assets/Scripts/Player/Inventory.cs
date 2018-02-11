@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     // Basic Inventory information
     [Header("Inventory Info")]
     public int maxItems;
-    public int itemCount;// TODO: Remove?
+    public int itemCount;
 
     // Resources class for keeping track of available resources
     [System.Serializable]
@@ -29,11 +29,7 @@ public class Inventory : MonoBehaviour
     // Class containing all the resources
     public Resources resources;
     // Array of items that can be used by the player
-    public List<Item> inventoryItems;
-
-    [Header("Hotbar Attributes")]
-    // Reference to the hotbar object
-    public Hotbar hotbar;
+    public List<Item> items;
 
 	[Header("UI Information")]
 	// Reference to the game UI
@@ -41,15 +37,14 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        inventoryItems = new List<Item>();
-        inventoryItems.Capacity = maxItems;
-        itemCount = 0;
+        items.Capacity = maxItems;
+		itemCount = items.Count;
     }
 
     public void AddItem(Item item, int numItem = 1)
     {
         bool containsItem = false;
-        foreach (Item _item in inventoryItems)
+        foreach (Item _item in items)
         {
             // If item already exists: increment the item count without exceeding limits
             if (_item.name == item.name)
@@ -62,30 +57,22 @@ public class Inventory : MonoBehaviour
         // If the item does not already exist add it
         if (!containsItem && itemCount < maxItems)
         {
-            inventoryItems.Add(item);
+            items.Add(item);
 
 			// Update the GUI
 			ui.UpdateInventory();
         }
     }
 
-    public void AddItemToHotbar(int itemIdx)
-    {
-        // Equip the item onto the player
-    }
-
     // Removes an item from the inventory and updates the Inventory GUI
     //  also removes the item from the hotbar if needed
     public void RemoveItem(int itemIdx)
     {
-        Item tmp = inventoryItems[itemIdx];
+        Item tmp = items[itemIdx];
         // TODO: Drop onto the ground
 
-        // If item in Hotbar remove it
-        hotbar.RemoveItem(tmp.name);
-
         // Destroy from inventory menu
-        inventoryItems[itemIdx] = null;
+        items[itemIdx] = null;
 
         // Update the GUI
 		ui.UpdateInventory();
