@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Muzzle
+  - MiniMap
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Shootable
   - Floor
   - Obstacle
-  - 
+  - MiniMap
   - 
   - 
   - 
