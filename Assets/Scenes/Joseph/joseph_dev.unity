@@ -665,6 +665,36 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114264284684862336, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_FontData.m_FontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114598792074085646, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114810505889418452, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224412909134237402, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224412909134237402, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114325949735668166, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: height
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42320307909f2f94ca58094053e3485c, type: 2}
   m_IsPrefabParent: 0
