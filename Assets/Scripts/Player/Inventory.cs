@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
 
 	[Header("UI Information")]
 	// Reference to the game UI
-	public GameUI ui;
+	public UI_Game ui;
 
     private void Start()
     {
