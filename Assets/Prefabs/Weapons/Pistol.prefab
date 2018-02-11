@@ -280,18 +280,18 @@ MonoBehaviour:
     scrap: 0
     energy: 0
     wire: 0
-  weaponInfo:
-    damagePerShot: 10
-    timeBetweenBullets: 0.2
-    range: 10
-    clipSize: 14
-    reloadSpeed: 1
-  gunLight: {fileID: 108574773265884894}
-  gunShotSFX:
+  Damage: 20
+  Range: 20
+  TimeBetweenShots: 0.15
+  ClipSize: 30
+  ReloadTime: 5
+  GunShotSFX:
   - {fileID: 8300000, guid: c1c374b71d35ca34da01765b8dfa8e37, type: 3}
-  reloadSFX: {fileID: 8300000, guid: 0ac1f81f8511c6e4094fabe0d72beaa4, type: 3}
-  radius: 1
-  z: 10
+  ReloadSFX: {fileID: 8300000, guid: 0ac1f81f8511c6e4094fabe0d72beaa4, type: 3}
+  GunEmptySFX: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
+  Radius: 2
+  Z: 10
+  gunLight: {fileID: 108574773265884894}
 --- !u!120 &120146581595635598
 LineRenderer:
   m_ObjectHideFlags: 1

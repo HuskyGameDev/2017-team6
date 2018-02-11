@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 198796357987331176}
   - component: {fileID: 199813578305013090}
   - component: {fileID: 82460424637547064}
-  - component: {fileID: 114680158850876472}
+  - component: {fileID: 114644885121386522}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -289,7 +289,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114680158850876472
+--- !u!114 &114644885121386522
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1866865064506768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a494be6b7879e874f8fea76da8265ea0, type: 3}
+  m_Script: {fileID: 11500000, guid: 98cf06f2df2a1ff4989a01f3219a11ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   max: 1
@@ -308,22 +308,22 @@ MonoBehaviour:
     scrap: 0
     energy: 0
     wire: 0
-  weaponInfo:
-    damagePerShot: 20
-    timeBetweenBullets: 1
-    range: 20
-    clipSize: 6
-    reloadSpeed: 3.5
-  projectile: {fileID: 1830864759168760, guid: 7c13b5c4c5e6f6a40a747906f07fcd36, type: 2}
-  gunLight: {fileID: 108500214165278208}
-  gunShotSFX:
+  Damage: 10
+  Range: 20
+  TimeBetweenShots: 0.5
+  ClipSize: 6
+  ReloadTime: 5
+  GunShotSFX:
+  - {fileID: 8300000, guid: ccad8b9f356157645bdc4b1e25e4f484, type: 3}
   - {fileID: 8300000, guid: f52a9eeedb484b54f844b684afa3e8b9, type: 3}
-  - {fileID: 8300000, guid: f52a9eeedb484b54f844b684afa3e8b9, type: 3}
-  reloadSFX: {fileID: 8300000, guid: eb9958d8dce328745bfacc1100942e62, type: 3}
-  gunEmpty: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
-  radius: 5
-  z: 10
-  numberOfShots: 10
+  ReloadSFX: {fileID: 8300000, guid: dbe95d1fd0359614984bbf9787f2a254, type: 3}
+  GunEmptySFX: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
+  Radius: 2
+  Z: 10
+  NumberOfProjectiles: 10
+  ProjectileSpeed: 50
+  Projectile: {fileID: 1830864759168760, guid: 7c13b5c4c5e6f6a40a747906f07fcd36, type: 2}
+  GunLight: {fileID: 108500214165278208}
 --- !u!198 &198796357987331176
 ParticleSystem:
   m_ObjectHideFlags: 1

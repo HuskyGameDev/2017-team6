@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Simple class used to keep track of items
 [System.Serializable]
@@ -21,7 +19,8 @@ public abstract class Item : MonoBehaviour {
 
     public string itemName;
     public Sprite itemImg;
-    public enum Types {
+    public enum Types
+    {
         Weapon, Ammo, Consumable
     };
 
