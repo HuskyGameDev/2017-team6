@@ -42,6 +42,7 @@ public class Game : MonoBehaviour {
         enemySpawners = GameObject.FindObjectsOfType<SpawnPoint>();
 
         playerMngr = playerObj.GetComponent<PlayerManager>();
+		playerMngr.enabled = false;
 
         // Disable the player initially
         playerObj.GetComponent<PlayerMovement>().enabled = false;
@@ -67,6 +68,7 @@ public class Game : MonoBehaviour {
                     waveTimer = (defendDuration / waveInfo.numberOfWaves);
 
                     Debug.Log("Game State: " + currentState.ToString());
+					playerMngr.enabled = true;
                 }
                 break;
             case GameState.DEFEND:
