@@ -798,8 +798,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   currentHealth: 0
+  pointValue: 10
   flashSpeed: 5
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
+  itemdrops:
+  - {fileID: 1903219567948394, guid: 5e465add49123ba4abc1abc0cb26f462, type: 2}
+  - {fileID: 1542687549716934, guid: e5e7c698f4b70d74fa01820bb1ed093c, type: 2}
+  - {fileID: 1368543358018746, guid: 3cc5ddebdf2f57847aff7a8ef97a36d8, type: 2}
+  resourcedrops:
+  - {fileID: 1542687549716934, guid: e5e7c698f4b70d74fa01820bb1ed093c, type: 2}
+  - {fileID: 1368543358018746, guid: 3cc5ddebdf2f57847aff7a8ef97a36d8, type: 2}
+  - {fileID: 1745096321466240, guid: 14b89c7000bb04f419fc88d26931c96d, type: 2}
 --- !u!114 &114851415970699194
 MonoBehaviour:
   m_ObjectHideFlags: 1

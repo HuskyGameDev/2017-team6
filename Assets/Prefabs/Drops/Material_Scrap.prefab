@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65414642310807730}
   m_Layer: 0
   m_Name: Material_Scrap
-  m_TagString: Untagged
+  m_TagString: DropScrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
