@@ -915,6 +915,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  weaponpickup: {fileID: 1903219567948394, guid: 5e465add49123ba4abc1abc0cb26f462,
+    type: 2}
 --- !u!114 &114855292295216034
 MonoBehaviour:
   m_ObjectHideFlags: 1

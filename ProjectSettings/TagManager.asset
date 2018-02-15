@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Muzzle
+  - Undefined
+  - DropScrap
+  - DropWire
+  - DropEnergy
+  - DropWeapon
   - MiniMap
   layers:
   - Default

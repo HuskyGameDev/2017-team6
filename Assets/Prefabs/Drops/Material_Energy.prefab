@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 65763141537095620}
   m_Layer: 0
   m_Name: Material_Energy
-  m_TagString: Untagged
+  m_TagString: DropEnergy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
