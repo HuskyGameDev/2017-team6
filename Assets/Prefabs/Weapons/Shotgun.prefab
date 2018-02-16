@@ -310,18 +310,18 @@ MonoBehaviour:
     wire: 0
   Damage: 10
   Range: 20
-  TimeBetweenShots: 0.5
+  TimeBetweenShots: 1
   ClipSize: 6
-  ReloadTime: 5
+  ReloadTime: 3.5
   GunShotSFX:
   - {fileID: 8300000, guid: ccad8b9f356157645bdc4b1e25e4f484, type: 3}
   - {fileID: 8300000, guid: f52a9eeedb484b54f844b684afa3e8b9, type: 3}
-  ReloadSFX: {fileID: 8300000, guid: dbe95d1fd0359614984bbf9787f2a254, type: 3}
+  ReloadSFX: {fileID: 8300000, guid: eb9958d8dce328745bfacc1100942e62, type: 3}
   GunEmptySFX: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
-  Radius: 2
+  Radius: 5
   Z: 10
   NumberOfProjectiles: 10
-  ProjectileSpeed: 50
+  ProjectileSpeed: 20
   Projectile: {fileID: 1830864759168760, guid: 7c13b5c4c5e6f6a40a747906f07fcd36, type: 2}
   GunLight: {fileID: 108500214165278208}
 --- !u!198 &198796357987331176

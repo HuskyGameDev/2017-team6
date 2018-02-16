@@ -274,22 +274,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   max: 1
   current: 0
-  itemName: Basic Pistol
+  itemName: Pistol
   itemImg: {fileID: 21300000, guid: 3114190a71de62f49af5d8bd1023e73d, type: 3}
   itemCost:
     scrap: 0
     energy: 0
     wire: 0
-  Damage: 20
-  Range: 20
-  TimeBetweenShots: 0.15
-  ClipSize: 30
-  ReloadTime: 5
+  Damage: 10
+  Range: 10
+  TimeBetweenShots: 0.2
+  ClipSize: 14
+  ReloadTime: 1
   GunShotSFX:
   - {fileID: 8300000, guid: c1c374b71d35ca34da01765b8dfa8e37, type: 3}
   ReloadSFX: {fileID: 8300000, guid: 0ac1f81f8511c6e4094fabe0d72beaa4, type: 3}
   GunEmptySFX: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
-  Radius: 2
+  Radius: 1
   Z: 10
   gunLight: {fileID: 108574773265884894}
 --- !u!120 &120146581595635598
