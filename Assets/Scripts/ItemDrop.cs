@@ -6,6 +6,7 @@ public class ItemDrop : MonoBehaviour {
 
 	public bool shouldSpin = true;
 	public float spinSpeed = 0.5f;
+	public Item itemtest;
 
 	//References
 	MeshFilter itemMesh;

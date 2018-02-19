@@ -1,99 +1,71 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
-public class ProjectileWeapon : Item
+public class ProjectileWeapon : Weapon
 {
+    [Header("Projectile Info")]
+    public int NumberOfProjectiles = 1;
+    public int ProjectileSpeed = 20;
 
-    [System.Serializable]
-    public class WeaponInfo
-    {
-        public int damagePerShot = 20;                  // The damage inflicted by each bullet.
-        public float timeBetweenBullets = 0.15f;        // The time between each shot.
-        public float range = 20f;                       // The distance the gun can fire.
-        public int clipSize = 30;
-        public float reloadSpeed = 5.0f;                // time reached to do something
-    }
+    public GameObject Projectile;               // Reference to projectile game object
 
-    // Weapon Info Class
-    public WeaponInfo weaponInfo;
+    [Header("Game Objects/Resources")]
+    public Light GunLight;                      // Reference to the light component
 
-    // Information about the projectiles
-    [Header("Projectile")]
-    public GameObject projectile;
+    private Transform _firepoint;               // Point where bullets come out of in our gun
 
-    [Header("GameObjects/Resources")]
-    public Light gunLight;                          // Reference to the light component.
-    public AudioClip[] gunShotSFX;
-    public AudioClip reloadSFX;
-	public AudioClip gunEmpty;
+    private int _shootableMask;                 // A layer mask so the raycast only hits things on the shootable layer
 
-    [Header("Fire Variance Attributes")]
-    // Scale of the circle
-    public float radius = 2.0f;
-    // Used to set the distance of the circle
-    public float z = 10f;
+    private ParticleSystem _gunParticles;       // Reference to the particle system
+    private AudioSource _gunAudio;              // Reference to the audio source
 
-    protected Transform firepoint;                            // Point where bullets come out of in our gun
+    //float effectsDisplayTime = 0.2f;            // The proportion of the timeBetweenBullets that the effects will display for
+    //bool timerRunning = false;                  // timer begins at this value
 
-    protected int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
-
-    protected ParticleSystem gunParticles;                    // Reference to the particle system.
-    protected AudioSource gunAudio;                           // Reference to the audio source.
-
-    float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
-    bool timerRunning = false;                      // timer begins at this value
-
-	protected int ammo;
-    protected bool reloading = false;
-    protected float nextTimeToFire = 0.0f;                   // Timer to keep track of fire rate
+    private int _ammo;
+    private bool _reloading = false;
+    private float _nextTimeToFire = 0.0f;       // Timer to keep track of fire rate
 
     // Use this for initialization
     void Awake()
     {
         // Create a layer mask for the Shootable layer.
-        shootableMask = LayerMask.GetMask("Shootable");
+        _shootableMask = LayerMask.GetMask("Shootable");
 
         // Set up the references.
-        gunParticles = GetComponent<ParticleSystem>();
-        gunAudio = GetComponent<AudioSource>();
+        _gunParticles = GetComponent<ParticleSystem>();
+        _gunAudio = GetComponent<AudioSource>();
 
         // Find the fire point
-        Transform[] transforms = this.transform.GetComponentsInChildren<Transform>();
-        foreach (Transform t in transforms)
-        {
-            if (t.name == "FirePoint")
-            {
-                firepoint = t;
-            }
-        }
+        _firepoint = transform.GetComponentsInChildren<Transform>()
+            .FirstOrDefault(t => t.name == "FirePoint");
 
         // Initialize the ammo within our weapon
-        ammo = weaponInfo.clipSize;
+        _ammo = ClipSize;
     }
 
     // Inherited method for Using the weapon
     public override void Using()
     {
-        if (Time.time > nextTimeToFire &&
-            reloading == false &&
-            ammo > 0)
+        if (Time.time > _nextTimeToFire &&
+            _reloading == false &&
+            _ammo > 0)
         {
             // Play weapon fire audio
-            int hitSoundID = Mathf.CeilToInt(UnityEngine.Random.Range(0, gunShotSFX.Length));
-            gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
+            int hitSoundID = Mathf.CeilToInt(Random.Range(0, GunShotSFX.Length));
+            _gunAudio.PlayOneShot(GunShotSFX[hitSoundID], 0.4f);
 
-            ShootProjectile();
+            FireWeapon();
 
-            nextTimeToFire = Time.time + weaponInfo.timeBetweenBullets;
+            _nextTimeToFire = Time.time + TimeBetweenShots;
         }
-		else if (nextTimeToFire >= weaponInfo.timeBetweenBullets && 
-				 reloading == false && 
-				 ammo <= 0)
+        else if (_nextTimeToFire >= TimeBetweenShots &&
+                 _reloading == false &&
+                 _ammo <= 0)
         {
-			gunAudio.PlayOneShot(gunEmpty, 0.4f);
-			nextTimeToFire = 0f;
+            _gunAudio.PlayOneShot(GunEmptySFX, 0.4f);
+            _nextTimeToFire = 0f;
             DisableEffects();
             // Play empty sound
         }
@@ -106,7 +78,7 @@ public class ProjectileWeapon : Item
     // Inherited method for reloading
     public override void Reloading()
     {
-        if (!reloading)
+        if (!_reloading)
         {
             StartCoroutine(Reload());
         }
@@ -117,54 +89,58 @@ public class ProjectileWeapon : Item
     // IEnumerator for handling reloads
     IEnumerator Reload()
     {
-        reloading = true;
+        _reloading = true;
 
         // Play reload sound
-        gunAudio.PlayOneShot(reloadSFX, 0.3f);
+        _gunAudio.PlayOneShot(ReloadSFX, 0.3f);
 
         // TODO: Play reload animation
 
-        yield return new WaitForSeconds(weaponInfo.reloadSpeed);
+        yield return new WaitForSeconds(ReloadTime);
 
-        ammo = weaponInfo.clipSize;
-        reloading = false;
+        _ammo = ClipSize;
+        _reloading = false;
     }
 
     // Fire the Ray
-    protected virtual void ShootProjectile()
+    public override void FireWeapon()
     {
-        Vector3 spread = new Vector3(
-            UnityEngine.Random.Range(-1, 1), 
-            UnityEngine.Random.Range(-1, 1), 
-            UnityEngine.Random.Range(-1, 1)
-        ).normalized * radius;
+        for (var i = 0; i < NumberOfProjectiles; i++)
+        {
+            Vector3 spread = new Vector3(
+                Random.Range(-1, 1),
+                Random.Range(-1, 1),
+                Random.Range(-1, 1)
+            ).normalized * Radius;
+
+            // Enable the light.
+            GunLight.enabled = true;
+
+            // Stop the particles from playing if they were, then start the particles.
+            _gunParticles.Stop();
+            _gunParticles.Play();
+
+            // Fire the Projectile
+            GameObject tmpProj = Instantiate(Projectile);
+            tmpProj.GetComponent<BasicBullet>().InheritWeaponValues(Damage, ProjectileSpeed, Range);
+            tmpProj.transform.position = _firepoint.position;
+            tmpProj.transform.rotation = Quaternion.Euler(spread) * _firepoint.rotation;
+
+            // Stop the particles from playing if they were, then start the particles.
+            _gunParticles.Stop();
+            _gunParticles.Play();
+        }
 
         // Enable the light.
-        gunLight.enabled = true;
-
-        // Stop the particles from playing if they were, then start the particles.
-        gunParticles.Stop();
-        gunParticles.Play();
-
-        // Fire the Projectile
-        GameObject tmpProj = Instantiate(projectile);
-        tmpProj.transform.position = firepoint.position;
-        tmpProj.transform.rotation = Quaternion.Euler(spread) * firepoint.rotation;
-
-        // Enable the light.
-        gunLight.enabled = true;
-
-        // Stop the particles from playing if they were, then start the particles.
-        gunParticles.Stop();
-        gunParticles.Play();
+        GunLight.enabled = true;
 
         // Reset variables for next fire
-        nextTimeToFire = 0f;
-        ammo--;
+        _nextTimeToFire = 0f;
+        _ammo--;
     }
 
     public void DisableEffects()
     {
-        gunLight.enabled = false;
+        GunLight.enabled = false;
     }
 }

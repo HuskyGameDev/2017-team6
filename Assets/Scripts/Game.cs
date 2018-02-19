@@ -23,7 +23,8 @@ public class Game : MonoBehaviour {
     public GameObject[] enemies;
 
     // Information regarding how waves behave (i.e. What and How Many enemies gets spawned)
-    [Header("Current Wave Information")]
+	[Header("Current Wave Information")]
+	public int wave;
     public Wave waveInfo;
 
     GameObject playerObj;
@@ -45,6 +46,7 @@ public class Game : MonoBehaviour {
         // Disable the player initially
         playerObj.GetComponent<PlayerMovement>().enabled = false;
 
+		wave = 1;
         currentState = GameState.START;
 	}
 	
@@ -55,6 +57,7 @@ public class Game : MonoBehaviour {
             case GameState.START:
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+					
                     timer = 0.0f;
                     spawnTimer = 0.0f;
                     currentState = GameState.DEFEND;

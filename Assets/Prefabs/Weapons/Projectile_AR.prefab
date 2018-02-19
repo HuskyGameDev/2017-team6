@@ -308,21 +308,21 @@ MonoBehaviour:
     scrap: 0
     energy: 0
     wire: 0
-  weaponInfo:
-    damagePerShot: 20
-    timeBetweenBullets: 0.05
-    range: 20
-    clipSize: 50
-    reloadSpeed: 1.5
-  projectile: {fileID: 1830864759168760, guid: 7c13b5c4c5e6f6a40a747906f07fcd36, type: 2}
-  gunLight: {fileID: 108147885541473898}
-  gunShotSFX:
+  Damage: 20
+  Range: 20
+  TimeBetweenShots: 0.05
+  ClipSize: 50
+  ReloadTime: 1.5
+  GunShotSFX:
   - {fileID: 8300000, guid: d0ecd2d4816957f4e889d147aeaf6526, type: 3}
-  - {fileID: 8300000, guid: d0ecd2d4816957f4e889d147aeaf6526, type: 3}
-  reloadSFX: {fileID: 8300000, guid: 5d884f5cd82260b4fb8518ff33f1f800, type: 3}
-  gunEmpty: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
-  radius: 5
-  z: 2
+  ReloadSFX: {fileID: 8300000, guid: 5d884f5cd82260b4fb8518ff33f1f800, type: 3}
+  GunEmptySFX: {fileID: 8300000, guid: bfb39d32dd0f07e4185332997dc534a0, type: 3}
+  Radius: 5
+  Z: 2
+  NumberOfProjectiles: 1
+  ProjectileSpeed: 20
+  Projectile: {fileID: 1830864759168760, guid: 7c13b5c4c5e6f6a40a747906f07fcd36, type: 2}
+  GunLight: {fileID: 108147885541473898}
 --- !u!198 &198847172753348484
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     int floorMask;
     float camRayLength = 100f;
     float camHorizontalAngle = 0f;
+	Inventory holditemsonkill;
+	public GameObject weaponpickup;
 
     // Initializes player variables on startup
     void Awake()
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
         anim = GetComponentInChildren<Animator>();
         playerRBody = GetComponent<Rigidbody>();
-
+		holditemsonkill = GetComponent<Inventory> ();
         // Get the Main Character from the scene
         playerCam = GameObject.Find("Main Camera").GetComponent<Camera>();
         camHorizontalAngle = playerCam.GetComponent<PlayerCamera>().horizontalRotation;
@@ -50,12 +52,33 @@ public class PlayerMovement : MonoBehaviour
     void Move(float h, float v)
     {
         movement.Set(h, 0f, v);
-
         movement = movement.normalized * speed * Time.deltaTime;
         movement = Quaternion.Euler(0, camHorizontalAngle, 0) * movement;
-
         playerRBody.MovePosition(transform.position + movement);
     }
+
+	//on colliding with dropped items, add them to the player inventory then delete them from the map
+	void OnCollisionEnter(Collision col){
+		//detects wether the plaer has collided with objects using the "drop____" tag
+		if (col.gameObject.CompareTag("DropWeapon")){ 
+			//adds the weapon dropped by the enemy to the player's inventory
+			//holditemsonkill.AddItem( ,1);
+			Destroy (col.gameObject);
+		}
+		if (col.gameObject.CompareTag("DropWire")){ 
+			//increments the player's count of a resource, then destroys the object currently left on the map
+			holditemsonkill.resources.wire++;
+			Destroy (col.gameObject);
+		}
+		if (col.gameObject.CompareTag ("DropScrap")) { 
+			holditemsonkill.resources.scrap++;
+			Destroy (col.gameObject);
+		}
+		if (col.gameObject.CompareTag ("DropEnergy")) { 
+			holditemsonkill.resources.energy++;
+			Destroy (col.gameObject);
+		} 
+	}
 
     // Rotates the player base on the Camera position and Mouse position
     void Turning()
