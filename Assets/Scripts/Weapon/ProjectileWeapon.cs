@@ -1,9 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class ProjectileWeapon : Weapon
 {
+	[Header("ItemStat Constants")]
+	protected List<ItemStat> stats_Projectile = new List<ItemStat> {
+		new ItemStat {name="Bullets/Shot",field="NumberOfProjectiles",baseVal=1,canUpgrade=true,increaseOnLv=true,increment=1,limit=10},
+		new ItemStat {name="Bullet Speed",field="ProjectileSpeed",baseVal=20,canUpgrade=true,increaseOnLv=true,increment=2,limit=50}
+	};
+
     [Header("Projectile Info")]
     public int NumberOfProjectiles = 1;
     public int ProjectileSpeed = 20;
@@ -138,6 +145,14 @@ public class ProjectileWeapon : Weapon
         _nextTimeToFire = 0f;
         _ammo--;
     }
+
+	public override List<ItemStat> GetStats ()
+	{
+		List<ItemStat> stats = new List<ItemStat>();
+		stats.AddRange (stats_Weapon);
+		stats.AddRange (stats_Projectile);
+		return stats;
+	}
 
     public void DisableEffects()
     {
