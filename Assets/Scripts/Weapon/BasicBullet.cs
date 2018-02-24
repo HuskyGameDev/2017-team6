@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BasicBullet : MonoBehaviour {
+public class BasicBullet : MonoBehaviour
+{
     
     [System.Serializable]
     public class ImpactSounds
@@ -12,10 +11,11 @@ public class BasicBullet : MonoBehaviour {
         public AudioClip concrete;
     }
 
-    public int damage;
+    public int Damage;
+    public int Speed;
+    public float Range;
+
     public LayerMask canDamageLMask;
-    public float projectileSpeed;
-    public float projectileRange;
 
     public ImpactSounds impactSoundClips;
 
@@ -23,18 +23,21 @@ public class BasicBullet : MonoBehaviour {
     private AudioSource playAudio;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         startPos = transform.position;
         playAudio = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update()
+    {
         float distanceTraveled = Vector3.Distance(startPos, transform.position);
-        if (distanceTraveled <= projectileRange)
+        if (distanceTraveled <= Range)
         {
-            transform.Translate(Vector3.forward * (projectileSpeed * Time.deltaTime));
-        } else
+            transform.Translate(Vector3.forward * (Speed * Time.deltaTime));
+        }
+        else
         {
             Destroy(gameObject);
         }
@@ -52,19 +55,27 @@ public class BasicBullet : MonoBehaviour {
             {
                 case "Player":
                     AudioSource.PlayClipAtPoint(impactSoundClips.wood, transform.position);
-                    col.GetComponent<PlayerManager>().applyDamage(damage);
+                    col.GetComponent<PlayerManager>().applyDamage(Damage);
                     break;
                 case "Enemy":
                     AudioSource.PlayClipAtPoint(impactSoundClips.metal, transform.position);
-                    col.GetComponentInParent<EnemyManager>().applyDamage(damage);
+                    col.GetComponentInParent<EnemyManager>().applyDamage(Damage);
                     break;
             }
             Destroy(gameObject);
-        } else if (colLayer == LayerMask.NameToLayer("Obstacle"))
+        }
+        else if (colLayer == LayerMask.NameToLayer("Obstacle"))
         {
             AudioSource.PlayClipAtPoint(impactSoundClips.concrete, transform.position);
             Destroy(gameObject);
         }
         // TODO: play hit sound
+    }
+
+    public void InheritWeaponValues(int damage, int speed, float range)
+    {
+        Damage = damage;
+        Speed = speed;
+        Range = range;
     }
 }

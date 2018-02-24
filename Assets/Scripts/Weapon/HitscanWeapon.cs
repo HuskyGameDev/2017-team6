@@ -1,37 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
-public class BaseRayGun : Item
+public class HitscanWeapon : Weapon
 {
-
-    [System.Serializable]
-    public class WeaponInfo
-    {
-        public int damagePerShot = 20;                  // The damage inflicted by each bullet.
-        public float timeBetweenBullets = 0.15f;        // The time between each shot.
-        public float range = 20f;                       // The distance the gun can fire.
-        public int clipSize = 30;
-        public float reloadSpeed = 5.0f;                // time reached to do something
-    }
-
-    // Weapon Info Class
-    public WeaponInfo weaponInfo;
 
     [Header("GameObjects/Resources")]
     public Light gunLight;                          // Reference to the light component.
-    public AudioClip[] gunShotSFX;
-    public AudioClip reloadSFX;
-
-    [Header("Fire Variance Attributes")]
-    // Scale of the circle
-    public float radius = 2.0f;
-    // Used to set the distance of the circle
-    public float z = 10f;
-
-    GameObject player;
-    GameObject gun;
 
     Ray shootRay;                                   // A ray from the gun end forwards.
     RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
@@ -60,7 +34,7 @@ public class BaseRayGun : Item
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
 
-        ammo = weaponInfo.clipSize;
+        ammo = ClipSize;
     }
 
     // Inherited method for Using the weapon
@@ -72,18 +46,20 @@ public class BaseRayGun : Item
             ammo > 0)
         {
             // Play weapon fire audio
-            int hitSoundID = Mathf.CeilToInt(UnityEngine.Random.Range(0, gunShotSFX.Length));
-            gunAudio.PlayOneShot(gunShotSFX[hitSoundID], 0.4f);
+            int hitSoundID = Mathf.CeilToInt(UnityEngine.Random.Range(0, GunShotSFX.Length));
+            gunAudio.PlayOneShot(GunShotSFX[hitSoundID], 0.4f);
 
-            ShootRay();
+            FireWeapon();
 
-            nextTimeToFire = Time.time + weaponInfo.timeBetweenBullets;
-        } else if (ammo <= 0)
+            nextTimeToFire = Time.time + TimeBetweenShots;
+        }
+        else if (ammo <= 0)
         {
             nextTimeToFire = 0f;
             DisableEffects();
             // Play empty sound
-        } else
+        }
+        else
         {
             DisableEffects();
         }
@@ -106,22 +82,22 @@ public class BaseRayGun : Item
         reloading = true;
 
         // Play reload sound
-        gunAudio.PlayOneShot(reloadSFX, 0.3f);
+        gunAudio.PlayOneShot(ReloadSFX, 0.3f);
 
         // TODO: Play reload animation
 
-        yield return new WaitForSeconds(weaponInfo.reloadSpeed);
+        yield return new WaitForSeconds(ReloadTime);
 
-        ammo = weaponInfo.clipSize;
+        ammo = ClipSize;
         reloading = false;
     }
 
     // Fire the Ray
-    void ShootRay()
+    public override void FireWeapon()
     {
         // Adjust direction for weapon spread
-        Vector3 randomDirection = UnityEngine.Random.insideUnitCircle * radius;
-        randomDirection.z = z;
+        Vector3 randomDirection = UnityEngine.Random.insideUnitCircle * Radius;
+        randomDirection.z = Z;
 
         randomDirection = gunLight.transform.TransformDirection(randomDirection.normalized);
 
@@ -143,11 +119,11 @@ public class BaseRayGun : Item
         Debug.DrawRay(transform.position, randomDirection);
 
         // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-        if (Physics.Raycast(shootRay, out shootHit, weaponInfo.range, shootableMask))
+        if (Physics.Raycast(shootRay, out shootHit, Range, shootableMask))
         {
             print("Hit: " + shootHit.collider.name);
 
-            shootHit.collider.gameObject.GetComponentInParent<EnemyManager>().applyDamage(weaponInfo.damagePerShot);
+            shootHit.collider.gameObject.GetComponentInParent<EnemyManager>().applyDamage(Damage);
 
             // Set the second position of the line renderer to the point the raycast hit.
             gunLine.SetPosition(1, shootHit.point);
@@ -156,7 +132,7 @@ public class BaseRayGun : Item
         else
         {
             // ... set the second position of the line renderer to the fullest extent of the gun's range.
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * weaponInfo.range);
+            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * Range);
         }
 
         // Enable the light.
