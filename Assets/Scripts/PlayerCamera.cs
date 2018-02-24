@@ -30,4 +30,8 @@ public class PlayerCamera : MonoBehaviour {
         transform.rotation = rot;
         transform.position = pos;
     }
+
+	public float getHorizontalRotation(){
+		return horizontalRotation;
+	}
 }
