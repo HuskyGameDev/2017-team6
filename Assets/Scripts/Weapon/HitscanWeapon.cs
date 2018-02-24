@@ -162,4 +162,11 @@ public class HitscanWeapon : Weapon
 			_ammo = value;
 		}
 	}
+
+	public override bool IsReloading
+	{
+		get {
+			return reloading;
+		}
+	}
 }

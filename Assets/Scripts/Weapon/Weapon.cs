@@ -21,4 +21,6 @@ public abstract class Weapon : Item
 	public abstract void FireWeapon ();
 
 	public abstract int Ammo { get; protected set; }
+
+	public abstract bool IsReloading { get; }
 }

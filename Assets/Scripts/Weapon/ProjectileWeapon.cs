@@ -154,4 +154,11 @@ public class ProjectileWeapon : Weapon
 			_ammo = value;
 		}
 	}
+
+	public override bool IsReloading
+	{
+		get {
+			return _reloading;
+		}
+	}
 }
