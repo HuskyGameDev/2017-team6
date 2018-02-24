@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
 
-    public Item startingWeapon;
+    public Weapon[] Weapons;
     public float enemyFov;
 
     Animator anim;                              // Reference to the animator component.
@@ -38,7 +38,7 @@ public class EnemyAttack : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         anim = GetComponent<Animator>();
         
-        attachWeapon(startingWeapon);
+        attachWeapon(Weapons[Random.Range(0, Weapons.Length)]);
     }
 
     void OnTriggerEnter(Collider other)

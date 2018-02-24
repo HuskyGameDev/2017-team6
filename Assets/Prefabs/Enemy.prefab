@@ -891,10 +891,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f01a93af4f64c7469da73148adf0732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenAttacks: 0.5
-  attackDamage: 10
-  startingWeapon: {fileID: 114223502909024330, guid: a19304707921ac542a95dc2c3990536f,
-    type: 2}
+  Weapons:
+  - {fileID: 114271046245406050, guid: f244babd8fbc1434fa2246c1198ef315, type: 2}
+  - {fileID: 114046770664666564, guid: 66fb54eb34079254e84ba0d163598dbd, type: 2}
+  - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
+  - {fileID: 114899506463473908, guid: a683243c46ce2e241a29ce4999c54f36, type: 2}
+  - {fileID: 114644885121386522, guid: 5aa1baa12530199438ca7c74c0760ec6, type: 2}
   enemyFov: 20
 --- !u!135 &135301647947922584
 SphereCollider:

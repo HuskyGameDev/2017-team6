@@ -123,8 +123,16 @@ public class HitscanWeapon : Weapon
         {
             print("Hit: " + shootHit.collider.name);
 
-            shootHit.collider.gameObject.GetComponentInParent<EnemyManager>().applyDamage(Damage);
-
+            switch(shootHit.collider.gameObject.tag)
+            {
+                case "Player":
+                    shootHit.collider.gameObject.GetComponentInParent<PlayerManager>().applyDamage(Damage);
+                    break;
+                case "Enemy":
+                    shootHit.collider.gameObject.GetComponentInParent<EnemyManager>().applyDamage(Damage);
+                    break;
+            }
+            
             // Set the second position of the line renderer to the point the raycast hit.
             gunLine.SetPosition(1, shootHit.point);
         }
