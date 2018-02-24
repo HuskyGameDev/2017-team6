@@ -17,13 +17,13 @@ public class ProjectileWeapon : Weapon
 
     private int _shootableMask;                 // A layer mask so the raycast only hits things on the shootable layer
 
+	private int _ammo;
     private ParticleSystem _gunParticles;       // Reference to the particle system
     private AudioSource _gunAudio;              // Reference to the audio source
 
     //float effectsDisplayTime = 0.2f;            // The proportion of the timeBetweenBullets that the effects will display for
     //bool timerRunning = false;                  // timer begins at this value
 
-    private int _ammo;
     private bool _reloading = false;
     private float _nextTimeToFire = 0.0f;       // Timer to keep track of fire rate
 
@@ -42,7 +42,7 @@ public class ProjectileWeapon : Weapon
             .FirstOrDefault(t => t.name == "FirePoint");
 
         // Initialize the ammo within our weapon
-        _ammo = ClipSize;
+        Ammo = ClipSize;
     }
 
     // Inherited method for Using the weapon
@@ -50,7 +50,7 @@ public class ProjectileWeapon : Weapon
     {
         if (Time.time > _nextTimeToFire &&
             _reloading == false &&
-            _ammo > 0)
+            Ammo > 0)
         {
             // Play weapon fire audio
             int hitSoundID = Mathf.CeilToInt(Random.Range(0, GunShotSFX.Length));
@@ -62,7 +62,7 @@ public class ProjectileWeapon : Weapon
         }
         else if (_nextTimeToFire >= TimeBetweenShots &&
                  _reloading == false &&
-                 _ammo <= 0)
+                 Ammo <= 0)
         {
             _gunAudio.PlayOneShot(GunEmptySFX, 0.4f);
             _nextTimeToFire = 0f;
@@ -98,7 +98,7 @@ public class ProjectileWeapon : Weapon
 
         yield return new WaitForSeconds(ReloadTime);
 
-        _ammo = ClipSize;
+        Ammo = ClipSize;
         _reloading = false;
     }
 
@@ -136,11 +136,22 @@ public class ProjectileWeapon : Weapon
 
         // Reset variables for next fire
         _nextTimeToFire = 0f;
-        _ammo--;
+        Ammo--;
     }
 
     public void DisableEffects()
     {
         GunLight.enabled = false;
     }
+		
+
+	public override int Ammo
+	{
+		get {
+			return _ammo;
+		}
+		protected set {
+			_ammo = value;
+		}
+	}
 }

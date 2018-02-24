@@ -18,5 +18,7 @@ public abstract class Weapon : Item
     public float Radius = 2.0f;                 // Scale of the circle.
     public float Z = 10f;                       // Used to set the distance of the circle
 
-    public abstract void FireWeapon();
+	public abstract void FireWeapon ();
+
+	public abstract int Ammo { get; protected set; }
 }
