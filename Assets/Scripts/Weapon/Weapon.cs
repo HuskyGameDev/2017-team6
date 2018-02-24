@@ -23,4 +23,6 @@ public abstract class Weapon : Item
 	public abstract int Ammo { get; protected set; }
 
 	public abstract bool IsReloading { get; }
+
+	public abstract float GetReloadPercent ();
 }

@@ -19,6 +19,7 @@ public class HitscanWeapon : Weapon
     float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
     bool timerRunning = false;                      // timer begins at this value
 
+	private float _reloadStart;
 	private int _ammo;
     private bool reloading = false;
     private float nextTimeToFire;                   // Timer to keep track of fire rate
@@ -86,6 +87,7 @@ public class HitscanWeapon : Weapon
 
         // TODO: Play reload animation
 
+		_reloadStart = Time.time;
         yield return new WaitForSeconds(ReloadTime);
 
         Ammo = ClipSize;
@@ -168,5 +170,11 @@ public class HitscanWeapon : Weapon
 		get {
 			return reloading;
 		}
+	}
+
+
+	public override float GetReloadPercent()
+	{
+		return (Time.time - _reloadStart) / ReloadTime;
 	}
 }

@@ -24,6 +24,7 @@ public class ProjectileWeapon : Weapon
     //float effectsDisplayTime = 0.2f;            // The proportion of the timeBetweenBullets that the effects will display for
     //bool timerRunning = false;                  // timer begins at this value
 
+	private float _reloadStart;
     private bool _reloading = false;
     private float _nextTimeToFire = 0.0f;       // Timer to keep track of fire rate
 
@@ -95,7 +96,7 @@ public class ProjectileWeapon : Weapon
         _gunAudio.PlayOneShot(ReloadSFX, 0.3f);
 
         // TODO: Play reload animation
-
+		_reloadStart = Time.time;
         yield return new WaitForSeconds(ReloadTime);
 
         Ammo = ClipSize;
@@ -160,5 +161,10 @@ public class ProjectileWeapon : Weapon
 		get {
 			return _reloading;
 		}
+	}
+
+	public override float GetReloadPercent()
+	{
+		return (Time.time - _reloadStart) / ReloadTime;
 	}
 }
