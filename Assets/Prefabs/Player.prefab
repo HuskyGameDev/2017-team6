@@ -163,8 +163,6 @@ GameObject:
   - component: {fileID: 114795773638992278}
   - component: {fileID: 114713649551450000}
   - component: {fileID: 114256014026592456}
-  - component: {fileID: 114855292295216034}
-  - component: {fileID: 114225112485089476}
   - component: {fileID: 23399158236737746}
   m_Layer: 8
   m_Name: Player
@@ -782,21 +780,6 @@ MonoBehaviour:
   score: 0
   flashSpeed: 5
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
---- !u!114 &114225112485089476
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540490609704840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8866afa7978a0b14b9f8ccdd3e512419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
-  - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
-  currentItem: 0
 --- !u!114 &114256014026592456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -890,7 +873,7 @@ MonoBehaviour:
   items:
   - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
   - {fileID: 114899506463473908, guid: a683243c46ce2e241a29ce4999c54f36, type: 2}
-  - {fileID: 114680158850876472, guid: 5aa1baa12530199438ca7c74c0760ec6, type: 2}
+  - {fileID: 0}
   - {fileID: 114271046245406050, guid: f244babd8fbc1434fa2246c1198ef315, type: 2}
   ui: {fileID: 0}
 --- !u!114 &114795773638992278
@@ -919,25 +902,6 @@ MonoBehaviour:
   speed: 6
   weaponpickup: {fileID: 1903219567948394, guid: 5e465add49123ba4abc1abc0cb26f462,
     type: 2}
---- !u!114 &114855292295216034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540490609704840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8866afa7978a0b14b9f8ccdd3e512419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - {fileID: 114731704006151370, guid: 6c79f79c789cb1b449be5e3613c1f6af, type: 2}
-  - {fileID: 114899506463473908, guid: a683243c46ce2e241a29ce4999c54f36, type: 2}
-  - {fileID: 114680158850876472, guid: 5aa1baa12530199438ca7c74c0760ec6, type: 2}
-  - {fileID: 114271046245406050, guid: f244babd8fbc1434fa2246c1198ef315, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentItem: 0
 --- !u!135 &135005289191560602
 SphereCollider:
   m_ObjectHideFlags: 1
