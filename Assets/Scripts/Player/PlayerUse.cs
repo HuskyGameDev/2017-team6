@@ -8,7 +8,7 @@ public class PlayerUse : MonoBehaviour
 
     public Item[] weaponList;
 
-    private Item currentEquipped;
+	public Item currentEquipped { get; private set;}
     private Transform weaponHolder;
     private Inventory inventoryMngr;
     private Hotbar hotbar;
