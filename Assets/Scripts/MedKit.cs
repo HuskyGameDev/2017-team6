@@ -13,24 +13,21 @@ public class MedKit : Item {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
 	// Inherited method for Using the weapon
 	public override void Using()
 	{
-		
+		// TODO: Heal	
 	}
 
 	// Inherited method for reloading
 	public override void Reloading()
 	{
-		
 	}
 
 	public override List<ItemStat> GetStats ()
