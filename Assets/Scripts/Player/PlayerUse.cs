@@ -8,7 +8,8 @@ public class PlayerUse : MonoBehaviour
 	public int selectedIndex;
 
 	private PlayerManager playerManager;
-    private Item currentEquipped;
+    public Item[] weaponList;
+	public Item currentEquipped { get; private set;}
     private Transform weaponHolder;
     private Inventory inventoryMngr; // Hotbar consists of indices 0-5
 

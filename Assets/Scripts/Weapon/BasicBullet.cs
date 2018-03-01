@@ -61,6 +61,11 @@ public class BasicBullet : MonoBehaviour
                     AudioSource.PlayClipAtPoint(impactSoundClips.metal, transform.position);
                     col.GetComponentInParent<EnemyManager>().applyDamage(Damage);
                     break;
+				case "RobotCart":
+					AudioSource.PlayClipAtPoint(impactSoundClips.metal, transform.position);
+					col.GetComponentInParent<EnemyManager>().applyDamage(Damage);
+					break;
+
             }
             Destroy(gameObject);
         }
