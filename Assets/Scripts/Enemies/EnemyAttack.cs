@@ -10,8 +10,8 @@ public class EnemyAttack : MonoBehaviour
 
     Animator anim;                              // Reference to the animator component.
     GameObject player;                          // Reference to the player GameObject.
-    PlayerManager playerHealth;                  // Reference to the player's health.
-    EnemyManager enemyHealth;                    // Reference to this enemy's health.
+    PlayerManager playerManager;                  // Reference to the player's health.
+    EnemyManager enemyManager;                    // Reference to this enemy's health.
     EnemyMovement enemyMovement;
     bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     float timer = 0f;                                // Timer for counting up to the next attack.
@@ -33,8 +33,8 @@ public class EnemyAttack : MonoBehaviour
 
         // Setting up the references.
         player = GameObject.FindGameObjectWithTag("Player");
-        playerHealth = player.GetComponent<PlayerManager>();
-        enemyHealth = GetComponent<EnemyManager>();
+		playerManager = player.GetComponent<PlayerManager>();
+		enemyManager = GetComponent<EnemyManager>();
         enemyMovement = GetComponent<EnemyMovement>();
         anim = GetComponent<Animator>();
         
@@ -71,17 +71,17 @@ public class EnemyAttack : MonoBehaviour
     {
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
         if (playerInRange && 
-            enemyHealth.currentHealth > 0 && 
+			enemyManager.currentHealth > 0 && 
             IsLookingAtObject(transform, player.transform.position, enemyFov))
         {
 
             // TODO: Rotate enemy to follow player like in sentry
             Debug.Log("IM SHOOTNG");
-            currentEquipped.Using();
+			currentEquipped.Using(enemyManager);
         }
 
         // If the player has zero or less health...
-        if (enemyHealth.currentHealth <= 0)
+		if (enemyManager.currentHealth <= 0)
         {
             // ... tell the animator the player is dead.
             anim.SetTrigger("PlayerDead");
@@ -95,9 +95,9 @@ public class EnemyAttack : MonoBehaviour
         timer = 0f;
 
         // If the player has health to lose...
-        if (playerHealth.currentHealth > 0)
+		if (playerManager.currentHealth > 0)
         {
-            currentEquipped.Using();
+			currentEquipped.Using(enemyManager);
         }
     }
 
@@ -113,6 +113,12 @@ public class EnemyAttack : MonoBehaviour
 
         currentEquipped.transform.parent = weaponHolder;
     }
+
+	public void removeHeldItem()
+	{
+		if(currentEquipped != null)
+			GameObject.Destroy(currentEquipped.gameObject);
+	}
 
     // Check to see if looker is looking at the targetPos
     // Shamelessly stolen from: https://answers.unity.com/questions/503934/chow-to-check-if-an-object-is-facing-another.html

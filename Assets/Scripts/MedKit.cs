@@ -6,10 +6,10 @@ public class MedKit : Item {
 
 	[Header("ItemStat Constants")]
 	protected List<ItemStat> stats_Medkit = new List<ItemStat> {
-		new ItemStat {name="Health Restored",field="hp",baseVal=50,canUpgrade=false,increaseOnLv=true,increment=1,limit=100}
+		new ItemStat {name="Health Restored",field="healed",baseVal=50,canUpgrade=false,increaseOnLv=true,increment=1,limit=100}
 	};
 
-	float hp = 50;
+	int healed = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -19,10 +19,19 @@ public class MedKit : Item {
 	void Update () {
 	}
 
-	// Inherited method for Using the weapon
-	public override void Using()
+	// Inherited method for Using the item
+	public override void Using(UnitManager parent)
 	{
-		// TODO: Heal	
+		if (parent.currentHealth < parent.maxHealth) {
+			// Heal the unit holding the medkit
+			parent.currentHealth = Mathf.Min (parent.currentHealth + healed, parent.maxHealth);
+
+			// Decrement or remove this item
+			if (current > 1)
+				current--;
+			else
+				parent.removeHeldItem ();
+		}
 	}
 
 	// Inherited method for reloading

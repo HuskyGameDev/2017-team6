@@ -53,7 +53,7 @@ public class ProjectileWeapon : Weapon
     }
 
     // Inherited method for Using the weapon
-    public override void Using()
+	public override void Using(UnitManager parent)
     {
         if (Time.time > _nextTimeToFire &&
             _reloading == false &&

@@ -7,6 +7,7 @@ public class PlayerUse : MonoBehaviour
 {
 	public int selectedIndex;
 
+	private PlayerManager playerManager;
     private Item currentEquipped;
     private Transform weaponHolder;
     private Inventory inventoryMngr; // Hotbar consists of indices 0-5
@@ -14,6 +15,8 @@ public class PlayerUse : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+		playerManager = GetComponent<PlayerManager> ();
+
 		// Find weapon holder
         Transform[] transforms = this.transform.GetComponentsInChildren<Transform>();
         foreach (Transform t in transforms)
@@ -35,7 +38,7 @@ public class PlayerUse : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            currentEquipped.Using();
+            currentEquipped.Using(playerManager);
         }
 
         if (Input.GetKeyDown("r"))
@@ -74,6 +77,11 @@ public class PlayerUse : MonoBehaviour
 		}
 	}
 
+	public void updateSelected()
+	{
+		ChangeSelected (selectedIndex);
+	}
+
     // Attach the selected item onto the player
     public void attachItem(Item weapon)
     {
@@ -89,4 +97,12 @@ public class PlayerUse : MonoBehaviour
         );
         currentEquipped.transform.parent = weaponHolder;
     }
+
+	public void removeHeldItem()
+	{
+		if (currentEquipped != null)
+			GameObject.Destroy (currentEquipped.gameObject);
+
+		inventoryMngr.RemoveItem (selectedIndex);
+	}
 }

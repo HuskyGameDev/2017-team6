@@ -53,8 +53,8 @@ public abstract class Item : MonoBehaviour {
     [Header("Item Cost")]
     public ItemCost itemCost;						// The amount of each material needed to craft, if craftable
 
-    public abstract void Using();
-    public abstract void Reloading();
+	public abstract void Using(UnitManager parent);
+    public abstract void Reloading(); // TODO Remove?
 
 	public abstract List<ItemStat> GetStats ();
 

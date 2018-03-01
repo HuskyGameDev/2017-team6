@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_Item : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class UI_Item : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IDragHandler {
 
 	public UI_Game parent;
 	public int index;
@@ -22,5 +22,30 @@ public class UI_Item : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
 		{
 			parent.MouseExit ();
 		}
+	}
+
+	public void OnPointerClick(PointerEventData eventData)
+	{
+		if (eventData.button == PointerEventData.InputButton.Left) {
+			parent.MouseLeftClick (index);
+		}
+		if (eventData.button == PointerEventData.InputButton.Right) {
+			parent.MouseRightClick (index);
+		}
+	}
+
+	public void OnBeginDrag(PointerEventData eventData)
+	{
+		
+	}
+
+	public void OnDrag(PointerEventData eventData)
+	{
+		
+	}
+
+	public void OnEndDrag(PointerEventData eventData)
+	{
+		
 	}
 }

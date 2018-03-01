@@ -38,6 +38,8 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         items.Capacity = maxItems;
+		for(int i=0; i<24; i++)
+			items.Add(null);
 		itemCount = items.Count;
     }
 
@@ -69,7 +71,6 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(int itemIdx)
     {
         Item tmp = items[itemIdx];
-        // TODO: Drop onto the ground
 
         // Destroy from inventory menu
         items[itemIdx] = null;
@@ -77,4 +78,6 @@ public class Inventory : MonoBehaviour
         // Update the GUI
 		ui.UpdateInventory();
     }
+
+	// TODO: DropItem method
 }
