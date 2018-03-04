@@ -1,9 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HitscanWeapon : Weapon
 {
-
     [Header("GameObjects/Resources")]
     public Light gunLight;                          // Reference to the light component.
 
@@ -39,7 +39,7 @@ public class HitscanWeapon : Weapon
     }
 
     // Inherited method for Using the weapon
-    public override void Using()
+	public override void Using(UnitManager parent)
     {
 
         if (Time.time > nextTimeToFire &&
@@ -156,6 +156,13 @@ public class HitscanWeapon : Weapon
         nextTimeToFire = 0f;
         Ammo--;
     }
+
+	public override List<ItemStat> GetStats ()
+	{
+		List<ItemStat> stats = new List<ItemStat>();
+		stats.AddRange (stats_Weapon);
+		return stats;
+	}
 
     public void DisableEffects()
     {

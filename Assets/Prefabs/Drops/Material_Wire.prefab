@@ -54,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4869234185618418}
   - component: {fileID: 65848209222434910}
+  - component: {fileID: 114877096835143244}
   m_Layer: 0
   m_Name: Material_Wire
   m_TagString: DropWire
@@ -206,3 +207,16 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114877096835143244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745096321466240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc64a1eaec193024e9541f63447181bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldSpin: 1
+  spinSpeed: 1
