@@ -36,6 +36,7 @@ public class Game : MonoBehaviour {
     private int enemiesRemaining;
     private float waveTimer;
 	private UI_Game _ui;
+	private bool _hasShownAlert;
 
     // Use this for initialization
     void Start () {
@@ -48,6 +49,7 @@ public class Game : MonoBehaviour {
 
         // Disable the player initially
         playerObj.GetComponent<PlayerMovement>().enabled = false;
+		_hasShownAlert = false;
 
 		wave = 1;
         currentState = GameState.START;
@@ -57,26 +59,31 @@ public class Game : MonoBehaviour {
 	void Update () {
 		switch (currentState)
         {
-            case GameState.START:
+		case GameState.START:
+			
+			if (!_hasShownAlert) {
+				_ui.ShowAlert ("WAVE " + wave.ToString (), "Press Enter", (wave==1?float.PositiveInfinity:5));
+				_hasShownAlert = true;
+			}
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-					
                     timer = 0.0f;
                     spawnTimer = 0.0f;
                     currentState = GameState.DEFEND;
                     // Enable the player
                     playerObj.GetComponent<PlayerMovement>().enabled = true;
-					_ui.ShowAlert ("WAVE " + wave.ToString(), "Press Enter");
                     waveTimer = (defendDuration / waveInfo.numberOfWaves);
 
                     Debug.Log("Game State: " + currentState.ToString());
                 }
                 break;
-            case GameState.DEFEND:
+		case GameState.DEFEND:
 
                 // Update the time
-                timer += Time.deltaTime;
-                spawnTimer += Time.deltaTime;
+				timer += Time.deltaTime;
+				spawnTimer += Time.deltaTime;
+				
+				_hasShownAlert = false;
 
                 // If the player dies
                 if (playerMngr.currentHealth <= 0)
@@ -127,7 +134,10 @@ public class Game : MonoBehaviour {
                 }
                 break;
 		case GameState.END:
-			_ui.ShowAlert ("GAME OVER", "Press Enter", float.PositiveInfinity, true);
+			if (!_hasShownAlert) {
+				_ui.ShowAlert ("GAME OVER", "Press Enter", float.PositiveInfinity, true);
+				_hasShownAlert = true;
+			}
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);

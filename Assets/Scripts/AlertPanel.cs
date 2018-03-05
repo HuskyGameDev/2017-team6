@@ -67,7 +67,7 @@ public class AlertPanel : MonoBehaviour
 		_panel.CrossFadeAlpha (0f, fadeOutTime, true);
 	}
 
-
+	// Displays each alert in a FIFO order for DisplayTime seconds
 	IEnumerator DisplayAlerts()
 	{
 		while (alerts.Count != 0) {
@@ -90,27 +90,28 @@ public class AlertPanel : MonoBehaviour
 			// If an alert is showing, get rid of it
 			if (AlertIsShowing) {
 				DestroyAlert ();
-			} else {
-				FadeIn ();
-				StartCoroutine (DisplayAlerts ());
 			}
 		} else {
 			alerts.AddLast (alert);
-			// see if if the alerts are showing
-			if (!AlertIsShowing) {
-				FadeIn ();
-				StartCoroutine(DisplayAlerts ());
-			}
+		}
+		if (!AlertIsShowing) {
+			FadeIn ();
+			StartCoroutine (DisplayAlerts ());
 		}
 	}
 
 	// Removes the current alert and shows the next one if there are more
 	public void DestroyAlert()
 	{
+		// if no alert is showing, none needs to be destroyed
+		if (!AlertIsShowing) {
+			return;
+		}
 		StopCoroutine (DisplayAlerts());
 		if (alerts.Count != 0) {
 			StartCoroutine (DisplayAlerts ());
 		}
+		FadeOut ();
 	}
 }
 
