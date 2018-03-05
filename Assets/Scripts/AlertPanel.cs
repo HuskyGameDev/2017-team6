@@ -10,11 +10,11 @@ public class AlertPanel : MonoBehaviour
 	public struct UIAlert
 	{
 		public string BigText, SmallText;
-		public float Time;
-		public UIAlert(string bigText, string smallText, float time) {
+		public float DisplayTime;
+		public UIAlert(string bigText, string smallText, float displayTime) {
 			BigText = bigText;
 			SmallText = smallText;
-			Time = time;
+			DisplayTime = displayTime;
 		}
 	}
 
@@ -75,7 +75,7 @@ public class AlertPanel : MonoBehaviour
 			alerts.RemoveFirst();
 			_bigText.text = currentAlert.BigText;
 			_smallText.text = currentAlert.SmallText;
-			yield return new WaitForSeconds (currentAlert.Time);
+			yield return new WaitForSeconds (currentAlert.DisplayTime);
 		}
 		FadeOut ();
 	}
@@ -104,7 +104,7 @@ public class AlertPanel : MonoBehaviour
 		}
 	}
 
-
+	// Removes the current alert and shows the next one if there are more
 	public void DestroyAlert()
 	{
 		StopCoroutine (DisplayAlerts());
