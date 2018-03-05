@@ -9,42 +9,42 @@ public class AlertPanel : MonoBehaviour
 
 	public struct UIAlert
 	{
-		public String BigText, SmallText;
+		public string BigText, SmallText;
 		public float Time;
-		public UIAlert(String bigText, String smallText, float time) {
+		public UIAlert(string bigText, string smallText, float time) {
 			BigText = bigText;
 			SmallText = smallText;
 			Time = time;
 		}
 	}
 
-	Image panel;
+	Image _panel;
 	public float fadeInTime;
 	public float fadeOutTime;
 	public float windowHeight;
 	public float windowWidth;
-	Text bigText;
-	Text smallText;
+	Text _bigText;
+	Text _smallText;
 
-	private Stack<UIAlert> alerts;
+	private LinkedList<UIAlert> alerts;
 
 	public bool AlertIsShowing {get; set; }
 
 	void Start ()
 	{
-		panel = GetComponent<Image> ();
+		_panel = GetComponent<Image> ();
 		// The height is set in a script so that it doesn't clutter the UI prefab
 		GetComponent<RectTransform> ().SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, windowHeight);
 		// width is set to an arbitrarily high number to encapsulate the entire width of UI
 		GetComponent<RectTransform> ().SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, windowWidth);
 
 		AlertIsShowing = false;
-		panel.CrossFadeAlpha (0f, 0, true);
+		_panel.CrossFadeAlpha (0f, 0, true);
 
-		bigText = transform.Find ("BigText").GetComponent<Text>();
-		smallText = transform.Find ("BigText/SmallText").GetComponent<Text>();
+		_bigText = transform.Find ("BigText").GetComponent<Text>();
+		_smallText = transform.Find ("BigText/SmallText").GetComponent<Text>();
 
-		alerts = new Stack<UIAlert> ();
+		alerts = new LinkedList<UIAlert> ();
 
 
 	}
@@ -53,19 +53,64 @@ public class AlertPanel : MonoBehaviour
 	{
 		enabled = true;
 		AlertIsShowing = true;
-		panel.CrossFadeAlpha (1f, fadeInTime, true);
+		_panel.CrossFadeAlpha (1f, fadeInTime, true);
 	}
 
 	public void FadeOut()
 	{
+		// return if there are still messages to be displayed
+		if (alerts.Count != 0) {
+			return;
+		}
 		enabled = false;
 		AlertIsShowing = false;
-		panel.CrossFadeAlpha (0f, fadeOutTime, true);
+		_panel.CrossFadeAlpha (0f, fadeOutTime, true);
 	}
 
-	public void SetAlert(UIAlert alert)
+
+	IEnumerator DisplayAlerts()
 	{
-		alerts.Push (alert);
+		while (alerts.Count != 0) {
+			UIAlert currentAlert = alerts.First.Value;
+			alerts.RemoveFirst();
+			_bigText.text = currentAlert.BigText;
+			_smallText.text = currentAlert.SmallText;
+			yield return new WaitForSeconds (currentAlert.Time);
+		}
+		FadeOut ();
+	}
+
+	// Displays the alerts sent to it in a FIFO order.  If forceOverride is set to true, it
+	// instead displays this alert first and skips the current alert.
+	public void SendAlert(UIAlert alert, bool forceOverride)
+	{
+		// add the alert to the linked list
+		if (forceOverride) {
+			alerts.AddFirst (alert);
+			// If an alert is showing, get rid of it
+			if (AlertIsShowing) {
+				DestroyAlert ();
+			} else {
+				FadeIn ();
+				StartCoroutine (DisplayAlerts ());
+			}
+		} else {
+			alerts.AddLast (alert);
+			// see if if the alerts are showing
+			if (!AlertIsShowing) {
+				FadeIn ();
+				StartCoroutine(DisplayAlerts ());
+			}
+		}
+	}
+
+
+	public void DestroyAlert()
+	{
+		StopCoroutine (DisplayAlerts());
+		if (alerts.Count != 0) {
+			StartCoroutine (DisplayAlerts ());
+		}
 	}
 }
 

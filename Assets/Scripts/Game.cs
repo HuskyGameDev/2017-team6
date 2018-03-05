@@ -35,11 +35,14 @@ public class Game : MonoBehaviour {
     private float spawnTimer;
     private int enemiesRemaining;
     private float waveTimer;
+	private UI_Game _ui;
 
     // Use this for initialization
     void Start () {
         playerObj = GameObject.Find("Player");
         enemySpawners = GameObject.FindObjectsOfType<SpawnPoint>();
+
+		_ui = GameObject.Find ("PlayerUI").GetComponent<UI_Game> ();
 
         playerMngr = playerObj.GetComponent<PlayerManager>();
 
@@ -63,7 +66,7 @@ public class Game : MonoBehaviour {
                     currentState = GameState.DEFEND;
                     // Enable the player
                     playerObj.GetComponent<PlayerMovement>().enabled = true;
-
+					_ui.ShowAlert ("WAVE " + wave.ToString(), "Press Enter");
                     waveTimer = (defendDuration / waveInfo.numberOfWaves);
 
                     Debug.Log("Game State: " + currentState.ToString());
@@ -123,7 +126,8 @@ public class Game : MonoBehaviour {
                     Debug.Log("Game State: " + currentState.ToString());
                 }
                 break;
-            case GameState.END:
+		case GameState.END:
+			_ui.ShowAlert ("GAME OVER", "Press Enter", float.PositiveInfinity, true);
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
