@@ -8,7 +8,7 @@ public class EnemyMovement : MonoBehaviour
 
     Transform player;
     public NavMeshAgent nav;
-    public float speed = 3f;
+    float speed = 3f;
     public bool isAttacking = true;
     public float rotationSpeed = 1f;
 
