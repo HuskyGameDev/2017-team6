@@ -100,6 +100,7 @@ public class Game : MonoBehaviour {
                 { 
                     timer = 0.0f;
                     ClearMapEntities();
+					wave++;
                     currentState = GameState.REST;
 
                     waveInfo.waveSize += 1;

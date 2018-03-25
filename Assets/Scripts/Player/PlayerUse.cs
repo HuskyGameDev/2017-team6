@@ -5,17 +5,20 @@ using UnityEngine;
 // Class used by the "player" to interact with inventory items
 public class PlayerUse : MonoBehaviour
 {
+	public int selectedIndex;
 
+	private PlayerManager playerManager;
     public Item[] weaponList;
-
-    private Item currentEquipped;
+	public Item currentEquipped { get; private set;}
     private Transform weaponHolder;
-    private Inventory inventoryMngr;
-    private Hotbar hotbar;
+    private Inventory inventoryMngr; // Hotbar consists of indices 0-5
 
     // Use this for initialization
     void Awake()
     {
+		playerManager = GetComponent<PlayerManager> ();
+
+		// Find weapon holder
         Transform[] transforms = this.transform.GetComponentsInChildren<Transform>();
         foreach (Transform t in transforms)
         {
@@ -27,19 +30,16 @@ public class PlayerUse : MonoBehaviour
 
         // Get the inventory component
         inventoryMngr = GetComponent<Inventory>();
-		// Get hotbar component
-		hotbar = GetComponent<Hotbar>();
-
-        // NOTE: Weapon to be spawned will be base on the inventory manager in the future
-        //attachItem(weaponList[0]);
-		attachItem(hotbar.items[0]);
+		// Attach the first weapon to the player
+		selectedIndex = 0;
+		attachItem(inventoryMngr.items[0]);
     }
 
     void Update()
     {
         if (Input.GetButton("Fire1"))
         {
-            currentEquipped.Using();
+            currentEquipped.Using(playerManager);
         }
 
         if (Input.GetKeyDown("r"))
@@ -49,14 +49,39 @@ public class PlayerUse : MonoBehaviour
 
 		if (Input.GetButtonDown("NextItem"))
         {
-            attachItem(hotbar.NextItem());
+			// Edge cases handled in method
+			ChangeSelected (selectedIndex + 1);
         }
 
         if (Input.GetButtonDown("PrevItem"))
         {
-            attachItem(hotbar.PreviousItem());
+			ChangeSelected (selectedIndex - 1);
         }
+		for (int i = 1; i <= 6; i++)
+		{
+			if (Input.GetButtonDown ("Hotbar" + (i)))
+			{
+				ChangeSelected (i-1);
+			}
+		}
     }
+
+	void ChangeSelected(int hotbarIndex)
+	{
+		if (hotbarIndex >= 0 && hotbarIndex < 6)
+		{
+			if (inventoryMngr.items [hotbarIndex] != null)
+			{
+				selectedIndex = hotbarIndex;
+				attachItem (inventoryMngr.items [hotbarIndex]);
+			}
+		}
+	}
+
+	public void updateSelected()
+	{
+		ChangeSelected (selectedIndex);
+	}
 
     // Attach the selected item onto the player
     public void attachItem(Item weapon)
@@ -73,4 +98,12 @@ public class PlayerUse : MonoBehaviour
         );
         currentEquipped.transform.parent = weaponHolder;
     }
+
+	public void removeHeldItem()
+	{
+		if (currentEquipped != null)
+			GameObject.Destroy (currentEquipped.gameObject);
+
+		inventoryMngr.RemoveItem (selectedIndex);
+	}
 }

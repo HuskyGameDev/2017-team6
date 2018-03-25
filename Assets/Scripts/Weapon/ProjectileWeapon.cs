@@ -1,9 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class ProjectileWeapon : Weapon
 {
+	[Header("ItemStat Constants")]
+	protected List<ItemStat> stats_Projectile = new List<ItemStat> {
+		new ItemStat {name="Bullets/Shot",field="NumberOfProjectiles",baseVal=1,canUpgrade=true,increaseOnLv=true,increment=1,limit=10},
+		new ItemStat {name="Bullet Speed",field="ProjectileSpeed",baseVal=20,canUpgrade=true,increaseOnLv=true,increment=2,limit=50}
+	};
+
     [Header("Projectile Info")]
     public int NumberOfProjectiles = 1;
     public int ProjectileSpeed = 20;
@@ -17,13 +24,14 @@ public class ProjectileWeapon : Weapon
 
     private int _shootableMask;                 // A layer mask so the raycast only hits things on the shootable layer
 
+	private int _ammo;
     private ParticleSystem _gunParticles;       // Reference to the particle system
     private AudioSource _gunAudio;              // Reference to the audio source
 
     //float effectsDisplayTime = 0.2f;            // The proportion of the timeBetweenBullets that the effects will display for
     //bool timerRunning = false;                  // timer begins at this value
 
-    private int _ammo;
+	private float _reloadStart;
     private bool _reloading = false;
     private float _nextTimeToFire = 0.0f;       // Timer to keep track of fire rate
 
@@ -42,15 +50,15 @@ public class ProjectileWeapon : Weapon
             .FirstOrDefault(t => t.name == "FirePoint");
 
         // Initialize the ammo within our weapon
-        _ammo = ClipSize;
+        Ammo = ClipSize;
     }
 
     // Inherited method for Using the weapon
-    public override void Using()
+	public override void Using(UnitManager parent)
     {
         if (Time.time > _nextTimeToFire &&
             _reloading == false &&
-            _ammo > 0)
+            Ammo > 0)
         {
             // Play weapon fire audio
             int hitSoundID = Mathf.CeilToInt(Random.Range(0, GunShotSFX.Length));
@@ -62,7 +70,7 @@ public class ProjectileWeapon : Weapon
         }
         else if (_nextTimeToFire >= TimeBetweenShots &&
                  _reloading == false &&
-                 _ammo <= 0)
+                 Ammo <= 0)
         {
             _gunAudio.PlayOneShot(GunEmptySFX, 0.4f);
             _nextTimeToFire = 0f;
@@ -95,10 +103,10 @@ public class ProjectileWeapon : Weapon
         _gunAudio.PlayOneShot(ReloadSFX, 0.3f);
 
         // TODO: Play reload animation
-
+		_reloadStart = Time.time;
         yield return new WaitForSeconds(ReloadTime);
 
-        _ammo = ClipSize;
+        Ammo = ClipSize;
         _reloading = false;
     }
 
@@ -136,11 +144,42 @@ public class ProjectileWeapon : Weapon
 
         // Reset variables for next fire
         _nextTimeToFire = 0f;
-        _ammo--;
+        Ammo--;
     }
+
+	public override List<ItemStat> GetStats ()
+	{
+		List<ItemStat> stats = new List<ItemStat>();
+		stats.AddRange (stats_Weapon);
+		stats.AddRange (stats_Projectile);
+		return stats;
+	}
 
     public void DisableEffects()
     {
         GunLight.enabled = false;
     }
+		
+
+	public override int Ammo
+	{
+		get {
+			return _ammo;
+		}
+		protected set {
+			_ammo = value;
+		}
+	}
+
+	public override bool IsReloading
+	{
+		get {
+			return _reloading;
+		}
+	}
+
+	public override float GetReloadPercent()
+	{
+		return (Time.time - _reloadStart) / ReloadTime;
+	}
 }

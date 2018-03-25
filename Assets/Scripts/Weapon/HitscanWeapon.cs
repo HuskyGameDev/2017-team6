@@ -1,9 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HitscanWeapon : Weapon
 {
-
     [Header("GameObjects/Resources")]
     public Light gunLight;                          // Reference to the light component.
 
@@ -19,7 +19,8 @@ public class HitscanWeapon : Weapon
     float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
     bool timerRunning = false;                      // timer begins at this value
 
-    private int ammo;
+	private float _reloadStart;
+	private int _ammo;
     private bool reloading = false;
     private float nextTimeToFire;                   // Timer to keep track of fire rate
 
@@ -34,16 +35,16 @@ public class HitscanWeapon : Weapon
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
 
-        ammo = ClipSize;
+        Ammo = ClipSize;
     }
 
     // Inherited method for Using the weapon
-    public override void Using()
+	public override void Using(UnitManager parent)
     {
 
         if (Time.time > nextTimeToFire &&
             reloading == false &&
-            ammo > 0)
+            Ammo > 0)
         {
             // Play weapon fire audio
             int hitSoundID = Mathf.CeilToInt(UnityEngine.Random.Range(0, GunShotSFX.Length));
@@ -53,7 +54,7 @@ public class HitscanWeapon : Weapon
 
             nextTimeToFire = Time.time + TimeBetweenShots;
         }
-        else if (ammo <= 0)
+        else if (Ammo <= 0)
         {
             nextTimeToFire = 0f;
             DisableEffects();
@@ -86,9 +87,10 @@ public class HitscanWeapon : Weapon
 
         // TODO: Play reload animation
 
+		_reloadStart = Time.time;
         yield return new WaitForSeconds(ReloadTime);
 
-        ammo = ClipSize;
+        Ammo = ClipSize;
         reloading = false;
     }
 
@@ -123,8 +125,16 @@ public class HitscanWeapon : Weapon
         {
             print("Hit: " + shootHit.collider.name);
 
-            shootHit.collider.gameObject.GetComponentInParent<EnemyManager>().applyDamage(Damage);
-
+            switch(shootHit.collider.gameObject.tag)
+            {
+                case "Player":
+                    shootHit.collider.gameObject.GetComponentInParent<PlayerManager>().applyDamage(Damage);
+                    break;
+                case "Enemy":
+                    shootHit.collider.gameObject.GetComponentInParent<EnemyManager>().applyDamage(Damage);
+                    break;
+            }
+            
             // Set the second position of the line renderer to the point the raycast hit.
             gunLine.SetPosition(1, shootHit.point);
         }
@@ -144,8 +154,15 @@ public class HitscanWeapon : Weapon
 
         // Reset variables for next fire
         nextTimeToFire = 0f;
-        ammo--;
+        Ammo--;
     }
+
+	public override List<ItemStat> GetStats ()
+	{
+		List<ItemStat> stats = new List<ItemStat>();
+		stats.AddRange (stats_Weapon);
+		return stats;
+	}
 
     public void DisableEffects()
     {
@@ -153,4 +170,26 @@ public class HitscanWeapon : Weapon
         gunLine.enabled = false;
         gunLight.enabled = false;
     }
+		
+	public override int Ammo {
+		get {
+			return _ammo;
+		}
+		protected set {
+			_ammo = value;
+		}
+	}
+
+	public override bool IsReloading
+	{
+		get {
+			return reloading;
+		}
+	}
+
+
+	public override float GetReloadPercent()
+	{
+		return (Time.time - _reloadStart) / ReloadTime;
+	}
 }
