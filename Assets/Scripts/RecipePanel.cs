@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace AssemblyCSharp
 {
-	public class CraftingRecipe : MonoBehaviour
+	public class RecipePanel : MonoBehaviour
 	{
 		[Header("Material Costs")]
 		public int ScrapCost;
@@ -26,6 +26,7 @@ namespace AssemblyCSharp
 		private Text _wireCostText;
 		private Image _image;
 
+
 		// used for initialization
 		void Start()
 		{
@@ -41,8 +42,18 @@ namespace AssemblyCSharp
 			_scrapCostText.text = ScrapCost.ToString () + " Scrap" + (ScrapCost == 1 ? "" : "s"); 
 			_energyCostText.text = EnergyCost.ToString () + " Energy";
 			_wireCostText.text = WireCost.ToString () + " Wire" + (WireCost == 1 ? "" : "s"); 
-			enabled = false;
-			_image.CrossFadeAlpha (0f, 0, true);
+		}
+
+		public void ShowRecipe(CraftingRecipe recipe)
+		{
+			_headerText.text = recipe.CraftedItemName;
+			_descriptionText.text = recipe.Description;
+			ScrapCost = recipe.ScrapCost;
+			_scrapCostText.text = ScrapCost.ToString () + " Scrap" + (ScrapCost == 1 ? "" : "s");
+			EnergyCost = recipe.EnergyCost;
+			_energyCostText.text = EnergyCost.ToString () + " Energy";
+			WireCost = recipe.WireCost;
+			_wireCostText.text = WireCost.ToString () + " Wire" + (WireCost == 1 ? "" : "s"); 
 		}
 
 		// creates the item specified by the recipe
