@@ -83,7 +83,7 @@ public class EnemyManager : UnitManager {
 			Vector3 position = transform.position;
 			foreach (GameObject item in itemdrops ){
 				if (item != null) {
-					Vector3 spawnPos = new Vector3 (position.x, 0, position.y);
+					Vector3 spawnPos = new Vector3 (position.x + Random.Range(-1,1), .2f, position.z + Random.Range(-1,1));
 					Instantiate(item, spawnPos , Quaternion.identity);
 				}
 			}
@@ -92,7 +92,7 @@ public class EnemyManager : UnitManager {
 			Vector3 position = transform.position;
 			foreach (GameObject item in resourcedrops ){
 				if (item != null) {
-					Vector3 spawnPos = new Vector3 (position.x, 0, position.y);
+					Vector3 spawnPos = new Vector3 (position.x + Random.Range(-1,1), .2f, position.z + Random.Range(-1,1));
 					Instantiate(item, spawnPos , Quaternion.identity);
 				}
 			}
