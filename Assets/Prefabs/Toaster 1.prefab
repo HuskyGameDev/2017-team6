@@ -41,6 +41,8 @@ GameObject:
   - component: {fileID: 23525847315853490}
   - component: {fileID: 95069320834121204}
   - component: {fileID: 65949512448920558}
+  - component: {fileID: 65447621348615290}
+  - component: {fileID: 114117870627021340}
   m_Layer: 8
   m_Name: Toaster
   m_TagString: Enemy
@@ -252,6 +254,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1191251346257686}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65447621348615290
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1271568249071826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.275232, y: 1.9999999, z: 45.40999}
+  m_Center: {x: 0.148801, y: 0, z: 18.809765}
 --- !u!65 &65949512448920558
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -376,6 +390,18 @@ MonoBehaviour:
   speed: 10
   isAttacking: 0
   rotationSpeed: 1
+--- !u!114 &114117870627021340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1271568249071826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f59c434f03fe845862378bcc0ab7aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 0
 --- !u!114 &114836749978225848
 MonoBehaviour:
   m_ObjectHideFlags: 1
