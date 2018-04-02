@@ -10,7 +10,7 @@ public class Collision_Damage : MonoBehaviour {
 		Damage = 5;
 	}
 
-	void OnTriggerEnter(Collider col)
+	void OnTriggerStay(Collider col)
 	{
 		if (col.gameObject.tag == "Player") {
 			col.GetComponent<PlayerManager>().applyDamage(Damage);
