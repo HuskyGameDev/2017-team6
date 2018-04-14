@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     float camHorizontalAngle = 0f;
 	Inventory holditemsonkill;
 	public GameObject weaponpickup;
+	PlayerManager tester;
 
     // Initializes player variables on startup
     void Awake()
@@ -59,7 +60,12 @@ public class PlayerMovement : MonoBehaviour
 
 	//on colliding with dropped items, add them to the player inventory then delete them from the map
 	void OnCollisionEnter(Collision col){
-		//detects wether the plaer has collided with objects using the "drop____" tag
+		//detects wether the plaer has collided with objects using the "drop____" tag. Then deletes the item after determining where to add it to the player
+		if (col.gameObject.CompareTag ("DropHealth")) {
+			transform.GetComponent<PlayerManager> ().currentHealth += 10;
+			Destroy (col.gameObject);
+
+		}
 		if (col.gameObject.CompareTag("DropWeapon")){ 
 			//adds the weapon dropped by the enemy to the player's inventory
 			//holditemsonkill.AddItem( ,1);
