@@ -31,13 +31,14 @@ public class Inventory : MonoBehaviour
     // Array of items that can be used by the player
     public List<Item> items;
 
-	[Header("UI Information")]
+	//[Header("UI Information")]
 	// Reference to the game UI
-	public UI_Game ui;
+	private UI_Game ui;
 
     private void Start()
     {
         items.Capacity = maxItems;
+		ui = (UI_Game)GameObject.Find ("PlayerUI").GetComponent<UI_Game> ();
 		/*
 		for(int i=0; i<24; i++)
 			items.Add(null);

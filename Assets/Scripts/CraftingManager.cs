@@ -35,19 +35,23 @@ namespace AssemblyCSharp
 		private List<CraftingRecipe> _recipes;
 		private Inventory _inventory;
 		private int _index;
+		private UI_Game _ui;
+
 		void Start()
 		{
 			_recipePanel = transform.Find ("RecipePanel").GetComponent<RecipePanel> ();
 			_recipes = new List<CraftingRecipe> ();
 			_inventory = (Inventory) GameObject.Find ("Player").GetComponent<Inventory>();
+			_ui = (UI_Game)GameObject.Find ("PlayerUI").GetComponent<UI_Game> ();
+
 			// read from the text file
 			StreamReader reader = new StreamReader ("Assets/Resources/Prefabs/CraftingRecipes/crafting-recipes.txt");
 			_index = 0;
 			string line = reader.ReadLine ();
 			while (line != null) {
 				// add to list
-				_recipes.Add (new CraftingRecipe(line));
-				line = reader.ReadLine ();
+					_recipes.Add (new CraftingRecipe (line));
+					line = reader.ReadLine ();
 			}
 			_recipePanel.ShowRecipe (_recipes[_index]);
 			reader.Close ();
@@ -59,18 +63,20 @@ namespace AssemblyCSharp
 			CraftingRecipe recipe = _recipes [_index];
 
 			if (_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) {
-				// make some message about not being able to craft
-				return;
+				_ui.ShowAlert ("Not enough resources to craft", "", 1f);
+				//return;
 			}
 			Item newItem = Resources.Load (recipe.PrefabName, typeof(Item)) as Item;
+			Debug.Log (newItem.itemName);
 			// see if it was added to the inventory
 			if (_inventory.AddItem (newItem, 1)) {
 				_inventory.resources.scrap -= recipe.ScrapCost;
 				_inventory.resources.energy -= recipe.EnergyCost;
 				_inventory.resources.wire -= recipe.WireCost;
+				_ui.ShowAlert (newItem.itemName + " successfully crafted", "", 1f);
 			} else {
 				GameObject.Destroy (newItem);
-				// show message for being unable to craft
+				_ui.ShowAlert ("Item already owned", "", 1f);
 			}
 		}
 	}
