@@ -86,7 +86,7 @@ public class ProjectileWeapon : Weapon
     // Inherited method for reloading
     public override void Reloading()
     {
-        if (!_reloading)
+		if (!_reloading && Ammo < ClipSize)
         {
             StartCoroutine(Reload());
         }
