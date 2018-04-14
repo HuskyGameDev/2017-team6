@@ -9,7 +9,7 @@ namespace AssemblyCSharp
 	public class CraftingRecipe
 	{
 		public string CraftedItemName;
-		public string CraftedItem;
+		public string PrefabName;
 		public int ScrapCost;
 		public int EnergyCost;
 		public int WireCost;
@@ -20,7 +20,7 @@ namespace AssemblyCSharp
 		{
 			string[] recipeCosts = lineOfText.Split (",,".ToCharArray());
 			CraftedItemName = recipeCosts[0];
-			CraftedItem = recipeCosts[2];
+			PrefabName = "Assets/Prefabs/" + recipeCosts[2] + ".prefab";
 			ScrapCost = Convert.ToInt32(recipeCosts[4]);
 			EnergyCost = Convert.ToInt32(recipeCosts[6]);
 			WireCost = Convert.ToInt32(recipeCosts[8]);
@@ -39,7 +39,7 @@ namespace AssemblyCSharp
 		{
 			_recipePanel = transform.Find ("RecipePanel").GetComponent<RecipePanel> ();
 			_recipes = new List<CraftingRecipe> ();
-			_inventory = GameObject.Find ("Inventory");
+			_inventory = (Inventory) GameObject.Find ("Player").GetComponent<Inventory>();
 			// read from the text file
 			StreamReader reader = new StreamReader ("Assets/Prefabs/CraftingRecipes/crafting-recipes.txt");
 			_index = 0;
@@ -56,7 +56,19 @@ namespace AssemblyCSharp
 
 		public void CraftItem()
 		{
-			Debug.Log ("Crafting item");
+			CraftingRecipe recipe = _recipes [_index];
+			/*
+			if (_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) {
+				// make some message about not being able to craft
+				return;
+			} */
+
+			_inventory.resources.scrap -= recipe.ScrapCost;
+			_inventory.resources.energy -= recipe.EnergyCost;
+			_inventory.resources.wire -= recipe.WireCost;
+			Debug.Log (recipe.PrefabName);
+			/* Item newItem;
+			_inventory.AddItem (newItem, 1); */
 		}
 	}
 }
