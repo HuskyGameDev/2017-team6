@@ -69,7 +69,7 @@ public class HitscanWeapon : Weapon
     // Inherited method for reloading
     public override void Reloading()
     {
-        if (!reloading)
+		if (!reloading && Ammo < ClipSize)
         {
             StartCoroutine(Reload());
         }
