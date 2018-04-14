@@ -39,7 +39,7 @@ namespace AssemblyCSharp
 		{
 			_recipePanel = transform.Find ("RecipePanel").GetComponent<RecipePanel> ();
 			_recipes = new List<CraftingRecipe> ();
-			_inventory = GameObject.Find ("Inventory");
+			//_inventory = GameObject.Find ("Inventory");
 			// read from the text file
 			StreamReader reader = new StreamReader ("Assets/Prefabs/CraftingRecipes/crafting-recipes.txt");
 			_index = 0;
