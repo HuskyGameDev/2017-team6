@@ -20,7 +20,7 @@ namespace AssemblyCSharp
 		{
 			string[] recipeCosts = lineOfText.Split (",,".ToCharArray());
 			CraftedItemName = recipeCosts[0];
-			PrefabName = "Assets/Prefabs/" + recipeCosts[2] + ".prefab";
+			PrefabName = "Prefabs/" + recipeCosts[2];
 			ScrapCost = Convert.ToInt32(recipeCosts[4]);
 			EnergyCost = Convert.ToInt32(recipeCosts[6]);
 			WireCost = Convert.ToInt32(recipeCosts[8]);
@@ -41,7 +41,7 @@ namespace AssemblyCSharp
 			_recipes = new List<CraftingRecipe> ();
 			_inventory = (Inventory) GameObject.Find ("Player").GetComponent<Inventory>();
 			// read from the text file
-			StreamReader reader = new StreamReader ("Assets/Prefabs/CraftingRecipes/crafting-recipes.txt");
+			StreamReader reader = new StreamReader ("Assets/Resources/Prefabs/CraftingRecipes/crafting-recipes.txt");
 			_index = 0;
 			string line = reader.ReadLine ();
 			while (line != null) {
@@ -57,18 +57,21 @@ namespace AssemblyCSharp
 		public void CraftItem()
 		{
 			CraftingRecipe recipe = _recipes [_index];
-			/*
+
 			if (_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) {
 				// make some message about not being able to craft
 				return;
-			} */
-
-			_inventory.resources.scrap -= recipe.ScrapCost;
-			_inventory.resources.energy -= recipe.EnergyCost;
-			_inventory.resources.wire -= recipe.WireCost;
-			Debug.Log (recipe.PrefabName);
-			/* Item newItem;
-			_inventory.AddItem (newItem, 1); */
+			}
+			Item newItem = Resources.Load (recipe.PrefabName, typeof(Item)) as Item;
+			// see if it was added to the inventory
+			if (_inventory.AddItem (newItem, 1)) {
+				_inventory.resources.scrap -= recipe.ScrapCost;
+				_inventory.resources.energy -= recipe.EnergyCost;
+				_inventory.resources.wire -= recipe.WireCost;
+			} else {
+				GameObject.Destroy (newItem);
+				// show message for being unable to craft
+			}
 		}
 	}
 }

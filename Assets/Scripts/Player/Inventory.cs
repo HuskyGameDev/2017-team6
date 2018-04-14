@@ -38,18 +38,24 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         items.Capacity = maxItems;
+		/*
 		for(int i=0; i<24; i++)
 			items.Add(null);
-		itemCount = items.Count;
+		itemCount = items.Count; */
     }
 
-    public void AddItem(Item item, int numItem = 1)
+	// returns true if the item was successfully added to the inventory,
+	// false otherwise
+    public bool AddItem(Item item, int numItem = 1)
     {
         bool containsItem = false;
         foreach (Item _item in items)
         {
+			if (_item == null) {
+				continue;
+			}
             // If item already exists: increment the item count without exceeding limits
-            if (_item.name == item.name)
+            if (_item.itemName == item.itemName)
             {
                 _item.current = Mathf.Clamp(numItem + _item.current, 0, _item.max);
                 containsItem = true;
@@ -63,7 +69,10 @@ public class Inventory : MonoBehaviour
 
 			// Update the GUI
 			ui.UpdateInventory();
+
+			return true;
         }
+		return false;
     }
 
     // Removes an item from the inventory and updates the Inventory GUI
