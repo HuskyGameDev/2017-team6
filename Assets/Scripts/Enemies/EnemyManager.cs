@@ -76,23 +76,23 @@ public class EnemyManager : UnitManager {
         isDead = true;
 
 
-		//create a randomly assigned number
-		var droproll = Random.Range(1,10);
-		//if the roll on death of the enemy matches the droproll value, drop scrap, energy, wires, and the gun of the enemy
-		if (droproll == 2) {
+		//create a randomly assigned number from 1-20, and if it matches the predetermined values, that enemy will drop loot.
+		//health is twice as rare as regular scrap and such, to preserve its value
+		var droproll = Random.Range(1, 20);
+		if (droproll == 1) {
 			Vector3 position = transform.position;
 			foreach (GameObject item in itemdrops ){
 				if (item != null) {
-					Vector3 spawnPos = new Vector3 (position.x + Random.Range(-1,1), .2f, position.z + Random.Range(-1,1));
+					Vector3 spawnPos = new Vector3 (position.x, 0, position.y);
 					Instantiate(item, spawnPos , Quaternion.identity);
 				}
 			}
 		}
-		if (droproll == 3) {
+		if (droproll == 2||droproll == 3) {
 			Vector3 position = transform.position;
 			foreach (GameObject item in resourcedrops ){
 				if (item != null) {
-					Vector3 spawnPos = new Vector3 (position.x + Random.Range(-1,1), .2f, position.z + Random.Range(-1,1));
+					Vector3 spawnPos = new Vector3 (position.x, 0, position.y);
 					Instantiate(item, spawnPos , Quaternion.identity);
 				}
 			}
@@ -113,5 +113,4 @@ public class EnemyManager : UnitManager {
 	{
 		enemyAttack.removeHeldItem ();
 	}
-		
 }
