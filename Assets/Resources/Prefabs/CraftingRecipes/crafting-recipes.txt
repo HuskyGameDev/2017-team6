@@ -1,1 +1,2 @@
 Laser Gun,,Weapons/Gun_Laser,,1,,0,,0,,A cool laser gun!
+Gun,,Weapons/Gun,,0,,0,,0,,A gun.

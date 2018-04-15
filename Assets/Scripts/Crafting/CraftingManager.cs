@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 namespace AssemblyCSharp
 {
@@ -19,12 +20,14 @@ namespace AssemblyCSharp
 		public CraftingRecipe(string lineOfText) 
 		{
 			string[] recipeCosts = lineOfText.Split (",,".ToCharArray());
-			CraftedItemName = recipeCosts[0];
-			PrefabName = "Prefabs/" + recipeCosts[2];
-			ScrapCost = Convert.ToInt32(recipeCosts[4]);
-			EnergyCost = Convert.ToInt32(recipeCosts[6]);
-			WireCost = Convert.ToInt32(recipeCosts[8]);
-			Description = recipeCosts[10];
+			if (recipeCosts.Length > 9) {
+				CraftedItemName = recipeCosts[0];
+				PrefabName = "Prefabs/" + recipeCosts[2];
+				ScrapCost = Convert.ToInt32(recipeCosts[4]);
+				EnergyCost = Convert.ToInt32(recipeCosts[6]);
+				WireCost = Convert.ToInt32(recipeCosts[8]);
+				Description = recipeCosts[10];
+			}
 		}
 	}
 
@@ -36,6 +39,9 @@ namespace AssemblyCSharp
 		private Inventory _inventory;
 		private int _index;
 		private UI_Game _ui;
+		private RecipeList _recipeList;
+		private Color _color;
+		private Image _image;
 
 		void Start()
 		{
@@ -43,6 +49,9 @@ namespace AssemblyCSharp
 			_recipes = new List<CraftingRecipe> ();
 			_inventory = (Inventory) GameObject.Find ("Player").GetComponent<Inventory>();
 			_ui = (UI_Game)GameObject.Find ("PlayerUI").GetComponent<UI_Game> ();
+			_recipeList = transform.Find ("CraftingList/Recipes").GetComponent<RecipeList> ();
+			_image = transform.GetComponent<Image> ();
+			_color = _image.color;
 
 			// read from the text file
 			StreamReader reader = new StreamReader ("Assets/Resources/Prefabs/CraftingRecipes/crafting-recipes.txt");
@@ -50,9 +59,12 @@ namespace AssemblyCSharp
 			string line = reader.ReadLine ();
 			while (line != null) {
 				// add to list
-					_recipes.Add (new CraftingRecipe (line));
-					line = reader.ReadLine ();
+				CraftingRecipe newRecipe = new CraftingRecipe(line);
+				_recipes.Add (newRecipe);
+				_recipeList.AddRecipe (newRecipe);
+				line = reader.ReadLine ();
 			}
+			_recipeList.Select (0);
 			_recipePanel.ShowRecipe (_recipes[_index]);
 			reader.Close ();
 			enabled = true;
@@ -60,11 +72,12 @@ namespace AssemblyCSharp
 
 		public void CraftItem()
 		{
+			if (!enabled) return;
 			CraftingRecipe recipe = _recipes [_index];
 
 			if (_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) {
 				_ui.ShowAlert ("Not enough resources to craft", "", 1f);
-				//return;
+				return;
 			}
 			Item newItem = Resources.Load (recipe.PrefabName, typeof(Item)) as Item;
 			Debug.Log (newItem.itemName);
@@ -78,6 +91,28 @@ namespace AssemblyCSharp
 				GameObject.Destroy (newItem);
 				_ui.ShowAlert ("Item already owned", "", 1f);
 			}
+		}
+
+		public void Select(int index)
+		{
+			_index = index;
+			_recipePanel.ShowRecipe (_recipes [_index]);
+		}
+
+
+
+		// the caller needs to remember to set the variable enabled to true
+		public void OpenCraftingWindow()
+		{
+			_color.a = 1f;
+			_image.color = _color;
+		}
+
+		// the caller needs to remember to set the variable enabled to false
+		public void CloseCraftingWindow()
+		{
+			_color.a = 0f;
+			_image.color = _color;
 		}
 	}
 }
