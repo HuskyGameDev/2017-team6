@@ -21,12 +21,14 @@ namespace AssemblyCSharp
 		{
 			string[] recipeCosts = lineOfText.Split (",,".ToCharArray());
 			if (recipeCosts.Length > 9) {
-				CraftedItemName = recipeCosts[0];
-				PrefabName = "Prefabs/" + recipeCosts[2];
-				ScrapCost = Convert.ToInt32(recipeCosts[4]);
-				EnergyCost = Convert.ToInt32(recipeCosts[6]);
-				WireCost = Convert.ToInt32(recipeCosts[8]);
-				Description = recipeCosts[10];
+				CraftedItemName = recipeCosts [0];
+				PrefabName = "Prefabs/" + recipeCosts [2];
+				ScrapCost = Convert.ToInt32 (recipeCosts [4]);
+				EnergyCost = Convert.ToInt32 (recipeCosts [6]);
+				WireCost = Convert.ToInt32 (recipeCosts [8]);
+				Description = recipeCosts [10];
+			} else {
+				CraftedItemName = "invalid";
 			}
 		}
 	}
@@ -56,14 +58,19 @@ namespace AssemblyCSharp
 			_image.color = _color;
 
 			// read from the text file
-			StreamReader reader = new StreamReader ("Assets/Resources/Prefabs/CraftingRecipes/crafting-recipes.txt");
+			StreamReader reader = new StreamReader ("Assets/Resources/crafting-recipes.txt");
 			_index = 0;
 			string line = reader.ReadLine ();
 			while (line != null) {
-				// add to list
-				CraftingRecipe newRecipe = new CraftingRecipe(line);
-				_recipes.Add (newRecipe);
-				_recipeList.AddRecipe (newRecipe);
+				if (line [0] != '#') { // commented lines start with #
+					// add to list
+					CraftingRecipe newRecipe = new CraftingRecipe (line);
+					// ensure it was a valid recipe
+					if (!newRecipe.CraftedItemName.Equals ("invalid")) {
+						_recipes.Add (newRecipe);
+						_recipeList.AddRecipe (newRecipe);
+					}
+				}
 				line = reader.ReadLine ();
 			}
 			_recipeList.Select (0);

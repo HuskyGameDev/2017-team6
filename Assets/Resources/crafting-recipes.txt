@@ -1,0 +1,10 @@
+# The format for crafting recipes is as follows:
+#
+# Item Name,,PrefabDirectory/PrefabName,,scraps,,energy,,wires,,Description
+#
+# Prefabs must be an Item and placed in the Resources folder to be craftable
+# Do not include the Resources folder in PrefabDirectory
+# All lines in this file that start with '#' will be skipped by the text parser
+#
+Laser Gun,,Weapons/Gun_Laser,,0,,0,,0,,A cool laser gun!
+Gun,,Weapons/Gun,,0,,0,,0,,A gun.
