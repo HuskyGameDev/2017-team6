@@ -30,6 +30,7 @@ namespace AssemblyCSharp
 		// used for initialization
 		void Start()
 		{
+			// get references to the text
 			_headerText = transform.Find("Header/NameText").GetComponent<Text> ();
 			_descriptionText = transform.Find("Description/DescriptionText").GetComponent<Text> ();
 			_scrapCostText = transform.Find("Description/ScrapCost").GetComponent<Text> ();
@@ -37,6 +38,7 @@ namespace AssemblyCSharp
 			_wireCostText = transform.Find("Description/WireCost").GetComponent<Text> ();
 			_image = GetComponent<Image> ();
 
+			// set the text
 			_headerText.text = CraftedItemName;
 			_descriptionText.text = Description;
 			_scrapCostText.text = ScrapCost.ToString () + " Scrap" + (ScrapCost == 1 ? "" : "s"); 
