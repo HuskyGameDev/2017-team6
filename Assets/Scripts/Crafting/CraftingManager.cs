@@ -52,6 +52,8 @@ namespace AssemblyCSharp
 			_recipeList = transform.Find ("CraftingList/Recipes").GetComponent<RecipeList> ();
 			_image = transform.GetComponent<Image> ();
 			_color = _image.color;
+			_color.a = 0f;
+			_image.color = _color;
 
 			// read from the text file
 			StreamReader reader = new StreamReader ("Assets/Resources/Prefabs/CraftingRecipes/crafting-recipes.txt");
@@ -67,13 +69,17 @@ namespace AssemblyCSharp
 			_recipeList.Select (0);
 			_recipePanel.ShowRecipe (_recipes[_index]);
 			reader.Close ();
-			enabled = true;
+			enabled = false;
 		}
 
 		public void CraftItem()
 		{
+			// return if the window isn't enabled
 			if (!enabled) return;
+
+			// craft the item at the current index
 			CraftingRecipe recipe = _recipes [_index];
+
 
 			if (_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) {
 				_ui.ShowAlert ("Not enough resources to craft", "", 1f);
@@ -104,6 +110,7 @@ namespace AssemblyCSharp
 		// the caller needs to remember to set the variable enabled to true
 		public void OpenCraftingWindow()
 		{
+			enabled = true;
 			_color.a = 1f;
 			_image.color = _color;
 		}
@@ -111,6 +118,7 @@ namespace AssemblyCSharp
 		// the caller needs to remember to set the variable enabled to false
 		public void CloseCraftingWindow()
 		{
+			enabled = false;
 			_color.a = 0f;
 			_image.color = _color;
 		}
