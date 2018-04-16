@@ -86,15 +86,21 @@ namespace AssemblyCSharp
 				return;
 			}
 			Item newItem = Resources.Load (recipe.PrefabName, typeof(Item)) as Item;
-			Debug.Log (newItem.itemName);
+			// see if the item exists
+			if (newItem == null) {
+				Debug.Log (recipe.PrefabName + " is not the name of an Item prefab");
+				_ui.ShowAlert ("Invalid item", "", 1f);
+				return;
+			}
+
 			// see if it was added to the inventory
 			if (_inventory.AddItem (newItem, 1)) {
 				_inventory.resources.scrap -= recipe.ScrapCost;
 				_inventory.resources.energy -= recipe.EnergyCost;
 				_inventory.resources.wire -= recipe.WireCost;
-				_ui.ShowAlert (newItem.itemName + " successfully crafted", "", 1f);
+				string alertMessage = recipe.CraftedItemName + " successfully crafted";
+				_ui.ShowAlert (alertMessage, "", 1f);
 			} else {
-				GameObject.Destroy (newItem);
 				_ui.ShowAlert ("Item already owned", "", 1f);
 			}
 		}
