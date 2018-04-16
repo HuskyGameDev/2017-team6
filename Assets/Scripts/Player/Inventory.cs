@@ -39,10 +39,9 @@ public class Inventory : MonoBehaviour
     {
         items.Capacity = maxItems;
 		ui = (UI_Game)GameObject.Find ("PlayerUI").GetComponent<UI_Game> ();
-		/*
 		for(int i=0; i<24; i++)
 			items.Add(null);
-		itemCount = items.Count; */
+		itemCount = 0;
     }
 
 	// returns true if the item was successfully added to the inventory,
@@ -62,11 +61,16 @@ public class Inventory : MonoBehaviour
                 containsItem = true;
             }
         }
-
         // If the item does not already exist add it
         if (!containsItem && itemCount < maxItems)
         {
-            items.Add(item);
+			for (int i = 0; i < maxItems; i++) {
+				if (items [i] == null) {
+					items [i] = item;
+					itemCount++;
+					break;
+				}
+			}
 
 			// Update the GUI
 			ui.UpdateInventory();
