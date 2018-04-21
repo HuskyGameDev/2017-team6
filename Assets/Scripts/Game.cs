@@ -21,6 +21,11 @@ public class Game : MonoBehaviour {
     public float defendDuration;
     public float restDuration;
     public GameObject[] enemies;
+	public GameObject[] enemies0;
+	public GameObject[] enemies1;
+	public GameObject[] enemies2;
+	public GameObject[] enemies3;
+
 
     // Information regarding how waves behave (i.e. What and How Many enemies gets spawned)
 	[Header("Current Wave Information")]
@@ -160,16 +165,77 @@ public class Game : MonoBehaviour {
     //          on the map.
     void SpawnNextWave()
     {
-        GameObject[] wave = new GameObject[waveInfo.waveSize];
-        for (int i = 0; i < waveInfo.waveSize; i++)
-        {
-            int enemyIdx = (int)UnityEngine.Random.Range(0, enemies.Length);
-            wave[i] = enemies[enemyIdx];
-        }
+		if (wave >= 1 && wave <= 3) {
+			GameObject[] wave = new GameObject[waveInfo.waveSize];
+			for (int i = 0; i < waveInfo.waveSize; i++)
+			{
+				int enemyIdx = (int)UnityEngine.Random.Range(0, enemies.Length);
+				wave[i] = enemies[enemyIdx];
+			}
 
-        foreach (SpawnPoint sp in enemySpawners)
-        {
-            sp.SpawnWave(wave);
-        }
+			foreach (SpawnPoint sp in enemySpawners)
+			{
+				sp.SpawnWave(wave);
+			}
+		}
+
+		if (wave >= 4 && wave <= 6) {
+			GameObject[] wave = new GameObject[waveInfo.waveSize];
+			for (int i = 0; i < waveInfo.waveSize; i++)
+			{
+				int enemyIdx = (int)UnityEngine.Random.Range(0, enemies0.Length);
+				wave[i] = enemies0[enemyIdx];
+			}
+
+			foreach (SpawnPoint sp in enemySpawners)
+			{
+				sp.SpawnWave(wave);
+			}
+		}
+
+      
+
+		if (wave >= 7 && wave <= 9) {
+			GameObject[] wave = new GameObject[waveInfo.waveSize];
+			for (int i = 0; i < waveInfo.waveSize; i++)
+			{
+				int enemyIdx = (int)UnityEngine.Random.Range(0, enemies1.Length);
+				wave[i] = enemies1[enemyIdx];
+			}
+
+			foreach (SpawnPoint sp in enemySpawners)
+			{
+				sp.SpawnWave(wave);
+			}
+		}
+
+		if (wave >= 10 && wave <= 12) {
+			GameObject[] wave = new GameObject[waveInfo.waveSize];
+			for (int i = 0; i < waveInfo.waveSize; i++)
+			{
+				int enemyIdx = (int)UnityEngine.Random.Range(0, enemies2.Length);
+				wave[i] = enemies2[enemyIdx];
+			}
+
+			foreach (SpawnPoint sp in enemySpawners)
+			{
+				sp.SpawnWave(wave);
+			}
+		}
+
+		if (wave >= 13) {
+			GameObject[] wave = new GameObject[waveInfo.waveSize];
+			for (int i = 0; i < waveInfo.waveSize; i++)
+			{
+				int enemyIdx = (int)UnityEngine.Random.Range(0, enemies3.Length);
+				wave[i] = enemies3[enemyIdx];
+			}
+
+			foreach (SpawnPoint sp in enemySpawners)
+			{
+				sp.SpawnWave(wave);
+			}
+		}
+
     }
 }
