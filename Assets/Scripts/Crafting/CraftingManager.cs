@@ -96,6 +96,32 @@ namespace AssemblyCSharp
 				_ui.ShowAlert ("Not enough resources to craft", "", 1f);
 				return;
 			}
+			// craft Scraps
+			if (recipe.PrefabName.Equals("Prefabs/Scrap")) {
+				_inventory.resources.scrap += 1;
+				_inventory.resources.scrap -= recipe.ScrapCost;
+				_inventory.resources.energy -= recipe.EnergyCost;
+				_inventory.resources.wire -= recipe.WireCost;
+				string alertMessage = recipe.CraftedItemName + " successfully converted";
+				_ui.ShowAlert (alertMessage, "", 1f);
+				return;
+			} else if (recipe.PrefabName.Equals("Prefabs/Energy")) {
+				_inventory.resources.energy += 1;
+				_inventory.resources.scrap -= recipe.ScrapCost;
+				_inventory.resources.energy -= recipe.EnergyCost;
+				_inventory.resources.wire -= recipe.WireCost;
+				string alertMessage = recipe.CraftedItemName + " successfully converted";
+				_ui.ShowAlert (alertMessage, "", 1f);
+				return;
+			} else if (recipe.PrefabName.Equals("Prefabs/Wire")) {
+				_inventory.resources.wire += 1;
+				_inventory.resources.scrap -= recipe.ScrapCost;
+				_inventory.resources.energy -= recipe.EnergyCost;
+				_inventory.resources.wire -= recipe.WireCost;
+				string alertMessage = recipe.CraftedItemName + " successfully converted";
+				_ui.ShowAlert (alertMessage, "", 1f);
+				return;
+			}
 			Item newItem = Resources.Load (recipe.PrefabName, typeof(Item)) as Item;
 			// see if the item exists
 			if (newItem == null) {
@@ -103,7 +129,6 @@ namespace AssemblyCSharp
 				_ui.ShowAlert ("Invalid item", "", 1f);
 				return;
 			}
-
 			// see if it was added to the inventory
 			if (_inventory.AddItem (newItem, 1)) {
 				_inventory.resources.scrap -= recipe.ScrapCost;
