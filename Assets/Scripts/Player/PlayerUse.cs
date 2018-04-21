@@ -33,7 +33,7 @@ public class PlayerUse : MonoBehaviour
 
 	private PlayerManager playerManager;
     public Item[] weaponList;
-	public Item currentEquipped { get; private set;}
+	public Item currentEquipped;
     private Transform weaponHolder;
     private Inventory inventoryMngr; // Hotbar consists of indices 0-5
 	private int itemID;
@@ -68,8 +68,8 @@ public class PlayerUse : MonoBehaviour
 			if (currentEquipped != null) {
 				currentEquipped.Using (playerManager);
 				if (currentEquipped.IsConsumable) {
-					currentEquipped = null;
 					removeHeldItem ();
+					currentEquipped = null;
 				}
 			}
         }
@@ -148,6 +148,7 @@ public class PlayerUse : MonoBehaviour
 		currentEquipped.transform.parent = weaponHolder;
 		if (weapon is Weapon) {
 			if (weaponStatus.ContainsKey (weapon.ItemID)) {
+				Debug.Log (weapon + " has been found in inventory.");
 				weaponStatus [weapon.ItemID].LoadStats ((Weapon)currentEquipped);
 			} else {
 				weaponStatus.Add (weapon.ItemID, new WeaponStats ());
