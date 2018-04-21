@@ -62,13 +62,15 @@ namespace AssemblyCSharp
 			_index = 0;
 			string line = reader.ReadLine ();
 			while (line != null) {
-				if (line [0] != '#') { // commented lines start with #
-					// add to list
-					CraftingRecipe newRecipe = new CraftingRecipe (line);
-					// ensure it was a valid recipe
-					if (!newRecipe.CraftedItemName.Equals ("invalid")) {
-						_recipes.Add (newRecipe);
-						_recipeList.AddRecipe (newRecipe);
+				if (line.Length > 0) {
+					if (line [0] != '#') { // commented lines start with #
+						// add to list
+						CraftingRecipe newRecipe = new CraftingRecipe (line);
+						// ensure it was a valid recipe
+						if (!newRecipe.CraftedItemName.Equals ("invalid")) {
+							_recipes.Add (newRecipe);
+							_recipeList.AddRecipe (newRecipe);
+						}
 					}
 				}
 				line = reader.ReadLine ();

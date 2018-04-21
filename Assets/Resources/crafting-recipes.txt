@@ -6,5 +6,5 @@
 # Do not include the Resources folder in PrefabDirectory
 # All lines in this file that start with '#' will be skipped by the text parser
 #
-Laser Gun,,Weapons/Gun_Laser,,0,,0,,0,,A cool laser gun!
-Gun,,Weapons/Gun,,0,,0,,0,,A gun.
+Med Kit,,Med Kit,,1,,1,,1,,A med kit that restores 50 health.
+Laser Gun,,Weapons/Gun_Laser,,0,,0,,0,,A powerful but inaccurate laser gun with a low fire rate.
