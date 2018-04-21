@@ -3,12 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-struct WeaponStats {
-	float WeaponDamage;
-	int CurrentAmmo;
-	float RefireTime;
-	float ReloadTime;
-	int ClipSize;
+public class WeaponStats {
+	public int WeaponDamage;
+	public int CurrentAmmo;
+	public float RefireTime;
+	public float ReloadTime;
+	public int ClipSize;
+	public void UpdateStats(Weapon weapon) {
+		WeaponDamage = weapon.Damage;
+		CurrentAmmo = weapon.Ammo;
+		RefireTime = weapon.TimeBetweenShots;
+		ReloadTime = weapon.ReloadTime;
+		ClipSize = weapon.ClipSize;
+	}
+
+	public void LoadStats(Weapon weapon) {
+		weapon.Damage = WeaponDamage;;
+		weapon.Ammo = CurrentAmmo;
+		weapon.TimeBetweenShots = RefireTime;
+		weapon.ReloadTime = ReloadTime;
+		weapon.ClipSize = ClipSize;
+	}
 };
 
 // Class used by the "player" to interact with inventory items
@@ -21,8 +36,8 @@ public class PlayerUse : MonoBehaviour
 	public Item currentEquipped { get; private set;}
     private Transform weaponHolder;
     private Inventory inventoryMngr; // Hotbar consists of indices 0-5
-
-	private HashSet<Item> renderedItems;
+	private int itemID;
+	private Dictionary<int, WeaponStats> weaponStatus;
 
     // Use this for initialization
     void Awake()
@@ -38,14 +53,12 @@ public class PlayerUse : MonoBehaviour
                 weaponHolder = t;
             }
         }
-
+		itemID = 0;
         // Get the inventory component
         inventoryMngr = GetComponent<Inventory>();
 		// Attach the first weapon to the player
 		selectedIndex = 0;
 		attachItem(inventoryMngr.items[0]);
-
-		renderedItems = new HashSet<Item> ();
     }
 
     void Update()
@@ -54,6 +67,10 @@ public class PlayerUse : MonoBehaviour
         {
 			if (currentEquipped != null) {
 				currentEquipped.Using (playerManager);
+				if (currentEquipped.IsConsumable) {
+					currentEquipped = null;
+					removeHeldItem ();
+				}
 			}
         }
 
@@ -102,16 +119,41 @@ public class PlayerUse : MonoBehaviour
     {
         // TODO: Play Equip Animation
 
+		if (weaponStatus == null) {
+			weaponStatus = new Dictionary<int, WeaponStats> ();
+		}
+
+
 		if (currentEquipped != null) {
+			if (currentEquipped is Weapon) {
+				weaponStatus [currentEquipped.ItemID].UpdateStats ((Weapon) currentEquipped);
+			}
 			GameObject.Destroy (currentEquipped.gameObject);
 		}
+
+
+		if (weapon == null) {
+			return;
+		}
+
+		if (weapon.ItemID == 0) {
+			weapon.ItemID = ++itemID;
+		}
+
 		currentEquipped = Instantiate (
 			weapon,
 			weaponHolder.transform.position,
 			weaponHolder.transform.rotation
 		);
 		currentEquipped.transform.parent = weaponHolder;
-    }
+		if (weapon is Weapon) {
+			if (weaponStatus.ContainsKey (weapon.ItemID)) {
+				weaponStatus [weapon.ItemID].LoadStats ((Weapon)currentEquipped);
+			} else {
+				weaponStatus.Add (weapon.ItemID, new WeaponStats ());
+			}
+		}
+	}
 
 	public void removeHeldItem()
 	{
