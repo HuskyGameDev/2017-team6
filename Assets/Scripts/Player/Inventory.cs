@@ -54,12 +54,14 @@ public class Inventory : MonoBehaviour
 			if (_item == null) {
 				continue;
 			}
+			/*
             // If item already exists: increment the item count without exceeding limits
             if (_item.itemName == item.itemName)
             {
                 _item.current = Mathf.Clamp(numItem + _item.current, 0, _item.max);
                 containsItem = true;
             }
+			*/
         }
         // If the item does not already exist add it
         if (!containsItem && itemCount < maxItems)

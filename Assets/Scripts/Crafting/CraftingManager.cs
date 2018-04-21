@@ -45,6 +45,8 @@ namespace AssemblyCSharp
 		private Color _color;
 		private Image _image;
 
+		public bool DebugEnabled;
+
 		void Start()
 		{
 			_recipePanel = transform.Find ("RecipePanel").GetComponent<RecipePanel> ();
@@ -90,7 +92,7 @@ namespace AssemblyCSharp
 			CraftingRecipe recipe = _recipes [_index];
 
 
-			if (_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) {
+			if ((_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) && !DebugEnabled) {
 				_ui.ShowAlert ("Not enough resources to craft", "", 1f);
 				return;
 			}
