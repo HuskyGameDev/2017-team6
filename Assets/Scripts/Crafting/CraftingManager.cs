@@ -45,6 +45,8 @@ namespace AssemblyCSharp
 		private Color _color;
 		private Image _image;
 
+		public bool DebugEnabled;
+
 		void Start()
 		{
 			_recipePanel = transform.Find ("RecipePanel").GetComponent<RecipePanel> ();
@@ -62,13 +64,15 @@ namespace AssemblyCSharp
 			_index = 0;
 			string line = reader.ReadLine ();
 			while (line != null) {
-				if (line [0] != '#') { // commented lines start with #
-					// add to list
-					CraftingRecipe newRecipe = new CraftingRecipe (line);
-					// ensure it was a valid recipe
-					if (!newRecipe.CraftedItemName.Equals ("invalid")) {
-						_recipes.Add (newRecipe);
-						_recipeList.AddRecipe (newRecipe);
+				if (line.Length > 0) {
+					if (line [0] != '#') { // commented lines start with #
+						// add to list
+						CraftingRecipe newRecipe = new CraftingRecipe (line);
+						// ensure it was a valid recipe
+						if (!newRecipe.CraftedItemName.Equals ("invalid")) {
+							_recipes.Add (newRecipe);
+							_recipeList.AddRecipe (newRecipe);
+						}
 					}
 				}
 				line = reader.ReadLine ();
@@ -88,8 +92,34 @@ namespace AssemblyCSharp
 			CraftingRecipe recipe = _recipes [_index];
 
 
-			if (_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) {
+			if ((_inventory.resources.scrap < recipe.ScrapCost || _inventory.resources.energy < recipe.EnergyCost || _inventory.resources.wire < recipe.WireCost) && !DebugEnabled) {
 				_ui.ShowAlert ("Not enough resources to craft", "", 1f);
+				return;
+			}
+			// craft Scraps
+			if (recipe.PrefabName.Equals("Prefabs/Scrap")) {
+				_inventory.resources.scrap += 1;
+				_inventory.resources.scrap -= recipe.ScrapCost;
+				_inventory.resources.energy -= recipe.EnergyCost;
+				_inventory.resources.wire -= recipe.WireCost;
+				string alertMessage = recipe.CraftedItemName + " successfully converted";
+				_ui.ShowAlert (alertMessage, "", 1f);
+				return;
+			} else if (recipe.PrefabName.Equals("Prefabs/Energy")) {
+				_inventory.resources.energy += 1;
+				_inventory.resources.scrap -= recipe.ScrapCost;
+				_inventory.resources.energy -= recipe.EnergyCost;
+				_inventory.resources.wire -= recipe.WireCost;
+				string alertMessage = recipe.CraftedItemName + " successfully converted";
+				_ui.ShowAlert (alertMessage, "", 1f);
+				return;
+			} else if (recipe.PrefabName.Equals("Prefabs/Wire")) {
+				_inventory.resources.wire += 1;
+				_inventory.resources.scrap -= recipe.ScrapCost;
+				_inventory.resources.energy -= recipe.EnergyCost;
+				_inventory.resources.wire -= recipe.WireCost;
+				string alertMessage = recipe.CraftedItemName + " successfully converted";
+				_ui.ShowAlert (alertMessage, "", 1f);
 				return;
 			}
 			Item newItem = Resources.Load (recipe.PrefabName, typeof(Item)) as Item;
@@ -99,7 +129,6 @@ namespace AssemblyCSharp
 				_ui.ShowAlert ("Invalid item", "", 1f);
 				return;
 			}
-
 			// see if it was added to the inventory
 			if (_inventory.AddItem (newItem, 1)) {
 				_inventory.resources.scrap -= recipe.ScrapCost;

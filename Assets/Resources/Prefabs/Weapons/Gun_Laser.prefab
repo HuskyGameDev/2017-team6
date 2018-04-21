@@ -273,18 +273,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max: 1
-  current: 0
+  current: 1
   itemName: Laser Gun
+  itemType: 0
   itemImg: {fileID: 21300000, guid: 53b1b9b936d9b004a9b6d42f43804caf, type: 3}
+  level: 1
+  itemTier: 0
   itemCost:
     scrap: 0
     energy: 0
     wire: 0
-  Damage: 20
+  Damage: 100
   Range: 20
-  TimeBetweenShots: 0.15
+  TimeBetweenShots: 0.45
+  ReloadTime: 2.5
   ClipSize: 30
-  ReloadTime: 5
   GunShotSFX:
   - {fileID: 8300000, guid: 27490432a17d30547b6304c8fb5f331f, type: 3}
   - {fileID: 8300000, guid: bcec26fea408df8458b574ac28ae6a16, type: 3}

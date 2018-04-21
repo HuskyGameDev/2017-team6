@@ -261,7 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 581801393}
   horizontalRotation: 45
-  distanceFromPlayer: 10
+  playerDistance: 10
+  minPlayerDistance: 5
+  maxPlayerDistance: 15
   angleFromTop: 45
 --- !u!4 &581801393 stripped
 Transform:
@@ -622,6 +624,30 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458935009210570, guid: 42320307909f2f94ca58094053e3485c, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224238273315407384, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 224526944547048402, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224599754434803958, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224355487586062930, guid: 42320307909f2f94ca58094053e3485c,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 42320307909f2f94ca58094053e3485c, type: 2}
