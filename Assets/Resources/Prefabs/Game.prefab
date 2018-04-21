@@ -62,7 +62,7 @@ MonoBehaviour:
   enemies1:
   - {fileID: 1186647429741530, guid: f39e5f16b1faeca4cb926f46b05d45ae, type: 2}
   - {fileID: 1370353266211238, guid: 0d829a8cfb996b54789bae3c601b165e, type: 2}
-  - {fileID: 0}
+  - {fileID: 1535131303236386, guid: 6aaa9e80277af80489b6de0463fcbb9e, type: 2}
   - {fileID: 1907193153417536, guid: 221abbc6da3e6084b913666d941925d1, type: 2}
   enemies2:
   - {fileID: 1140937592518982, guid: 7baf9be4f5726364082a56385bbd9e3c, type: 2}

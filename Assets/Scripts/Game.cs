@@ -118,8 +118,12 @@ public class Game : MonoBehaviour {
 					wave++;
                     currentState = GameState.REST;
 
-                    waveInfo.waveSize += 1;
-                    waveInfo.numberOfWaves += 1;
+					if (wave % 3 == 0) {
+						waveInfo.waveSize += 1;
+					}
+					if (wave % 5 == 0) {
+						waveInfo.numberOfWaves += 1;
+					}
 
                     Debug.Log("Game State: " + currentState.ToString());
                 }
