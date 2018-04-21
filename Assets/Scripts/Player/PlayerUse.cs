@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+struct WeaponStats {
+	float WeaponDamage;
+	int CurrentAmmo;
+	float RefireTime;
+	float ReloadTime;
+	int ClipSize;
+};
+
 // Class used by the "player" to interact with inventory items
 public class PlayerUse : MonoBehaviour
 {
@@ -12,6 +21,8 @@ public class PlayerUse : MonoBehaviour
 	public Item currentEquipped { get; private set;}
     private Transform weaponHolder;
     private Inventory inventoryMngr; // Hotbar consists of indices 0-5
+
+	private HashSet<Item> renderedItems;
 
     // Use this for initialization
     void Awake()
@@ -33,18 +44,24 @@ public class PlayerUse : MonoBehaviour
 		// Attach the first weapon to the player
 		selectedIndex = 0;
 		attachItem(inventoryMngr.items[0]);
+
+		renderedItems = new HashSet<Item> ();
     }
 
     void Update()
     {
         if (Input.GetButton("Fire1"))
         {
-            currentEquipped.Using(playerManager);
+			if (currentEquipped != null) {
+				currentEquipped.Using (playerManager);
+			}
         }
 
         if (Input.GetKeyDown("r"))
         {
-            currentEquipped.Reloading();
+			if (currentEquipped != null) {
+				currentEquipped.Reloading ();
+			}
         }
 
 		if (Input.GetButtonDown("NextItem"))
@@ -70,11 +87,8 @@ public class PlayerUse : MonoBehaviour
 	{
 		if (hotbarIndex >= 0 && hotbarIndex < 6)
 		{
-			if (inventoryMngr.items [hotbarIndex] != null)
-			{
-				selectedIndex = hotbarIndex;
-				attachItem (inventoryMngr.items [hotbarIndex]);
-			}
+			selectedIndex = hotbarIndex;
+			attachItem (inventoryMngr.items [hotbarIndex]);
 		}
 	}
 
@@ -88,15 +102,15 @@ public class PlayerUse : MonoBehaviour
     {
         // TODO: Play Equip Animation
 
-		if(currentEquipped != null)
-			GameObject.Destroy(currentEquipped.gameObject);
-
-        currentEquipped = Instantiate(
-          weapon,
-          weaponHolder.transform.position,
-          weaponHolder.transform.rotation
-        );
-        currentEquipped.transform.parent = weaponHolder;
+		if (currentEquipped != null) {
+			GameObject.Destroy (currentEquipped.gameObject);
+		}
+		currentEquipped = Instantiate (
+			weapon,
+			weaponHolder.transform.position,
+			weaponHolder.transform.rotation
+		);
+		currentEquipped.transform.parent = weaponHolder;
     }
 
 	public void removeHeldItem()
