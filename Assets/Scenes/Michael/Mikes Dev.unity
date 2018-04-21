@@ -460,8 +460,7 @@ Prefab:
         type: 2}
       propertyPath: enemies1.Array.data[2]
       value: 
-      objectReference: {fileID: 1167521439279458, guid: 67928e02515329340a884048e0d78699,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114969643197526624, guid: ec1cd6f47b97f0b41a384642a21069dc,
         type: 2}
       propertyPath: enemies2.Array.data[0]
@@ -502,13 +501,13 @@ Prefab:
         type: 2}
       propertyPath: enemies3.Array.data[0]
       value: 
-      objectReference: {fileID: 1167521439279458, guid: 67928e02515329340a884048e0d78699,
+      objectReference: {fileID: 1087035857976988, guid: 67928e02515329340a884048e0d78699,
         type: 2}
     - target: {fileID: 114969643197526624, guid: ec1cd6f47b97f0b41a384642a21069dc,
         type: 2}
       propertyPath: enemies3.Array.data[1]
       value: 
-      objectReference: {fileID: 1140937592518982, guid: 7baf9be4f5726364082a56385bbd9e3c,
+      objectReference: {fileID: 1087035857976988, guid: 67928e02515329340a884048e0d78699,
         type: 2}
     - target: {fileID: 114969643197526624, guid: ec1cd6f47b97f0b41a384642a21069dc,
         type: 2}
@@ -532,13 +531,13 @@ Prefab:
         type: 2}
       propertyPath: enemies3.Array.data[4]
       value: 
-      objectReference: {fileID: 1167521439279458, guid: 67928e02515329340a884048e0d78699,
+      objectReference: {fileID: 1370353266211238, guid: 0d829a8cfb996b54789bae3c601b165e,
         type: 2}
     - target: {fileID: 114969643197526624, guid: ec1cd6f47b97f0b41a384642a21069dc,
         type: 2}
       propertyPath: enemies3.Array.data[5]
       value: 
-      objectReference: {fileID: 1167521439279458, guid: 67928e02515329340a884048e0d78699,
+      objectReference: {fileID: 1535131303236386, guid: 6aaa9e80277af80489b6de0463fcbb9e,
         type: 2}
     - target: {fileID: 114969643197526624, guid: ec1cd6f47b97f0b41a384642a21069dc,
         type: 2}
@@ -561,12 +560,12 @@ Prefab:
     - target: {fileID: 114969643197526624, guid: ec1cd6f47b97f0b41a384642a21069dc,
         type: 2}
       propertyPath: waveInfo.numberOfWaves
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114969643197526624, guid: ec1cd6f47b97f0b41a384642a21069dc,
         type: 2}
       propertyPath: wave
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec1cd6f47b97f0b41a384642a21069dc, type: 2}

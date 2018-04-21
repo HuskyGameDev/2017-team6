@@ -52,9 +52,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  defendDuration: 0
-  restDuration: 0
-  enemies: []
+  defendDuration: 30
+  restDuration: 1
+  enemies:
+  - {fileID: 1186647429741530, guid: f39e5f16b1faeca4cb926f46b05d45ae, type: 2}
+  enemies0:
+  - {fileID: 1186647429741530, guid: f39e5f16b1faeca4cb926f46b05d45ae, type: 2}
+  - {fileID: 1370353266211238, guid: 0d829a8cfb996b54789bae3c601b165e, type: 2}
+  enemies1:
+  - {fileID: 1186647429741530, guid: f39e5f16b1faeca4cb926f46b05d45ae, type: 2}
+  - {fileID: 1370353266211238, guid: 0d829a8cfb996b54789bae3c601b165e, type: 2}
+  - {fileID: 0}
+  - {fileID: 1907193153417536, guid: 221abbc6da3e6084b913666d941925d1, type: 2}
+  enemies2:
+  - {fileID: 1140937592518982, guid: 7baf9be4f5726364082a56385bbd9e3c, type: 2}
+  - {fileID: 1140937592518982, guid: 7baf9be4f5726364082a56385bbd9e3c, type: 2}
+  - {fileID: 1370353266211238, guid: 0d829a8cfb996b54789bae3c601b165e, type: 2}
+  - {fileID: 1140937592518982, guid: 7baf9be4f5726364082a56385bbd9e3c, type: 2}
+  - {fileID: 1140937592518982, guid: 7baf9be4f5726364082a56385bbd9e3c, type: 2}
+  - {fileID: 1907193153417536, guid: 221abbc6da3e6084b913666d941925d1, type: 2}
+  enemies3:
+  - {fileID: 1087035857976988, guid: 67928e02515329340a884048e0d78699, type: 2}
+  - {fileID: 1087035857976988, guid: 67928e02515329340a884048e0d78699, type: 2}
+  - {fileID: 1907193153417536, guid: 221abbc6da3e6084b913666d941925d1, type: 2}
+  - {fileID: 1370353266211238, guid: 0d829a8cfb996b54789bae3c601b165e, type: 2}
+  - {fileID: 1370353266211238, guid: 0d829a8cfb996b54789bae3c601b165e, type: 2}
+  - {fileID: 1535131303236386, guid: 6aaa9e80277af80489b6de0463fcbb9e, type: 2}
+  - {fileID: 1782138184534242, guid: f43a1834fdf701a489da00de107bce11, type: 2}
+  wave: 1
   waveInfo:
     waveSize: 1
-    numberOfWaves: 5
+    numberOfWaves: 3
