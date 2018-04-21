@@ -39,12 +39,16 @@ public class PlayerUse : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            currentEquipped.Using(playerManager);
+			if (currentEquipped != null) {
+				currentEquipped.Using (playerManager);
+			}
         }
 
         if (Input.GetKeyDown("r"))
         {
-            currentEquipped.Reloading();
+			if (currentEquipped != null) {
+				currentEquipped.Reloading ();
+			}
         }
 
 		if (Input.GetButtonDown("NextItem"))
@@ -70,11 +74,8 @@ public class PlayerUse : MonoBehaviour
 	{
 		if (hotbarIndex >= 0 && hotbarIndex < 6)
 		{
-			if (inventoryMngr.items [hotbarIndex] != null)
-			{
-				selectedIndex = hotbarIndex;
-				attachItem (inventoryMngr.items [hotbarIndex]);
-			}
+			selectedIndex = hotbarIndex;
+			attachItem (inventoryMngr.items [hotbarIndex]);
 		}
 	}
 
