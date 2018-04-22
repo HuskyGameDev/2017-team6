@@ -166,7 +166,7 @@ public class ProjectileWeapon : Weapon
 		get {
 			return _ammo;
 		}
-		protected set {
+		set {
 			_ammo = value;
 		}
 	}

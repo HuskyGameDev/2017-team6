@@ -175,7 +175,7 @@ public class HitscanWeapon : Weapon
 		get {
 			return _ammo;
 		}
-		protected set {
+		set {
 			_ammo = value;
 		}
 	}

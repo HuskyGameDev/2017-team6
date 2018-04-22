@@ -6,6 +6,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public abstract class Item : MonoBehaviour {
 
+	public bool IsConsumable;
+
     [System.Serializable]
     // Basic class for Cost of Item
     public class ItemCost
