@@ -6,7 +6,7 @@
 # Do not include the Resources folder in PrefabDirectory
 # All lines in this file that start with '#' will be skipped by the text parser
 #
-Med Kit,,Med Kit,,1,,1,,1,,Restores 50 health.
+Med Kit,,Med Kit,,1,,1,,1,,A Med Kit which restores 50 health.
 Laser Blaster,,Weapons/Gun_Laser,,5,,1,,1,,A powerful but innaccurate and slow-firing laser cannon.
 Automatic Rifle,,Weapons/AutoRifle,,10,,10,,3,,An automatic rifle with a high fire rate and damage.
 Particle Rifle,,Weapons/Projectile_AR,,5,,5,,0,,A high damage automatic rifle that fires slow-moving projectiles.
