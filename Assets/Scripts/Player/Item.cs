@@ -5,7 +5,6 @@ using System.Collections.Generic;
 // Simple class used to keep track of items
 [System.Serializable]
 public abstract class Item : MonoBehaviour {
-	public int ItemID;
 
 	public bool IsConsumable;
 

@@ -36,8 +36,8 @@ public class PlayerUse : MonoBehaviour
 	public Item currentEquipped;
     private Transform weaponHolder;
     private Inventory inventoryMngr; // Hotbar consists of indices 0-5
-	private int itemID;
-	private Dictionary<int, WeaponStats> weaponStatus;
+	private Item currentItem;
+	private Dictionary<Item, WeaponStats> weaponStatus;
 
     // Use this for initialization
     void Awake()
@@ -53,7 +53,6 @@ public class PlayerUse : MonoBehaviour
                 weaponHolder = t;
             }
         }
-		itemID = 0;
         // Get the inventory component
         inventoryMngr = GetComponent<Inventory>();
 		// Attach the first weapon to the player
@@ -119,41 +118,43 @@ public class PlayerUse : MonoBehaviour
     {
         // TODO: Play Equip Animation
 
+		// this gets called before Awake, so ensure it's initialized
 		if (weaponStatus == null) {
-			weaponStatus = new Dictionary<int, WeaponStats> ();
+			weaponStatus = new Dictionary<Item, WeaponStats> ();
 		}
 
 
-		if (currentEquipped != null) {
-			if (currentEquipped is Weapon) {
-				weaponStatus [currentEquipped.ItemID].UpdateStats ((Weapon) currentEquipped);
+		if (currentEquipped != null && currentItem != null) {
+			if (currentItem is Weapon) {
+				weaponStatus [currentItem].UpdateStats ((Weapon) currentEquipped);
 			}
 			GameObject.Destroy (currentEquipped.gameObject);
 		}
 
-
+		// set the current item to the item we're switching to
+		currentItem = weapon;
+		// if it's null, we're done
 		if (weapon == null) {
 			return;
 		}
 
-		if (weapon.ItemID == 0) {
-			weapon.ItemID = ++itemID;
-		}
-
+		// instantiate the item
 		currentEquipped = Instantiate (
 			weapon,
 			weaponHolder.transform.position,
 			weaponHolder.transform.rotation
 		);
 		currentEquipped.transform.parent = weaponHolder;
+
+		// if it's a weapon, add it to the dictionary of weapon stats
 		if (weapon is Weapon) {
-			if (weaponStatus.ContainsKey (weapon.ItemID)) {
-				Debug.Log (weapon + " has been found in inventory.");
-				weaponStatus [weapon.ItemID].LoadStats ((Weapon)currentEquipped);
+			if (weaponStatus.ContainsKey (weapon)) {
+				weaponStatus [weapon].LoadStats ((Weapon)currentEquipped);
 			} else {
-				weaponStatus.Add (weapon.ItemID, new WeaponStats ());
+				weaponStatus.Add (weapon, new WeaponStats ());
 			}
 		}
+
 	}
 
 	public void removeHeldItem()
