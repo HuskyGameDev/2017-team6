@@ -60,10 +60,9 @@ namespace AssemblyCSharp
 			_image.color = _color;
 
 			// read from the text file
-			StreamReader reader = new StreamReader ("config/crafting-recipes.txt");
+			TextAsset reader = Resources.Load("crafting-recipes") as TextAsset;
 			_index = 0;
-			string line = reader.ReadLine ();
-			while (line != null) {
+			foreach (string line in reader.text.Split("\n".ToCharArray())) {
 				if (line.Length > 0) {
 					if (line [0] != '#') { // commented lines start with #
 						// add to list
@@ -75,11 +74,9 @@ namespace AssemblyCSharp
 						}
 					}
 				}
-				line = reader.ReadLine ();
 			}
 			_recipeList.Select (0);
 			_recipePanel.ShowRecipe (_recipes[_index]);
-			reader.Close ();
 			enabled = false;
 		}
 
