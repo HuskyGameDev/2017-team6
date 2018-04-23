@@ -60,7 +60,7 @@ namespace AssemblyCSharp
 			_image.color = _color;
 
 			// read from the text file
-			StreamReader reader = new StreamReader ("Assets/Resources/crafting-recipes.txt");
+			StreamReader reader = new StreamReader ("config/crafting-recipes.txt");
 			_index = 0;
 			string line = reader.ReadLine ();
 			while (line != null) {
