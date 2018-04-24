@@ -69,6 +69,14 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
+		if (currentEquipped != null) {
+			if (currentEquipped is Weapon) {
+				if (((Weapon)currentEquipped).Ammo <= 0) {
+					Debug.Log (this + " is reloading.");
+					currentEquipped.Reloading ();
+				}
+			}
+		}
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
         if (playerInRange && 
 			enemyManager.currentHealth > 0 && 
