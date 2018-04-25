@@ -9,7 +9,7 @@ public class MedKit : Item {
 		new ItemStat {name="Health Restored",field="healed",baseVal=50,canUpgrade=false,increaseOnLv=true,increment=1,limit=100}
 	};
 
-	int healed = 50;
+	int healed = 200;
 
 	// Use this for initialization
 	void Start () {
